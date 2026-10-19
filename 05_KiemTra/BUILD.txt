@@ -1,0 +1,7 @@
+  Autora -> /workspace/scratch/38441a2bbaef/completion_latest/work/Autora_NopBai/02_SourceCode/Autora/bin/Debug/net8.0/Autora.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:06.96

@@ -12,6 +12,7 @@
     </div>
 </div>
 
+<form method="get" class="d-flex gap-2 mb-3"><input name="keyword" value="@ViewBag.Keyword" class="form-control" placeholder="Tìm VIN hoặc dòng xe"/><button class="btn btn-outline-secondary">Tìm</button></form>
 <div class="table-responsive bg-white rounded-3 shadow-sm border p-3">
     <table class="table table-hover align-middle mb-0">
         <thead class="table-light">
@@ -48,3 +49,5 @@
         </tbody>
     </table>
 </div>
+
+<p>Trang @ViewBag.Page / @ViewBag.Pages</p>@if(ViewBag.Page>1){<a asp-route-page="@(ViewBag.Page-1)" asp-route-keyword="@ViewBag.Keyword">Trước</a>} @if(ViewBag.Page<ViewBag.Pages){<a asp-route-page="@(ViewBag.Page+1)" asp-route-keyword="@ViewBag.Keyword">Sau</a>}

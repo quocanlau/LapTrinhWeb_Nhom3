@@ -1,0 +1,2 @@
+@model string
+<div class="container py-4"><h2>@(Model=="installment"?"Tư vấn trả góp":"Thông tin kiểm định")</h2>@if(Model=="installment"){<p>Liên hệ showroom để được tư vấn hồ sơ và điều kiện vay của ngân hàng. Website chưa phê duyệt khoản vay hoặc tính lịch trả nợ tự động.</p>}else{<p>Thông số và ảnh trên website hỗ trợ tham khảo. Khách hàng cần kiểm tra hồ sơ, tình trạng thực tế và các cam kết trong hợp đồng trước khi mua xe.</p>}<a asp-controller="Contact" asp-action="Index">Gửi yêu cầu tư vấn</a></div>

@@ -21,9 +21,9 @@
                 <div class="hero-photo p-0 overflow-hidden rounded-4 shadow-lg position-relative">
                     @if (Model.Cars.Any())
                     {
-                        <!-- Slider ảnh động: tự động chuyển sau 5 giây (data-bs-interval="5000"), hiệu ứng mờ dần mượt mà -->
+                                                                                                                              
                         <div id="heroCarCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
-                            <!-- Các chấm tròn chuyển slide ở đáy ảnh -->
+                                                                         
                             <div class="carousel-indicators mb-2">
                                 @for (int i = 0; i < Model.Cars.Count; i++)
                                 {
@@ -31,7 +31,7 @@
                                 }
                             </div>
 
-                            <!-- Danh sách các xe trong slider -->
+                                                                  
                             <div class="carousel-inner">
                                 @for (int i = 0; i < Model.Cars.Count; i++)
                                 {
@@ -39,7 +39,7 @@
                                     var imgPath = c.Images.FirstOrDefault(x => x.IsPrimary)?.ImagePath ?? "/images/cars/ford-territory.jpg";
                                     
                                     <div class="carousel-item @(i == 0 ? "active" : "")" data-bs-interval="5000">
-                                        <!-- Click vào ảnh sẽ mở ra trang Chi tiết xe -->
+                                                                                         
                                         <a asp-controller="Car" asp-action="Details" asp-route-id="@c.Id" class="d-block text-decoration-none" title="@c.CarModel.Name">
                                             <img src="@imgPath" class="d-block w-100" style="object-fit: cover; aspect-ratio: 16/10; border-radius: 1.25rem;" alt="@c.CarModel.Name" />
                                         </a>
@@ -47,7 +47,7 @@
                                 }
                             </div>
 
-                            <!-- 2 Mũi tên chuyển ảnh Trước / Sau -->
+                                                                     
                             <button class="carousel-control-prev" type="button" data-bs-target="#heroCarCarousel" data-bs-slide="prev" style="width: 12%;">
                                 <span class="carousel-control-prev-icon" aria-hidden="true" style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.6));"></span>
                                 <span class="visually-hidden">@L["Home_Prev"]</span>

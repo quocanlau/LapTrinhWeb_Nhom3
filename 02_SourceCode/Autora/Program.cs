@@ -1,3 +1,4 @@
+using System.Threading.RateLimiting;
 using Microsoft.AspNetCore.Authentication;
 using Autora.Data;
 using Autora.Models;
@@ -14,34 +15,40 @@ builder.Services.AddDbContext<AppDbContext>(o => o.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")
     ?? "Server=(localdb)\\MSSQLLocalDB;Database=AutoraDb;Trusted_Connection=True;TrustServerCertificate=True"));
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>(o => {
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(o =>
+{
     o.User.RequireUniqueEmail = true;
     o.Password.RequiredLength = 8;
     o.Lockout.MaxFailedAccessAttempts = 5;
     o.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
 }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
-builder.Services.Configure<SecurityStampValidatorOptions>(o => {
-    o.ValidationInterval = TimeSpan.FromMinutes(10);
+builder.Services.Configure<SecurityStampValidatorOptions>(o =>
+{
+    o.ValidationInterval = TimeSpan.Zero;
 });
 
-builder.Services.ConfigureApplicationCookie(o => {
+builder.Services.ConfigureApplicationCookie(o =>
+{
     o.LoginPath = "/Account/Login";
     o.AccessDeniedPath = "/Account/AccessDenied";
     o.Cookie.HttpOnly = true;
     o.Cookie.SameSite = SameSiteMode.Lax;
     o.SlidingExpiration = true;
-    o.Events.OnRedirectToLogin = c => {
+    o.Events.OnRedirectToLogin = c =>
+    {
         if (c.Request.Path.StartsWithSegments("/api")) { c.Response.StatusCode = 401; return Task.CompletedTask; }
         c.Response.Redirect(c.RedirectUri);
         return Task.CompletedTask;
     };
-    o.Events.OnRedirectToAccessDenied = c => {
+    o.Events.OnRedirectToAccessDenied = c =>
+    {
         if (c.Request.Path.StartsWithSegments("/api")) { c.Response.StatusCode = 403; return Task.CompletedTask; }
         c.Response.Redirect(c.RedirectUri);
         return Task.CompletedTask;
     };
-    o.Events.OnValidatePrincipal = async c => {
+    o.Events.OnValidatePrincipal = async c =>
+    {
         await SecurityStampValidator.ValidatePrincipalAsync(c);
         if (c.ShouldRenew && c.Principal?.Identity?.IsAuthenticated == true)
         {
@@ -58,17 +65,20 @@ builder.Services.ConfigureApplicationCookie(o => {
 
 builder.Services.AddResponseCompression(o => o.EnableForHttps = true);
 builder.Services.AddDistributedMemoryCache();
-builder.Services.AddSession(o => {
+builder.Services.AddRateLimiter(o => { o.RejectionStatusCode = 429; o.AddPolicy("contact", ctx => RateLimitPartition.GetFixedWindowLimiter(ctx.Connection.RemoteIpAddress?.ToString() ?? "unknown", _ => new FixedWindowRateLimiterOptions { PermitLimit = 5, Window = TimeSpan.FromMinutes(1), QueueLimit = 0 })); });
+builder.Services.AddSession(o =>
+{
     o.IdleTimeout = TimeSpan.FromMinutes(30);
     o.Cookie.HttpOnly = true;
     o.Cookie.IsEssential = true;
 });
 builder.Services.AddAntiforgery(o => o.HeaderName = "X-CSRF-TOKEN");
 
-// 
+   
 builder.Services.AddLocalization(o => o.ResourcesPath = "Resources");
 
-builder.Services.AddControllersWithViews(o => {
+builder.Services.AddControllersWithViews(o =>
+{
     o.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
     o.Filters.Add<DatabaseErrorFilter>();
 })
@@ -83,9 +93,10 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
            .AddSupportedUICultures(supportedCultures);
 });
 
-// Services nghiệp vụ
+                     
 builder.Services.AddScoped<AdminNotificationService>();
 builder.Services.AddScoped<CarQuery>();
+builder.Services.AddScoped<ShowroomService>();
 builder.Services.AddScoped<SaleService>();
 builder.Services.AddScoped<PurchaseService>();
 
@@ -108,12 +119,14 @@ app.UseHttpsRedirection();
 app.UseResponseCompression();
 app.UseStaticFiles(new StaticFileOptions
 {
-    OnPrepareResponse = ctx => {
+    OnPrepareResponse = ctx =>
+    {
         ctx.Context.Response.Headers.Append("Cache-Control", "public,max-age=604800");
     }
 });
 
 app.UseRouting();
+app.UseRateLimiter();
 app.UseRequestLocalization();
 app.UseSession();
 app.UseAuthentication();
@@ -124,3 +137,4 @@ app.MapControllerRoute("areas", "{area:exists}/{controller=Home}/{action=Index}/
 app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+public partial class Program { }

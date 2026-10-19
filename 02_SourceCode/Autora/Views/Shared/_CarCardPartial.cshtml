@@ -7,7 +7,7 @@
 }
 
 <div class="car-card h-100 d-flex flex-column rounded-4 overflow-hidden border border-secondary border-opacity-25 shadow-sm" style="background-color: #FFFFFF;">
-    <!-- Khung ảnh tỷ lệ 16:9 bo góc mượt mà -->
+                                                
     <div class="car-card-img-wrapper position-relative overflow-hidden" style="aspect-ratio: 16/9; background-color: #EEF2F3;">
         <img src="@image" 
              alt="@Model.CarModel.Name" 
@@ -16,7 +16,7 @@
              loading="lazy"
              onerror="this.onerror=null;this.src='/images/car-placeholder.svg';" />
 
-        <!-- Huy hiệu trạng thái góc trên -->
+                                             
         <div class="position-absolute top-0 start-0 m-3 d-flex flex-column gap-1">
             <span class="badge bg-dark bg-opacity-75 border border-secondary text-white small px-2 py-1 rounded-pill">
                 <i class="bi bi-shield-check text-lime me-1"></i> @L["Card_Inspected"]
@@ -36,9 +36,9 @@
         </div>
     </div>
 
-    <!-- Nội dung thông tin xe -->
+                                  
     <div class="p-3 d-flex flex-column flex-grow-1">
-        <!-- Hãng xe & Năm SX -->
+                                 
         <div class="d-flex justify-content-between align-items-center mb-1">
             <span class="text-secondary small fw-bold text-uppercase" style="letter-spacing: 0.5px;">
                 @Model.CarModel.Manufacturer.Name
@@ -48,12 +48,12 @@
             </span>
         </div>
 
-        <!-- Tên xe -->
+                       
         <h5 class="text-white fw-bold mb-2 text-truncate" title="@Model.CarModel.Manufacturer.Name @Model.CarModel.Name">
             @Model.CarModel.Manufacturer.Name @Model.CarModel.Name
         </h5>
 
-        <!-- THÔNG SỐ XE DẠNG CÁC BADGE NHỎ GỌN GÀNG (ODO, Hộp số, Nhiên liệu) -->
+                                                                                  
         <div class="d-flex flex-wrap gap-2 mb-3 mt-1">
             <span class="badge bg-dark border border-secondary border-opacity-50 text-white-50 px-2 py-1 rounded-2 fw-normal d-inline-flex align-items-center gap-1">
                 <i class="bi bi-speedometer2 text-lime"></i> @Model.Mileage.ToString("N0") km
@@ -66,7 +66,7 @@
             </span>
         </div>
 
-        <!-- Giá tiền & Tiền cọc (2%) -->
+                                         
         <div class="mt-auto pt-2 border-top border-secondary border-opacity-25">
             <div class="d-flex align-items-baseline justify-content-between mb-2">
                 <div>
@@ -79,7 +79,7 @@
                 </div>
             </div>
 
-            <!-- Các nút hành động -->
+                                      
             <div class="d-flex gap-2">
                 <a asp-controller="Car" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-light flex-grow-1 py-2 rounded-pill fw-semibold">
                     @L["Card_Details"]
@@ -100,3 +100,4 @@
         </div>
     </div>
 </div>
+<form asp-controller="Compare" asp-action="Add" method="post" class="px-3 pb-3"><input type="hidden" name="carId" value="@Model.Id"/><button class="btn btn-sm btn-outline-secondary w-100">@(CarTranslationHelper.IsEnglish ? "Add to comparison" : "Thêm vào so sánh")</button></form>

@@ -30,7 +30,7 @@ public class UserAuthorizationTests
     [Fact]
     public void Employee_RoleDefinition_CannotAccessAdminExclusiveEndpoints()
     {
-        // Verify Employee role does NOT match Roles.Admin
+                                                          
         Assert.NotEqual(Roles.Admin, Roles.Employee);
         Assert.Equal("Admin", Roles.Admin);
         Assert.Equal("Employee", Roles.Employee);

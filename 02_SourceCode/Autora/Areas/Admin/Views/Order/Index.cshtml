@@ -2,17 +2,21 @@
 @using Autora.Models
 @using Autora.Services
 @{Layout="~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";ViewData["Title"]="Yêu cầu và giao dịch";}
-<h3>Yêu cầu đặt cọc mới</h3>
+<a asp-action="Draft" class="btn btn-primary mb-3">Lập giao dịch bán nháp / bán trực tiếp</a><h3>Yêu cầu cần xử lý</h3>
 @foreach(var r in Model.Requests){<div id="request-@r.Id" class="card p-3 mb-3"><h5>#@r.Id · @r.Car.CarModel.Name · @r.Customer.FullName</h5><p>@r.Customer.Phone · @r.Note · @Html.DisplayFor(_=>r.Car.Status)</p>
+@if(r.Status==RequestStatus.New){<form asp-action="Process" method="post"><input name="requestId" value="@r.Id" type="hidden"/><button class="btn btn-outline-secondary">Bắt đầu xử lý</button></form>}
 @if(r.Car.Status==CarStatus.Available){<form asp-action="Reserve" method="post" class="d-flex gap-2 flex-wrap"><input name="RequestId" value="@r.Id" type="hidden"/><label>Giá bán chốt VND <input name="AgreedPrice" value="@r.Car.ListedPrice" type="number" min="1" step="1" required class="form-control"/></label><button class="btn btn-primary">Xác nhận giữ xe chờ cọc 2%</button></form>}
 else{<p>Xe không còn nhận cọc mới.</p>}
 <form asp-action="CloseRequest" method="post" class="mt-2"><input name="requestId" value="@r.Id" type="hidden"/><button class="btn btn-outline-secondary">Đóng yêu cầu</button></form></div>}
 <h3>Giao dịch bán</h3>
 @foreach(var s in Model.Sales){<div id="sale-@s.Id" class="card p-3 mb-3"><h5>#@s.Id · @s.Car.CarModel.Name · @s.Customer.FullName</h5><p>@Html.DisplayFor(_=>s.Status)</p>
 <p>Giá chốt @s.AgreedPrice.ToString("N0") đ · Cọc 2% @s.RequiredDeposit.ToString("N0") đ · Thực thu @DepositPolicy.NetPaid(s).ToString("N0") đ · Còn phải thu @((s.AgreedPrice-DepositPolicy.NetPaid(s)).ToString("N0")) đ</p>
+@if(s.Status==SaleStatus.Draft){<a asp-action="Draft" asp-route-id="@s.Id">Sửa nháp</a><form asp-action="ConfirmDraft" method="post"><input name="id" value="@s.Id" type="hidden"/><input name="version" value="@Convert.ToBase64String(s.RowVersion)" type="hidden"/><button class="btn btn-primary">Xác nhận giữ xe</button></form><form asp-action="Cancel" method="post"><input name="saleId" value="@s.Id" type="hidden"/><button class="btn btn-outline-danger">Hủy nháp</button></form>}
 @if(s.Status is SaleStatus.Reserved or SaleStatus.Deposited){
 <form asp-action="Pay" method="post" class="row g-2 mb-3"><input name="SaleId" value="@s.Id" type="hidden"/><div class="col-md-2"><select name="EntryType" class="form-select"><option value="0">Thu tiền</option><option value="1">Hoàn tiền</option></select></div><div class="col-md-3"><input name="Amount" type="number" min="1" step="1" required placeholder="Số tiền VND" class="form-control"/></div><div class="col-md-2"><select name="PaymentMethod" class="form-select"><option>Tiền mặt</option><option>Chuyển khoản</option><option>POS</option></select></div><div class="col-md-3"><input name="Note" maxlength="500" placeholder="Ghi chú chứng từ" class="form-control"/></div><div class="col-md-2"><button class="btn btn-primary">Ghi nhận</button></div></form>
 <form asp-action="Deliver" method="post" class="d-flex gap-2 flex-wrap mb-3"><input name="SaleId" value="@s.Id" type="hidden"/><input name="Recipient" maxlength="150" required placeholder="Người nhận xe" class="form-control w-auto"/><button class="btn btn-success">Bàn giao khi đã thu đủ</button></form>
 <form asp-action="Cancel" method="post"><input name="saleId" value="@s.Id" type="hidden"/><button class="btn btn-outline-danger">Hủy sau khi đã hoàn đủ tiền</button></form>
 }
 <details class="mt-3"><summary>Lịch sử thu và hoàn</summary>@foreach(var p in s.Payments.OrderBy(x=>x.Id)){<p>#@p.Id · @p.EntryType · @p.Amount.ToString("N0") đ · @p.PaymentMethod · @p.Note</p>}</details></div>}
+
+<p>Trang @Model.Page / @Model.Pages</p>@if(Model.Page>1){<a asp-route-page="@(Model.Page-1)">Trước</a>} @if(Model.Page<Model.Pages){<a asp-route-page="@(Model.Page+1)">Sau</a>}

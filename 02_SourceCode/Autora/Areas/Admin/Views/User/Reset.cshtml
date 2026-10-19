@@ -1,0 +1,2 @@
+@{Layout="~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";}
+<h2>Đặt mật khẩu mới cho @ViewBag.UserName</h2><form asp-action="ResetPassword" method="post"><input name="id" value="@ViewBag.UserId" type="hidden"/><label>Mật khẩu mới (ít nhất 8 ký tự, đủ hoa/thường/số/ký tự đặc biệt)</label><input name="newPassword" type="password" minlength="8" maxlength="100" required autocomplete="new-password" class="form-control"/><button class="btn btn-primary mt-3">Đặt mật khẩu mới</button></form>

@@ -1,40 +1,6 @@
-@model List<Autora.Models.PurchaseReceipt>
-@using Autora.Models
-@{Layout="~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";ViewData["Title"]="Nhập mua xe";}
-<h3>Nhập mua xe</h3><p>Bản đầu xác nhận một chiếc xe mỗi lần nhập. Không sửa/xóa phiếu đã xác nhận.</p>
-<form asp-action="Import" method="post" class="row g-2 mb-4">
-    <div class="col-md-4">
-        <label class="form-label fw-semibold">Xe chờ nhập</label>
-        <select name="CarId" required class="form-select">
-            @if (((IEnumerable<Car>)ViewBag.Cars).Any())
-            {
-                @foreach (Car c in ViewBag.Cars)
-                {
-                    <option value="@c.Id">@c.CarModel.Name · @c.VIN</option>
-                }
-            }
-            else
-            {
-                <option value="" disabled selected>-- Chưa có xe chờ nhập (Tạo tại Quản lý kho xe) --</option>
-            }
-        </select>
-    </div>
-    <div class="col-md-3">
-        <label class="form-label fw-semibold">Đối tác</label>
-        <select name="SupplierId" required class="form-select">
-            @foreach (Supplier s in ViewBag.Suppliers)
-            {
-                <option value="@s.Id">@s.Name</option>
-            }
-        </select>
-    </div>
-    <div class="col-md-3">
-        <label class="form-label fw-semibold">Giá nhập VND</label>
-        <input name="PurchasePrice" type="number" min="1" step="1" required class="form-control" placeholder="Nhập giá vốn" />
-    </div>
-    <div class="col-md-2 d-flex align-items-end">
-        <button class="btn btn-primary w-100">Xác nhận nhập</button>
-    </div>
-</form>
-<h4>Thêm đối tác</h4><form asp-action="AddSupplier" method="post" class="row g-2 mb-4"><div class="col-md-3"><input name="Name" placeholder="Tên đối tác" maxlength="150" required class="form-control"/></div><div class="col-md-2"><select name="SupplierType" class="form-select"><option>Cá nhân</option><option>Tổ chức</option></select></div><div class="col-md-2"><input name="Phone" placeholder="Điện thoại" maxlength="20" class="form-control"/></div><div class="col-md-3"><input name="Address" placeholder="Địa chỉ" maxlength="300" class="form-control"/></div><div class="col-md-2"><button class="btn btn-primary">Thêm đối tác</button></div></form>
-<h4>Phiếu nhập đã xác nhận</h4>@foreach(var p in Model){<div class="card p-3 mb-3"><strong>#@p.Id · @p.Supplier.Name · @p.PurchasedAt.ToLocalTime().ToString("dd/MM/yyyy")</strong>@foreach(var d in p.Details){<p>@d.Car.CarModel.Name · @d.Car.VIN · Giá nhập @d.PurchasePrice.ToString("N0") đ</p>}</div>}
+@model Autora.ViewModels.PageResult<PurchaseReceipt>
+@{Layout="~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";}
+<h2>Phiếu nhập mua</h2><a asp-action="Edit" class="btn btn-primary mb-3">Tạo phiếu nháp nhiều xe</a> <a asp-controller="Supplier" asp-action="Index">Quản lý đối tác</a>
+@foreach(var p in Model.Items){<div class="card p-3 mb-3"><h5>#@p.Id · @p.Supplier.Name · @(p.Status==PurchaseStatus.Draft?"Nháp":"Đã xác nhận")</h5>@foreach(var d in p.Details){<p>@d.Car.CarModel.Name · @d.Car.VIN · @d.PurchasePrice.ToString("N0") đ</p>}
+@if(p.Status==PurchaseStatus.Draft){<a asp-action="Edit" asp-route-id="@p.Id">Sửa phiếu</a><form asp-action="Confirm" method="post"><input name="id" value="@p.Id" type="hidden"/><input name="version" value="@Convert.ToBase64String(p.RowVersion)" type="hidden"/><button class="btn btn-success">Xác nhận nhận tất cả xe</button></form><form asp-action="Delete" method="post"><input name="id" value="@p.Id" type="hidden"/><input name="version" value="@Convert.ToBase64String(p.RowVersion)" type="hidden"/><button class="btn btn-outline-danger">Xóa nháp</button></form>}</div>}
+<p>Trang @Model.Page / @Model.Pages</p>@if(Model.Page>1){<a asp-route-page="@(Model.Page-1)">Trước</a>} @if(Model.Page<Model.Pages){<a asp-route-page="@(Model.Page+1)">Sau</a>}

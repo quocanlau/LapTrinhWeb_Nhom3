@@ -1,0 +1,41 @@
+@startuml
+left to right direction
+actor "Khách vãng lai" as Guest
+actor "Khách hàng" as Customer
+actor "Nhân viên" as Staff
+actor "Quản trị viên" as Admin
+Customer --|> Guest
+Admin --|> Staff
+rectangle AUTORA {
+usecase "Tra cứu và xem chi tiết xe" as Browse
+usecase "So sánh và lưu xe quan tâm" as Compare
+usecase "Đăng ký và đăng nhập" as Login
+usecase "Quản lý hồ sơ cá nhân" as Profile
+usecase "Gửi yêu cầu mua và xem đơn riêng" as Request
+usecase "Gửi yêu cầu tư vấn" as Contact
+usecase "Quản lý hãng dòng xe và bộ ảnh" as Catalog
+usecase "Quản lý khách hàng và đối tác" as Partners
+usecase "Lập và xác nhận phiếu nhập" as Purchase
+usecase "Lập nháp và xác nhận giữ xe" as Sale
+usecase "Thu hoặc hoàn tiền" as Pay
+usecase "Bàn giao hoặc hủy giao dịch" as Deliver
+usecase "Xem thống kê và thông báo" as Report
+usecase "Quản lý tài khoản và quyền" as Users
+usecase "Cấu hình showroom" as Settings
+}
+Guest -- Browse
+Guest -- Compare
+Guest -- Login
+Guest -- Contact
+Customer -- Profile
+Customer -- Request
+Staff -- Catalog
+Staff -- Partners
+Staff -- Purchase
+Staff -- Sale
+Staff -- Pay
+Staff -- Deliver
+Staff -- Report
+Admin -- Users
+Admin -- Settings
+@enduml

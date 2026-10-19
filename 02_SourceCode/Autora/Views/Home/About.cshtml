@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!-- 1. HERO HEADER: GIỚI THIỆU CHUNG -->
+                                         
 <section class="position-relative overflow-hidden py-5" style="background: radial-gradient(circle at 60% 30%, #DCE7EA 0%, #F6F7F8 75%);">
     <div class="container py-4">
         <div class="row align-items-center gy-5">
@@ -41,7 +41,7 @@
     </div>
 </section>
 
-<!-- 2. SỐ LIỆU ẤN TƯỢNG (STATS COUNTER) -->
+                                            
 <section class="py-4 border-top border-bottom border-secondary border-opacity-25" style="background-color: #EEF2F3;">
     <div class="container">
         <div class="row g-4 text-center">
@@ -65,7 +65,7 @@
     </div>
 </section>
 
-<!-- 3. TẦM NHÌN & SỨ MỆNH -->
+                              
 <section class="py-5">
     <div class="container py-4">
         <div class="text-center max-w-700 mx-auto mb-5">
@@ -111,7 +111,7 @@
     </div>
 </section>
 
-<!-- 4. DỊCH VỤ CỐT LÕI -->
+                           
 <section class="py-5" style="background-color: #EEF2F3;">
     <div class="container py-4">
         <div class="row align-items-center gy-4 mb-4">
@@ -154,11 +154,11 @@
     </div>
 </section>
 
-<!-- 5. HỆ THỐNG SHOWROOM & FORM LIÊN HỆ -->
+                                            
 <section class="py-5" id="contact-section">
     <div class="container py-4">
         <div class="row g-5">
-            <!-- Địa chỉ các showroom -->
+                                         
             <div class="col-lg-6">
                 <span class="text-secondary small fw-bold text-uppercase">@L["About_NetworkEyebrow"]</span>
                 <h3 class="text-white fw-bold mt-1 mb-4">@L["About_VisitTitle"]</h3>
@@ -178,25 +178,25 @@
                 </div>
             </div>
 
-            <!-- Form đăng ký nhận tư vấn -->
+                                             
             <div class="col-lg-6">
                 <div class="p-4 p-md-5 rounded-4" style="background-color: #FFFFFF; border: 1px solid #DCE1E4;">
                     <h4 class="text-white fw-bold mb-2">@L["About_ConsultHeading"]</h4>
                     <p class="text-secondary small mb-4">@L["About_ConsultDesc"]</p>
 
-                    <form id="contactForm" onsubmit="event.preventDefault(); alert('@(CarTranslationHelper.IsEnglish ? "Thank you! Our advisory team will contact you shortly." : "Cảm ơn quý khách! Đội ngũ tư vấn sẽ liên hệ lại trong ít phút.")'); this.reset();">
+                    <form asp-controller="Contact" asp-action="Save" method="post">
                         <div class="mb-3">
                             <label class="text-secondary small mb-1">@L["About_FullName"]</label>
-                            <input type="text" class="form-control bg-dark border-secondary text-white rounded-3 px-3 py-2" placeholder="Nguyễn Văn A" required />
+                            <input name="FullName" maxlength="150" type="text" class="form-control bg-dark border-secondary text-white rounded-3 px-3 py-2" placeholder="Nguyễn Văn A" required />
                         </div>
                         <div class="row g-2 mb-3">
                             <div class="col-6">
                                 <label class="text-secondary small mb-1">@L["About_Phone"]</label>
-                                <input type="tel" class="form-control bg-dark border-secondary text-white rounded-3 px-3 py-2" placeholder="0987xxxxxx" required />
+                                <input name="Phone" maxlength="20" type="tel" class="form-control bg-dark border-secondary text-white rounded-3 px-3 py-2" placeholder="0987xxxxxx" required />
                             </div>
                             <div class="col-6">
                                 <label class="text-secondary small mb-1">@L["About_InterestedModel"]</label>
-                                <select class="form-select bg-dark border-secondary text-white rounded-3 px-3 py-2">
+                                <select name="InterestedModel" class="form-select bg-dark border-secondary text-white rounded-3 px-3 py-2">
                                     <option>Mercedes-Benz</option>
                                     <option>BMW</option>
                                     <option>Toyota</option>
@@ -206,7 +206,7 @@
                         </div>
                         <div class="mb-4">
                             <label class="text-secondary small mb-1">@L["About_SpecificNeed"]</label>
-                            <textarea class="form-control bg-dark border-secondary text-white rounded-3 px-3 py-2" rows="3" placeholder="@L["About_NeedPlaceholder"]"></textarea>
+                            <textarea name="Message" maxlength="1000" class="form-control bg-dark border-secondary text-white rounded-3 px-3 py-2" rows="3" placeholder="@L["About_NeedPlaceholder"]"></textarea>
                         </div>
                         <button type="submit" class="btn btn-lime w-100 py-3 fw-bold text-dark rounded-pill">
                             @L["About_SubmitBtn"]

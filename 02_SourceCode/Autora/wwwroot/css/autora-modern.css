@@ -1,4 +1,4 @@
-/* AUTORA — pearl / graphite / petrol. Presentation layer only. */
+                                                                  
 :root{--bg-dark:#F6F7F8;--bg-card:#FFF;--bg-card-hover:#F0F4F5;--border-color:#DCE1E4;--accent-lime:#173D44;--accent-lime-hover:#0F2F35;--text-primary:#182126;--text-muted:#63737C;--admin-bg:#F6F7F8;--admin-card:#FFF;--admin-border:#DCE1E4;--admin-sidebar-bg:#182E34;--admin-text-main:#182126;--admin-text-muted:#63737C;--admin-accent:#C4DBDE}
 body{background:#F6F7F8;color:#182126;font-family:'Plus Jakarta Sans',system-ui,sans-serif;line-height:1.65}
 h1,h2,h3,h4,h5,h6{letter-spacing:-.035em;color:#182126}a{color:#173D44}a:hover{color:#0F2F35}button,a,input,select,textarea{outline-offset:4px} :focus-visible{outline:3px solid #739FA7}
@@ -15,10 +15,10 @@ h1,h2,h3,h4,h5,h6{letter-spacing:-.035em;color:#182126}a{color:#173D44}a:hover{c
 @media(max-width:991px){.modern-hero{padding-top:36px}.hero-copy h1{font-size:3.1rem}.hero-photo img{height:320px}.modern-search{flex-wrap:wrap;margin-top:28px}.modern-search .btn{flex:1}.section-heading{align-items:start}.autora-admin .admin-sidebar{position:relative;min-height:0;width:100%;padding-bottom:15px}.autora-admin .admin-main-wrapper{margin-left:0;padding:24px 16px}.autora-admin header{gap:16px;flex-wrap:wrap}.autora-admin header .form-control{width:100%!important}}
 @media(max-width:575px){.hero-copy h1{font-size:2.65rem}.hero-photo img{height:240px}.modern-search{padding:16px;gap:14px}.modern-search .search-field-group{min-width:100%}.section-heading{flex-direction:column;gap:8px}.car-card-img-wrapper{height:auto}.autora-nav .brand-logo{font-size:1.05rem;gap:6px!important}.brand-icon-box{width:30px;height:30px}.autora-customer main>.container{padding-top:24px!important}.autora-admin .table{min-width:650px}}
 @media(prefers-reduced-motion:reduce){.hero-ambient{animation:none;will-change:auto}*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}.car-card:hover,.car-card:hover .car-card-img{transform:none}}
-/* Override original dark header and account controls. */
+                                                         
 .autora-nav{border-bottom:1px solid #DCE1E4!important}.autora-customer .user-dropdown-menu .dropdown-item{color:#182126!important}.autora-customer .user-dropdown-menu .dropdown-item:hover{background:#EDF3F4!important}.autora-customer .user-dropdown-menu .dropdown-divider{border-color:#DCE1E4}.autora-customer .user-dropdown-menu .dropdown-header{color:#63737C}.autora-customer .btn-user-pill:hover{background:#DDE9EC!important}.autora-customer .bg-dark.text-white{color:#182126!important}.autora-customer .badge.bg-dark.text-white{color:#173D44!important}
 
-/* Ambient layer: fixed, non-interactive, behind all page content. */
+                                                                     
 body.autora-customer, body.autora-admin { isolation: isolate; }
 body.autora-customer::before, body.autora-admin::before {
     content: "";
@@ -34,7 +34,7 @@ body.autora-customer::before, body.autora-admin::before {
     from { transform: translate3d(-2%, -1%, 0) scale(1); }
     to { transform: translate3d(2%, 2%, 0) scale(1.04); }
 }
-/* Keep status meanings readable on the new light surfaces. */
+                                                              
 .autora-customer .badge.bg-secondary { background: #EDF0F2 !important; color: #52636D !important; }
 .autora-customer .badge.bg-dark .text-lime { color: #173D44 !important; }
 .autora-customer .badge.bg-success { background: #E7F2EB !important; color: #21603D !important; }
@@ -72,7 +72,7 @@ input:-webkit-autofill { -webkit-text-fill-color: #182126; box-shadow: 0 0 0 100
 @media (prefers-reduced-motion: reduce) {
     body.autora-customer::before, body.autora-admin::before { animation: none; }
 }
-/* Legacy utility classes also follow the same palette. */
+                                                          
 .autora-customer .user-dropdown-menu { background-color: #FFF !important; border: 1px solid #DCE1E4; }
 .bg-dark-autora, .filter-sidebar-box { background-color: #FFF !important; border-color: #DCE1E4; }
 .bg-lime-badge { background-color: #DCEBEE !important; color: #173D44 !important; }
@@ -89,7 +89,7 @@ input:-webkit-autofill { -webkit-text-fill-color: #182126; box-shadow: 0 0 0 100
 .autora-customer .btn-outline-secondary:active { background: #52636D; border-color: #52636D; color: #FFF !important; }
 .autora-customer .btn-lime.text-white { color: #FFF !important; }
 
-/* Căn giữa tuyệt đối icon xe trong logo AUTORA */
+                                                  
 .brand-icon-box {
     display: flex !important;
     align-items: center !important;
@@ -105,5 +105,7 @@ input:-webkit-autofill { -webkit-text-fill-color: #182126; box-shadow: 0 0 0 100
     }
 
         .brand-icon-box i::before {
-            vertical-align: 0 !important; /* Triệt tiêu độ lệch mặc định của Bootstrap Icons */
-        }
+            vertical-align: 0 !important;                                                      
+        }.autora-customer .text-warning { color: #805100 !important; }
+.autora-customer .text-danger { color: #B42318 !important; }
+.autora-customer .text-info { color: #17536E !important; }

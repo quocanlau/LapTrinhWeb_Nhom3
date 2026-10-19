@@ -9,28 +9,33 @@ using Xunit;
 namespace Autora.Tests;
 public class NotificationTests
 {
-    [Fact] public void NotificationAccessRequiresStaffRole()
+    [Fact]
+    public void NotificationAccessRequiresStaffRole()
     {
-        var auth=typeof(NotificationController).GetCustomAttribute<AuthorizeAttribute>();
-        Assert.NotNull(auth);Assert.Equal(Roles.Staff,auth.Roles);
-        Assert.DoesNotContain(Roles.Customer,auth.Roles!);
+        var auth = typeof(NotificationController).GetCustomAttribute<AuthorizeAttribute>();
+        Assert.NotNull(auth); Assert.Equal(Roles.Staff, auth.Roles);
+        Assert.DoesNotContain(Roles.Customer, auth.Roles!);
     }
     [Theory]
-    [InlineData("Read")][InlineData("Open")][InlineData("ReadAll")][InlineData("ReadAllPage")]
+    [InlineData("Read")]
+    [InlineData("Open")]
+    [InlineData("ReadAll")]
+    [InlineData("ReadAllPage")]
     public void MarkingReadRequiresPostAndCsrf(string name)
     {
-        var method=typeof(NotificationController).GetMethod(name)!;
+        var method = typeof(NotificationController).GetMethod(name)!;
         Assert.NotNull(method.GetCustomAttribute<HttpPostAttribute>());
         Assert.NotNull(method.GetCustomAttribute<ValidateAntiForgeryTokenAttribute>());
-        // User id is not a client-controlled action parameter.
-        Assert.DoesNotContain(method.GetParameters(),p=>p.Name=="userId");
+                                                               
+        Assert.DoesNotContain(method.GetParameters(), p => p.Name == "userId");
     }
-    [Fact] public void ReadStateIsUniquePerUserAndEvent()
+    [Fact]
+    public void ReadStateIsUniquePerUserAndEvent()
     {
-        using var db=new AppDbContext(new DbContextOptionsBuilder<AppDbContext>().UseSqlServer("Server=localhost;Database=MetadataOnly;Trusted_Connection=True;TrustServerCertificate=True").Options);
-        var entity=db.Model.FindEntityType(typeof(AdminNotificationRead))!;
-        Assert.Contains(entity.GetIndexes(),i=>i.IsUnique && i.Properties.Select(p=>p.Name).SequenceEqual(new[]{"UserId","EventKey"}));
-        Assert.Equal(DeleteBehavior.Cascade,entity.GetForeignKeys().Single().DeleteBehavior);
-        Assert.Equal(100,entity.FindProperty("EventKey")!.GetMaxLength());
+        using var db = new AppDbContext(new DbContextOptionsBuilder<AppDbContext>().UseSqlServer("Server=localhost;Database=MetadataOnly;Trusted_Connection=True;TrustServerCertificate=True").Options);
+        var entity = db.Model.FindEntityType(typeof(AdminNotificationRead))!;
+        Assert.Contains(entity.GetIndexes(), i => i.IsUnique && i.Properties.Select(p => p.Name).SequenceEqual(new[] { "UserId", "EventKey" }));
+        Assert.Equal(DeleteBehavior.Cascade, entity.GetForeignKeys().Single().DeleteBehavior);
+        Assert.Equal(100, entity.FindProperty("EventKey")!.GetMaxLength());
     }
 }

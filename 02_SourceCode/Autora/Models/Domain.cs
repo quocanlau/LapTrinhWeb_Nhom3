@@ -4,18 +4,18 @@ namespace Autora.Models;
 
 public enum CarStatus : byte
 {
-    [Display(Name="Chờ nhập")] AwaitingImport = 0,
-    [Display(Name="Sẵn sàng")] Available = 1,
-    [Display(Name="Đang giữ chờ cọc")] Reserved = 2,
-    [Display(Name="Đã cọc")] Deposited = 3,
-    [Display(Name="Đã bán")] Sold = 4
+    [Display(Name = "Chờ nhập")] AwaitingImport = 0,
+    [Display(Name = "Sẵn sàng")] Available = 1,
+    [Display(Name = "Đang giữ chờ cọc")] Reserved = 2,
+    [Display(Name = "Đã cọc")] Deposited = 3,
+    [Display(Name = "Đã bán")] Sold = 4
 }
-public enum CarCondition : byte { [Display(Name="Xe mới")] New = 0, [Display(Name="Xe đã sử dụng")] Used = 1 }
+public enum CarCondition : byte { [Display(Name = "Xe mới")] New = 0, [Display(Name = "Xe đã sử dụng")] Used = 1 }
 public enum PurchaseStatus : byte { Draft = 0, Confirmed = 1 }
-public enum RequestStatus : byte { [Display(Name="Mới")] New = 0, [Display(Name="Đã chuyển giao dịch")] Converted = 1, [Display(Name="Đã đóng")] Closed = 2 }
-public enum SaleStatus : byte { [Display(Name="Nháp")] Draft = 0, [Display(Name="Đang giữ chờ cọc")] Reserved = 1, [Display(Name="Đã cọc")] Deposited = 2, [Display(Name="Đã bàn giao")] Delivered = 3, [Display(Name="Đã hủy")] Cancelled = 4 }
+public enum RequestStatus : byte { [Display(Name = "Mới")] New = 0, [Display(Name = "Đã chuyển giao dịch")] Converted = 1, [Display(Name = "Đã đóng")] Closed = 2, [Display(Name = "Đang xử lý")] Processing = 3 }
+public enum SaleStatus : byte { [Display(Name = "Nháp")] Draft = 0, [Display(Name = "Đang giữ chờ cọc")] Reserved = 1, [Display(Name = "Đã cọc")] Deposited = 2, [Display(Name = "Đã bàn giao")] Delivered = 3, [Display(Name = "Đã hủy")] Cancelled = 4 }
 public enum PaymentType : byte { Receipt = 0, Refund = 1 }
-public static class Roles { public const string Customer="Customer", Employee="Employee", Admin="Admin"; public const string Staff=Admin+","+Employee; }
+public static class Roles { public const string Customer = "Customer", Employee = "Employee", Admin = "Admin"; public const string Staff = Admin + "," + Employee; }
 public class ApplicationUser : IdentityUser
 {
     [Required, StringLength(150)] public string FullName { get; set; } = "";
@@ -61,15 +61,15 @@ public class Car
     public int Id { get; set; }
     public int CarModelId { get; set; }
     public CarModel CarModel { get; set; } = null!;
-    [Required, RegularExpression("^[A-HJ-NPR-Z0-9]{17}$", ErrorMessage="VIN phải có 17 ký tự hợp lệ, không gồm I, O, Q.")]
+    [Required, RegularExpression("^[A-HJ-NPR-Z0-9]{17}$", ErrorMessage = "VIN phải có 17 ký tự hợp lệ, không gồm I, O, Q.")]
     public string VIN { get; set; } = "";
-    [Range(1900,2100)] public short ManufactureYear { get; set; }
+    [Range(1900, 2100)] public short ManufactureYear { get; set; }
     [Required, StringLength(50)] public string Color { get; set; } = "";
     public CarCondition Condition { get; set; }
-    [Range(0,int.MaxValue)] public int Mileage { get; set; }
+    [Range(0, int.MaxValue)] public int Mileage { get; set; }
     [Required, StringLength(30)] public string Fuel { get; set; } = "Xăng";
     [Required, StringLength(30)] public string Transmission { get; set; } = "Tự động";
-    [Range(typeof(decimal),"1","9999999999999999")] public decimal ListedPrice { get; set; }
+    [Range(typeof(decimal), "1", "9999999999999999")] public decimal ListedPrice { get; set; }
     public CarStatus Status { get; set; } = CarStatus.AwaitingImport;
     public bool IsPublished { get; set; }
     public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;

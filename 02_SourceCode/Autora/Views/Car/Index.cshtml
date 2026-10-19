@@ -5,7 +5,7 @@
 }
 
 <div class="container py-4">
-    <!-- Tiêu đề trang & Breadcrumb -->
+                                       
     <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-4 gap-3">
         <div>
             <nav aria-label="breadcrumb">
@@ -20,7 +20,7 @@
         </div>
     </div>
 
-    <!-- KHỐI BỘ LỌC TÌM KIẾM DARK MODE CAO CẤP -->
+                                                   
     <div class="p-4 rounded-4 mb-4 border border-secondary border-opacity-25 shadow-sm" style="background-color: #FFFFFF;">
         <div class="d-flex align-items-center justify-content-between pb-3 mb-3 border-bottom border-secondary border-opacity-25">
             <h5 class="fw-bold text-white m-0 d-flex align-items-center gap-2">
@@ -30,7 +30,14 @@
         </div>
 
         <form id="carFilterForm" asp-action="Index" method="get" class="row g-3">
-            <!-- 1. Hãng xe -->
+<div class="col-md-4"><label class="form-label">@(CarTranslationHelper.IsEnglish?"Model":"Dòng xe")</label><select name="CarModelId" class="form-select"><option value="">--</option>@foreach(var c in Model.CarModels){<option value="@c.Id" selected="@(Model.Filter.CarModelId==c.Id)">@c.Name</option>}</select></div>
+<div class="col-md-4"><label class="form-label">@(CarTranslationHelper.IsEnglish?"Minimum price":"Giá từ")</label><input name="MinPrice" type="number" min="0" step="1" value="@Model.Filter.MinPrice" class="form-control"/></div>
+<div class="col-md-2"><label class="form-label">@(CarTranslationHelper.IsEnglish?"Year from":"Năm từ")</label><input name="YearFrom" type="number" min="1900" max="2100" value="@Model.Filter.YearFrom" class="form-control"/></div>
+<div class="col-md-2"><label class="form-label">@(CarTranslationHelper.IsEnglish?"Year to":"Đến năm")</label><input name="YearTo" type="number" min="1900" max="2100" value="@Model.Filter.YearTo" class="form-control"/></div>
+<div class="col-md-4"><label class="form-label">@(CarTranslationHelper.IsEnglish?"Body type":"Kiểu dáng")</label><select name="BodyType" class="form-select"><option value="">--</option>@foreach(var b in new[]{"Sedan","SUV","MPV","Hatchback","Crossover","Bán tải"}){<option selected="@(Model.Filter.BodyType==b)">@b</option>}</select></div>
+<div class="col-md-4"><label class="form-label">@(CarTranslationHelper.IsEnglish?"Transmission":"Hộp số")</label><select name="Transmission" class="form-select"><option value="">--</option>@foreach(var t in new[]{"Tự động","Số sàn"}){<option value="@t" selected="@(Model.Filter.Transmission==t)">@CarTranslationHelper.TranslateTransmission(t)</option>}</select></div>
+
+                               
             <div class="col-md-6 col-lg-3">
                 <label class="form-label text-secondary small fw-bold text-uppercase mb-1">@L["Filter_Brand"]</label>
                 <select name="ManufacturerId" class="form-select bg-dark text-white border-secondary border-opacity-50 rounded-3 py-2">
@@ -42,7 +49,7 @@
                 </select>
             </div>
 
-            <!-- 2. Tên xe / Từ khóa -->
+                                        
             <div class="col-md-6 col-lg-3">
                 <label class="form-label text-secondary small fw-bold text-uppercase mb-1">@L["Filter_Keyword"]</label>
                 <div class="input-group">
@@ -57,7 +64,7 @@
                 </div>
             </div>
 
-            <!-- 3. Giá tối đa VND -->
+                                      
             <div class="col-md-6 col-lg-3">
                 <label class="form-label text-secondary small fw-bold text-uppercase mb-1">@L["Filter_MaxPrice"]</label>
                 <input name="MaxPrice" 
@@ -69,7 +76,7 @@
                        placeholder="Ví dụ: 1500000000" />
             </div>
 
-            <!-- 4. Tình trạng xe -->
+                                     
             <div class="col-md-6 col-lg-3">
                 <label class="form-label text-secondary small fw-bold text-uppercase mb-1">@L["Filter_Condition"]</label>
                 <select name="Condition" class="form-select bg-dark text-white border-secondary border-opacity-50 rounded-3 py-2">
@@ -79,7 +86,7 @@
                 </select>
             </div>
 
-            <!-- 5. Nhiên liệu -->
+                                  
             <div class="col-md-6 col-lg-3">
                 <label class="form-label text-secondary small fw-bold text-uppercase mb-1">@L["Filter_Fuel"]</label>
                 <select name="Fuel" class="form-select bg-dark text-white border-secondary border-opacity-50 rounded-3 py-2">
@@ -91,7 +98,7 @@
                 </select>
             </div>
 
-            <!-- 6. Sắp xếp -->
+                               
             <div class="col-md-6 col-lg-3">
                 <label class="form-label text-secondary small fw-bold text-uppercase mb-1">@L["Filter_Sort"]</label>
                 <select name="Sort" class="form-select bg-dark text-white border-secondary border-opacity-50 rounded-3 py-2">
@@ -102,7 +109,7 @@
                 </select>
             </div>
 
-            <!-- 7. Nút hành động: Áp dụng lọc & Đặt lại -->
+                                                            
             <div class="col-lg-6 d-flex align-items-end gap-2">
                 <button type="submit" class="btn btn-lime px-4 py-2 rounded-pill fw-bold text-dark d-flex align-items-center gap-2 shadow-sm">
                     <i class="bi bi-funnel-fill"></i>
@@ -115,7 +122,7 @@
         </form>
     </div>
 
-    <!-- Vùng hiển thị kết quả xe (AJAX tự động cập nhật vào đây) -->
+                                                                     
     <div id="filterStatus" role="status" class="mb-2"></div>
     <div id="carResults">
         @await Html.PartialAsync("_CarResults", Model)

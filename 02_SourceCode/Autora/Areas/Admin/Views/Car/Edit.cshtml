@@ -9,3 +9,5 @@
 <div class="col-md-4"><label>Số km</label><input asp-for="Mileage" class="form-control"/></div><div class="col-md-4"><label>Nhiên liệu</label><input asp-for="Fuel" class="form-control"/></div><div class="col-md-4"><label>Hộp số</label><input asp-for="Transmission" class="form-control"/></div>
 <div class="col-md-6"><label>Giá niêm yết VND</label><input asp-for="ListedPrice" type="number" min="1" step="1" class="form-control"/></div><div class="col-md-6"><label>Ảnh chính URL HTTPS</label><input asp-for="ImageUrl" class="form-control"/></div>
 <div><label><input asp-for="IsPublished"/> Công khai sau khi nhập xe</label></div><div><button class="btn btn-primary">Lưu</button></div></form>
+
+@if(Model.Id>0){<a asp-controller="CarImage" asp-action="Index" asp-route-id="@Model.Id" class="btn btn-outline-primary mt-3">Quản lý bộ ảnh / tải ảnh lên</a>}

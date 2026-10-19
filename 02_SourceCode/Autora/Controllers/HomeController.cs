@@ -25,6 +25,7 @@ public class HomeController(CarQuery query) : Controller
     [HttpPost]
     public IActionResult SetLanguage(string culture, string returnUrl)
     {
+        if (culture is not ("vi" or "vi-VN" or "en" or "en-US")) return BadRequest("Ngôn ngữ không hợp lệ.");
         Response.Cookies.Append(
             Microsoft.AspNetCore.Localization.CookieRequestCultureProvider.DefaultCookieName,
             Microsoft.AspNetCore.Localization.CookieRequestCultureProvider.MakeCookieValue(new Microsoft.AspNetCore.Localization.RequestCulture(culture)),
@@ -36,4 +37,5 @@ public class HomeController(CarQuery query) : Controller
 
         return RedirectToAction("Index", "Home");
     }
+    public IActionResult Information(string topic) { if (topic is not ("installment" or "inspection")) return NotFound(); return View(model: topic); }
 }

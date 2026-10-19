@@ -3,13 +3,13 @@
     ViewData["Title"] = L["Account_LoginTitle"];
 }
 
-<!-- Container căn chính giữa màn hình cả chiều ngang lẫn dọc -->
+                                                                 
 <div class="container py-5 d-flex justify-content-center align-items-center" style="min-height: 82vh;">
-    <!-- Card Đăng nhập Dark Mode Sang Trọng -->
+                                                
     <div class="p-4 p-sm-5 rounded-4 border border-secondary border-opacity-25 shadow-lg" 
          style="width: 100%; max-width: 440px; background-color: #FFFFFF;">
         
-        <!-- Logo & Tiêu đề -->
+                               
         <div class="text-center mb-4">
             <div class="brand-icon-box mx-auto mb-3" style="width: 44px; height: 44px; font-size: 1.25rem;">
                 <i class="bi bi-car-front-fill"></i>
@@ -18,16 +18,16 @@
             <p class="text-secondary small">@L["Account_PortalSubtitle"]</p>
         </div>
 
-        <!-- Form Đăng nhập -->
+                               
         <form asp-action="Login" method="post">
             <input asp-for="ReturnUrl" type="hidden" />
 
-            <!-- Khối thông báo lỗi tổng hợp -->
+                                                
             <div asp-validation-summary="ModelOnly" 
                  class="alert alert-danger py-2 px-3 small border-0 mb-3" 
                  style="background-color: rgba(220, 53, 69, 0.15); color: #B42318;"></div>
 
-            <!-- Ô nhập Email -->
+                                 
             <div class="mb-3">
                 <label asp-for="Email" class="form-label text-secondary small fw-bold text-uppercase mb-1">
                     @L["Account_Email"]
@@ -44,7 +44,7 @@
                 <span asp-validation-for="Email" class="text-danger small mt-1 d-block"></span>
             </div>
 
-            <!-- Ô nhập Mật khẩu -->
+                                    
             <div class="mb-3">
                 <div class="d-flex align-items-center justify-content-between mb-1">
                     <label asp-for="Password" class="form-label text-secondary small fw-bold text-uppercase m-0">
@@ -64,7 +64,7 @@
                 <span asp-validation-for="Password" class="text-danger small mt-1 d-block"></span>
             </div>
 
-            <!-- Checkbox Ghi nhớ đăng nhập -->
+                                               
             <div class="form-check mb-4">
                 <input asp-for="RememberMe" class="form-check-input bg-dark border-secondary cursor-pointer" id="rememberMeCheck" />
                 <label asp-for="RememberMe" class="form-check-label text-secondary small cursor-pointer" for="rememberMeCheck">
@@ -72,14 +72,14 @@
                 </label>
             </div>
 
-            <!-- Nút Đăng nhập -->
+                                  
             <button type="submit" class="btn btn-lime w-100 py-3 rounded-pill fw-bold text-dark fs-6 shadow-sm d-flex align-items-center justify-content-center gap-2 mb-3">
                 <span>@L["Account_LoginBtn"]</span>
                 <i class="bi bi-arrow-right"></i>
             </button>
         </form>
 
-        <!-- Chuyển hướng đăng ký tài khoản -->
+                                               
         <div class="text-center pt-3 border-top border-secondary border-opacity-25">
             <span class="text-secondary small">@L["Account_NoAccount"] </span>
             <a asp-action="Register" class="text-lime fw-bold small text-decoration-none hover-underline">

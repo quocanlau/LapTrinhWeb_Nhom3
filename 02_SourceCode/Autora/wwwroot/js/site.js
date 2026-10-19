@@ -15,7 +15,7 @@ $(function () {
     $(document).on('click','.btn-add-to-cart',function(){
         var button=$(this);button.prop('disabled',true);
         $.ajax({url:'/Cart/Add',method:'POST',headers:{'X-CSRF-TOKEN':token()},data:{carId:button.data('car-id')}})
-        .done(function(result){$('#cart-counter').text(result.count);alert('Đã lưu xe vào danh sách quan tâm.');})
+        .done(function(result){$('#cart-counter').text(result.count).toggle(result.count > 0);alert('Đã lưu xe vào danh sách quan tâm.');})
         .fail(function(xhr){alert(xhr.responseJSON && (xhr.responseJSON.message || xhr.responseJSON.title) || 'Không thực hiện được thao tác. Hãy tải lại trang.');})
         .always(function(){button.prop('disabled',false);});
     });
