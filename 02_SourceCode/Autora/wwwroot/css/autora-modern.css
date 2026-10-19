@@ -1,0 +1,109 @@
+/* AUTORA — pearl / graphite / petrol. Presentation layer only. */
+:root{--bg-dark:#F6F7F8;--bg-card:#FFF;--bg-card-hover:#F0F4F5;--border-color:#DCE1E4;--accent-lime:#173D44;--accent-lime-hover:#0F2F35;--text-primary:#182126;--text-muted:#63737C;--admin-bg:#F6F7F8;--admin-card:#FFF;--admin-border:#DCE1E4;--admin-sidebar-bg:#182E34;--admin-text-main:#182126;--admin-text-muted:#63737C;--admin-accent:#C4DBDE}
+body{background:#F6F7F8;color:#182126;font-family:'Plus Jakarta Sans',system-ui,sans-serif;line-height:1.65}
+h1,h2,h3,h4,h5,h6{letter-spacing:-.035em;color:#182126}a{color:#173D44}a:hover{color:#0F2F35}button,a,input,select,textarea{outline-offset:4px} :focus-visible{outline:3px solid #739FA7}
+.autora-customer .text-white{color:#182126!important}.autora-customer .text-white-50{color:#63737C!important}.autora-customer .text-secondary{color:#63737C!important}.autora-customer .bg-dark{background:#FFF!important}.autora-customer .border-dark,.autora-customer .border-secondary{border-color:#DCE1E4!important}.text-lime{color:#173D44!important}
+.autora-customer .badge.bg-dark,.autora-customer .badge.bg-success,.autora-customer .badge.bg-danger,.autora-customer .btn-primary,.autora-customer .btn-success{color:#FFF!important}.autora-customer .badge.bg-dark{background:#EDF3F4!important;color:#173D44!important}
+.autora-nav{position:sticky!important;top:0;background:rgba(255,255,255,.94)!important;border-bottom:1px solid #DCE1E4;backdrop-filter:blur(16px);padding:14px 0!important;z-index:1030}.brand-logo{font-size:1.4rem;letter-spacing:.23em;color:#182126}.brand-icon-box{background:#173D44;color:#FFF;border-radius:10px}.nav-link-custom{color:#63737C!important;font-weight:600}.nav-link-custom:hover,.nav-link-custom.active{color:#173D44!important}.btn-nav-icon{color:#173D44!important}.btn-user-pill{background:#EDF3F4!important;color:#173D44!important}.user-avatar-circle{background:#173D44!important;color:#FFF!important}.user-dropdown-menu,.dropdown-menu-dark{--bs-dropdown-bg:#FFF;--bs-dropdown-color:#182126;--bs-dropdown-link-color:#182126;--bs-dropdown-link-hover-bg:#EDF3F4;--bs-dropdown-link-hover-color:#173D44}.mobile-page-nav{display:flex;gap:24px;overflow:auto;padding-top:12px;padding-bottom:12px;font-size:.85rem;background:#FFF}.mobile-page-nav a{white-space:nowrap}
+.btn-lime,.btn-primary,.btn-light{background:#173D44!important;border:1px solid #173D44!important;color:#FFF!important;border-radius:9px;font-weight:650;box-shadow:none!important}.btn-lime:hover,.btn-primary:hover,.btn-light:hover{background:#0F2F35!important;border-color:#0F2F35!important;color:#FFF!important}.btn-lime.text-dark{color:#FFF!important}.btn-outline-custom,.btn-outline-light{border:1px solid #C9D5D8!important;color:#173D44!important;background:transparent;border-radius:9px}.btn-outline-custom:hover,.btn-outline-light:hover{background:#EDF3F4!important;color:#173D44!important}.btn{transition:background .2s ease,border-color .2s ease,transform .2s ease}.btn:disabled{opacity:.65}
+.form-control,.form-select,.input-group-text{background:#FFF!important;color:#182126!important;border-color:#DCE1E4!important;border-radius:9px;min-height:44px}.form-control::placeholder{color:#63737C;opacity:1}.form-control:focus,.form-select:focus{border-color:#739FA7!important;box-shadow:0 0 0 3px #173D4412}.form-check-input:checked{background-color:#173D44!important;border-color:#173D44!important}.form-label,label{color:#52636D}.autora-customer .form-check-input.bg-dark{background-color:#FFF!important}.autora-customer .form-check-input.bg-dark:checked{background-color:#173D44!important}
+.modern-hero{position:relative;padding:72px 0 0;overflow:hidden;background:#EDF2F4}.hero-ambient{position:absolute;inset:-25%;pointer-events:none;background:radial-gradient(ellipse at 25% 30%,#BFD7DC88,transparent 50%),radial-gradient(ellipse at 80% 70%,#D6DEE499,transparent 55%);animation:ambient-drift 26s ease-in-out infinite alternate;will-change:transform}.hero-copy{padding-bottom:24px}.hero-eyebrow{display:block;font-size:.7rem;letter-spacing:.16em;color:#627A84;font-weight:750;margin-bottom:18px}.hero-copy h1{font-size:clamp(2.8rem,5vw,4.9rem);line-height:1.07;font-weight:800;letter-spacing:-.065em;margin-bottom:24px}.hero-copy p{font-size:1.05rem;max-width:440px;color:#63737C;margin-bottom:30px}.hero-photo{overflow:hidden;border-radius:16px;background:#DCE6E8;box-shadow:0 24px 60px #18212612}.hero-photo img{display:block;width:100%;height:410px;object-fit:cover}.modern-search{position:relative;margin:48px 0 0;padding:22px;background:#FFF!important;border:1px solid #DCE1E4;border-radius:14px;box-shadow:0 15px 35px #18212608;display:flex;gap:18px;align-items:end;transform:none}.modern-search .search-field-group{flex:1;min-width:180px;padding:0;border:0}.modern-search label{font-size:.76rem;display:block;margin-bottom:8px}.modern-search input{width:100%;min-height:48px;border:1px solid #DCE1E4;border-radius:8px;background:#F8FAFB;color:#182126;padding:10px 14px}.modern-search .btn{min-height:48px;white-space:nowrap;padding:12px 30px}.section-heading{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:28px}.section-heading h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:750}.section-heading .hero-eyebrow{margin-bottom:8px}.section-heading>a{font-size:.85rem;white-space:nowrap}
+.car-card{border:1px solid #DCE1E4;background:#FFF!important;border-radius:14px;overflow:hidden;box-shadow:0 4px 12px #18212603;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}.car-card:hover{background:#FFF!important;transform:translateY(-4px);border-color:#B3C8CD;box-shadow:0 16px 32px #1821260D}.car-card-img-wrapper{height:auto;aspect-ratio:16/9;background:#E9EEF0;overflow:hidden}.car-card-img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}.car-card:hover .car-card-img{transform:scale(1.025)}.car-card .p-3{padding:22px!important}.car-card h5{font-size:1.15rem;line-height:1.5}.car-card .fs-5{font-size:1.25rem!important}.badge-inspected{background:#FFF!important;color:#173D44!important;border:1px solid #DCE1E4}.badge-status-in-stock{background:#EAF3ED;color:#287044}.badge-status-booked{background:#FFF4DF;color:#8C651F}
+.autora-customer footer{background:#EEF2F3!important}.autora-customer footer .brand-logo{color:#173D44!important}.autora-customer main>.container{padding-top:36px!important;padding-bottom:36px!important}.autora-customer main>.container>h3{font-size:2rem;margin-bottom:24px}.autora-customer .card{background:#FFF;color:#182126;border-color:#DCE1E4;box-shadow:0 10px 30px #18212605}.autora-customer .rounded-4{border-radius:14px!important}.autora-customer .shadow-lg{box-shadow:0 16px 40px #1821260C!important}.table{--bs-table-bg:#FFF;--bs-table-color:#182126;--bs-table-border-color:#E5EAEC}.table th,.admin-table th{font-weight:650;background:#F0F4F5!important;color:#63737C!important;padding:16px}.table td{padding:16px;vertical-align:middle}.table-responsive{border:1px solid #DCE1E4;border-radius:12px;background:#FFF}.table{margin-bottom:0}.breadcrumb{font-size:.85rem}.border{border-color:#DCE1E4!important}.alert-info{color:#173D44;background:#EAF2F4;border-color:#CBDDE1}
+.autora-admin .admin-sidebar{background:#182E34;color:#DCE8EA}.autora-admin .admin-brand{letter-spacing:.18em}.autora-admin .admin-menu-item{color:#B9CBCE;border-radius:8px}.autora-admin .admin-menu-item:hover,.autora-admin .admin-menu-item.active{background:#FFFFFF12;color:#FFF}.autora-admin .admin-menu-label{color:#92AFB5}.autora-admin .admin-main-wrapper{padding:32px 36px}.autora-admin .kpi-card{border:1px solid #DCE1E4;box-shadow:0 4px 16px #18212604;border-radius:12px}.autora-admin .kpi-value{color:#173D44}.autora-admin .bg-white.rounded-4{border-radius:12px!important;box-shadow:0 4px 16px #18212604!important}.autora-admin header input{max-width:100%}.autora-admin .admin-table td{padding:16px;color:#182126}
+@keyframes ambient-drift{from{transform:translate3d(-2%,-1%,0) scale(1)}to{transform:translate3d(3%,2%,0) scale(1.04)}}
+@media(max-width:991px){.modern-hero{padding-top:36px}.hero-copy h1{font-size:3.1rem}.hero-photo img{height:320px}.modern-search{flex-wrap:wrap;margin-top:28px}.modern-search .btn{flex:1}.section-heading{align-items:start}.autora-admin .admin-sidebar{position:relative;min-height:0;width:100%;padding-bottom:15px}.autora-admin .admin-main-wrapper{margin-left:0;padding:24px 16px}.autora-admin header{gap:16px;flex-wrap:wrap}.autora-admin header .form-control{width:100%!important}}
+@media(max-width:575px){.hero-copy h1{font-size:2.65rem}.hero-photo img{height:240px}.modern-search{padding:16px;gap:14px}.modern-search .search-field-group{min-width:100%}.section-heading{flex-direction:column;gap:8px}.car-card-img-wrapper{height:auto}.autora-nav .brand-logo{font-size:1.05rem;gap:6px!important}.brand-icon-box{width:30px;height:30px}.autora-customer main>.container{padding-top:24px!important}.autora-admin .table{min-width:650px}}
+@media(prefers-reduced-motion:reduce){.hero-ambient{animation:none;will-change:auto}*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}.car-card:hover,.car-card:hover .car-card-img{transform:none}}
+/* Override original dark header and account controls. */
+.autora-nav{border-bottom:1px solid #DCE1E4!important}.autora-customer .user-dropdown-menu .dropdown-item{color:#182126!important}.autora-customer .user-dropdown-menu .dropdown-item:hover{background:#EDF3F4!important}.autora-customer .user-dropdown-menu .dropdown-divider{border-color:#DCE1E4}.autora-customer .user-dropdown-menu .dropdown-header{color:#63737C}.autora-customer .btn-user-pill:hover{background:#DDE9EC!important}.autora-customer .bg-dark.text-white{color:#182126!important}.autora-customer .badge.bg-dark.text-white{color:#173D44!important}
+
+/* Ambient layer: fixed, non-interactive, behind all page content. */
+body.autora-customer, body.autora-admin { isolation: isolate; }
+body.autora-customer::before, body.autora-admin::before {
+    content: "";
+    position: fixed;
+    inset: -12%;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(ellipse at 15% 25%, #c5dce580, transparent 52%),
+                radial-gradient(ellipse at 85% 75%, #c8ded65c, transparent 48%);
+    animation: page-ambient 32s ease-in-out infinite alternate;
+}
+@keyframes page-ambient {
+    from { transform: translate3d(-2%, -1%, 0) scale(1); }
+    to { transform: translate3d(2%, 2%, 0) scale(1.04); }
+}
+/* Keep status meanings readable on the new light surfaces. */
+.autora-customer .badge.bg-secondary { background: #EDF0F2 !important; color: #52636D !important; }
+.autora-customer .badge.bg-dark .text-lime { color: #173D44 !important; }
+.autora-customer .badge.bg-success { background: #E7F2EB !important; color: #21603D !important; }
+.autora-customer .badge.bg-danger { background: #FBE9E7 !important; color: #B42318 !important; }
+.autora-customer .badge.bg-warning { background: #FFF1CE !important; color: #805100 !important; }
+.autora-customer .badge.bg-primary { background: #E5EFF4 !important; color: #173D44 !important; }
+.autora-customer .btn-success, .autora-customer .btn-danger,
+.autora-customer .btn-secondary, .autora-customer .btn-dark { color: #FFF !important; }
+.autora-customer .btn-secondary.text-white-50 { color: #FFF !important; }
+.btn-outline-warning { color: #805100; border-color: #BD8500; }
+.btn-outline-warning:hover { color: #FFF; background: #805100; border-color: #805100; }
+.btn-link, .page-link, .notification-heading .btn-link { color: #173D44; }
+.active > .page-link, .page-link.active { color: #FFF; background: #173D44; border-color: #173D44; }
+.form-control:disabled, .form-control[readonly], .form-select:disabled {
+    background: #EDF0F2 !important; color: #52636D !important; opacity: 1;
+}
+.form-control.is-invalid, .form-select.is-invalid, .input-validation-error { border-color: #B42318 !important; }
+.form-control.is-valid, .form-select.is-valid { border-color: #21603D !important; }
+input:-webkit-autofill { -webkit-text-fill-color: #182126; box-shadow: 0 0 0 1000px #F4F8F9 inset; }
+.dropdown-item.active, .dropdown-item:active { background: #E2ECEF; color: #173D44; }
+.autora-customer .user-dropdown-menu .dropdown-item.text-danger { color: #B42318 !important; }
+.autora-customer .user-dropdown-menu .dropdown-item:focus { background: #EDF3F4; }
+.autora-customer footer .hover-white:hover { color: #173D44 !important; }
+.autora-customer .brand-icon-box i { color: #FFF; }
+.autora-customer .photo-caption { background: #FFFFFFF2 !important; border-top: 1px solid #DCE1E4; }
+.autora-admin .admin-sidebar { height: 100vh; overflow-y: auto; }
+.autora-admin .admin-sidebar .text-secondary { color: #AFC4C9 !important; }
+.autora-admin .admin-sidebar .btn-outline-danger { color: #FFB4AB; }
+.autora-admin .admin-sidebar .btn-outline-danger:hover { background: #A32E2E; color: #FFF; }
+.autora-admin .admin-menu-item.active { border-left-color: #C4DBDE; }
+@media (max-width: 991px) {
+    .autora-admin .admin-sidebar { height: auto; max-height: none; }
+    .autora-customer .sticky-top { position: static; }
+}
+@media (prefers-reduced-motion: reduce) {
+    body.autora-customer::before, body.autora-admin::before { animation: none; }
+}
+/* Legacy utility classes also follow the same palette. */
+.autora-customer .user-dropdown-menu { background-color: #FFF !important; border: 1px solid #DCE1E4; }
+.bg-dark-autora, .filter-sidebar-box { background-color: #FFF !important; border-color: #DCE1E4; }
+.bg-lime-badge { background-color: #DCEBEE !important; color: #173D44 !important; }
+.hover-lime:hover { color: #173D44 !important; }
+.hover-bg-light:hover { background-color: #EDF3F4; }
+.btn-wishlist { background: #FFFFFFEB; color: #173D44; }
+.btn-wishlist:hover { background: #173D44; color: #FFF; }
+.custom-range::-webkit-slider-thumb { background-color: #173D44 !important; }
+.custom-range::-moz-range-thumb { background-color: #173D44; }
+.page-link-custom { background: #FFF; color: #52636D; border-color: #DCE1E4; }
+.page-link-custom:hover { background: #EDF3F4; color: #173D44; }
+.page-item.active .page-link-custom { background: #173D44 !important; border-color: #173D44 !important; color: #FFF !important; }
+.autora-customer .btn-outline-secondary:hover,
+.autora-customer .btn-outline-secondary:active { background: #52636D; border-color: #52636D; color: #FFF !important; }
+.autora-customer .btn-lime.text-white { color: #FFF !important; }
+
+/* Căn giữa tuyệt đối icon xe trong logo AUTORA */
+.brand-icon-box {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important;
+}
+
+    .brand-icon-box i {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        line-height: 1 !important;
+    }
+
+        .brand-icon-box i::before {
+            vertical-align: 0 !important; /* Triệt tiêu độ lệch mặc định của Bootstrap Icons */
+        }

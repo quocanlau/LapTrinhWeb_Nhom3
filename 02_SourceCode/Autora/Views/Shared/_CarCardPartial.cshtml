@@ -1,0 +1,102 @@
+@model Car
+@using Autora.Services
+@{
+    var image = Model.Images.OrderByDescending(x => x.IsPrimary).ThenBy(x => x.SortOrder).FirstOrDefault()?.ImagePath
+                ?? "/images/car-placeholder.svg";
+    var depositAmount = DepositPolicy.Calculate(Model.ListedPrice);
+}
+
+<div class="car-card h-100 d-flex flex-column rounded-4 overflow-hidden border border-secondary border-opacity-25 shadow-sm" style="background-color: #FFFFFF;">
+    <!-- Khung ảnh tỷ lệ 16:9 bo góc mượt mà -->
+    <div class="car-card-img-wrapper position-relative overflow-hidden" style="aspect-ratio: 16/9; background-color: #EEF2F3;">
+        <img src="@image" 
+             alt="@Model.CarModel.Name" 
+             class="car-card-img w-100 h-100 object-fit-cover" 
+             style="object-fit: cover; transition: transform 0.3s ease;" 
+             loading="lazy"
+             onerror="this.onerror=null;this.src='/images/car-placeholder.svg';" />
+
+        <!-- Huy hiệu trạng thái góc trên -->
+        <div class="position-absolute top-0 start-0 m-3 d-flex flex-column gap-1">
+            <span class="badge bg-dark bg-opacity-75 border border-secondary text-white small px-2 py-1 rounded-pill">
+                <i class="bi bi-shield-check text-lime me-1"></i> @L["Card_Inspected"]
+            </span>
+            @if (Model.Status == CarStatus.Available)
+            {
+                <span class="badge bg-success bg-opacity-75 px-2 py-1 rounded-pill text-white small">
+                    <i class="bi bi-check-circle-fill me-1"></i> @L["Card_Available"]
+                </span>
+            }
+            else if (Model.Status == CarStatus.Reserved || Model.Status == CarStatus.Deposited)
+            {
+                <span class="badge bg-warning bg-opacity-75 text-dark px-2 py-1 rounded-pill small">
+                    <i class="bi bi-clock-fill me-1"></i> @L["Card_Deposited"]
+                </span>
+            }
+        </div>
+    </div>
+
+    <!-- Nội dung thông tin xe -->
+    <div class="p-3 d-flex flex-column flex-grow-1">
+        <!-- Hãng xe & Năm SX -->
+        <div class="d-flex justify-content-between align-items-center mb-1">
+            <span class="text-secondary small fw-bold text-uppercase" style="letter-spacing: 0.5px;">
+                @Model.CarModel.Manufacturer.Name
+            </span>
+            <span class="badge bg-secondary bg-opacity-25 text-white-50 border border-secondary border-opacity-25 fw-normal">
+                @string.Format(L["Card_Year"].Value, Model.ManufactureYear)
+            </span>
+        </div>
+
+        <!-- Tên xe -->
+        <h5 class="text-white fw-bold mb-2 text-truncate" title="@Model.CarModel.Manufacturer.Name @Model.CarModel.Name">
+            @Model.CarModel.Manufacturer.Name @Model.CarModel.Name
+        </h5>
+
+        <!-- THÔNG SỐ XE DẠNG CÁC BADGE NHỎ GỌN GÀNG (ODO, Hộp số, Nhiên liệu) -->
+        <div class="d-flex flex-wrap gap-2 mb-3 mt-1">
+            <span class="badge bg-dark border border-secondary border-opacity-50 text-white-50 px-2 py-1 rounded-2 fw-normal d-inline-flex align-items-center gap-1">
+                <i class="bi bi-speedometer2 text-lime"></i> @Model.Mileage.ToString("N0") km
+            </span>
+            <span class="badge bg-dark border border-secondary border-opacity-50 text-white-50 px-2 py-1 rounded-2 fw-normal d-inline-flex align-items-center gap-1">
+                <i class="bi bi-gear text-lime"></i> @CarTranslationHelper.TranslateTransmission(Model.Transmission)
+            </span>
+            <span class="badge bg-dark border border-secondary border-opacity-50 text-white-50 px-2 py-1 rounded-2 fw-normal d-inline-flex align-items-center gap-1">
+                <i class="bi bi-fuel-pump text-lime"></i> @CarTranslationHelper.TranslateFuel(Model.Fuel)
+            </span>
+        </div>
+
+        <!-- Giá tiền & Tiền cọc (2%) -->
+        <div class="mt-auto pt-2 border-top border-secondary border-opacity-25">
+            <div class="d-flex align-items-baseline justify-content-between mb-2">
+                <div>
+                    <span class="text-secondary d-block" style="font-size: 0.72rem;">@L["Card_ListedPrice"]</span>
+                    <span class="fw-bolder text-white fs-5">@Model.ListedPrice.ToString("N0") đ</span>
+                </div>
+                <div class="text-end">
+                    <span class="text-white-50 d-block" style="font-size: 0.7rem;">@L["Card_Deposit"]</span>
+                    <span class="text-lime fw-bold small">@depositAmount.ToString("N0") đ</span>
+                </div>
+            </div>
+
+            <!-- Các nút hành động -->
+            <div class="d-flex gap-2">
+                <a asp-controller="Car" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-light flex-grow-1 py-2 rounded-pill fw-semibold">
+                    @L["Card_Details"]
+                </a>
+                @if (Model.Status == CarStatus.Available)
+                {
+                    <button type="button" class="btn btn-sm btn-lime px-3 rounded-pill btn-add-to-cart text-dark" data-car-id="@Model.Id" title="@L["Card_AddToCart"]">
+                        <i class="bi bi-bag-plus"></i>
+                    </button>
+                }
+                else
+                {
+                    <button type="button" class="btn btn-sm btn-secondary px-3 rounded-pill" disabled title="@L["Card_Reserved"]">
+                        <i class="bi bi-lock-fill"></i>
+                    </button>
+                }
+            </div>
+        </div>
+    </div>
+</div>

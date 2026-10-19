@@ -1,0 +1,68 @@
+@model Autora.ViewModels.CarCatalog
+
+<div class="d-flex align-items-center justify-content-between mb-3 text-secondary small">
+    <span>@Html.Raw(string.Format(L["Results_FoundCars"].Value, $"<strong class=\"text-white\">{Model.TotalCount}</strong>"))</span>
+    <span>@string.Format(L["Results_Page"].Value, Model.Filter.Page, Math.Max(1, Model.TotalPages))</span>
+</div>
+
+<div class="row g-4">
+    @foreach(var car in Model.Cars)
+    {
+        <!-- col-lg-4: Đúng chuẩn lưới 3 cột trên Desktop (12/4 = 3) -->
+        <div class="col-md-6 col-lg-4">
+            @await Html.PartialAsync("_CarCardPartial", car)
+        </div>
+    }
+    @if(Model.Cars.Count == 0)
+    {
+        <div class="col-12 py-5 text-center text-secondary">
+            <i class="bi bi-search fs-1 d-block mb-3 text-white-50"></i>
+            <h5>@L["Results_NoCarsTitle"]</h5>
+            <p class="small">@L["Results_NoCarsDesc"]</p>
+        </div>
+    }
+</div>
+
+<!-- Phân trang -->
+@if (Model.TotalPages > 1)
+{
+    <nav class="mt-5 d-flex justify-content-center" aria-label="Pagination">
+        <div class="d-flex align-items-center gap-2">
+            @if(Model.Filter.Page > 1)
+            {
+                <a class="btn btn-sm btn-outline-secondary rounded-pill px-3 page-request text-white" 
+                   asp-action="Index" 
+                   asp-route-Page="@(Model.Filter.Page - 1)" 
+                   asp-route-ManufacturerId="@Model.Filter.ManufacturerId" 
+                   asp-route-Keyword="@Model.Filter.Keyword" 
+                   asp-route-MaxPrice="@Model.Filter.MaxPrice" 
+                   asp-route-Condition="@Model.Filter.Condition" 
+                   asp-route-Fuel="@Model.Filter.Fuel" 
+                   asp-route-Sort="@Model.Filter.Sort" 
+                   data-page="@(Model.Filter.Page - 1)">
+                    <i class="bi bi-chevron-left me-1"></i> @L["Paging_Prev"]
+                </a>
+            }
+
+            <span class="px-3 py-1 bg-dark rounded-pill border border-secondary border-opacity-50 text-white small">
+                @string.Format(L["Results_Page"].Value, Model.Filter.Page, Model.TotalPages)
+            </span>
+
+            @if(Model.Filter.Page < Model.TotalPages)
+            {
+                <a class="btn btn-sm btn-outline-secondary rounded-pill px-3 page-request text-white" 
+                   asp-action="Index" 
+                   asp-route-Page="@(Model.Filter.Page + 1)" 
+                   asp-route-ManufacturerId="@Model.Filter.ManufacturerId" 
+                   asp-route-Keyword="@Model.Filter.Keyword" 
+                   asp-route-MaxPrice="@Model.Filter.MaxPrice" 
+                   asp-route-Condition="@Model.Filter.Condition" 
+                   asp-route-Fuel="@Model.Filter.Fuel" 
+                   asp-route-Sort="@Model.Filter.Sort" 
+                   data-page="@(Model.Filter.Page + 1)">
+                    @L["Paging_Next"] <i class="bi bi-chevron-right ms-1"></i>
+                </a>
+            }
+        </div>
+    </nav>
+}

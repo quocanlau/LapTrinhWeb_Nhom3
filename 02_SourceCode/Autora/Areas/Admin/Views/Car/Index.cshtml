@@ -1,0 +1,50 @@
+@model List<Autora.Models.Car>
+@{Layout="~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";ViewData["Title"]="Kho xe";}
+<div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
+    <h3 class="m-0">Kho xe</h3>
+    <div class="d-flex gap-2">
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="bi bi-plus-circle me-1"></i>Thêm hồ sơ xe chờ nhập
+        </a>
+        <a asp-controller="Purchase" asp-action="Index" class="btn btn-outline-primary">
+            <i class="bi bi-cart-check me-1"></i>Nhập mua xe
+        </a>
+    </div>
+</div>
+
+<div class="table-responsive bg-white rounded-3 shadow-sm border p-3">
+    <table class="table table-hover align-middle mb-0">
+        <thead class="table-light">
+            <tr>
+                <th>Xe</th>
+                <th>VIN</th>
+                <th>Giá niêm yết</th>
+                <th>Trạng thái</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach(var c in Model){
+            <tr>
+                <td class="fw-semibold">@c.CarModel.Manufacturer.Name @c.CarModel.Name</td>
+                <td><code>@c.VIN</code></td>
+                <td>@c.ListedPrice.ToString("N0") đ</td>
+                <td>@Html.DisplayFor(_=>c.Status)</td>
+                <td class="text-nowrap">
+                    <div class="d-inline-flex align-items-center gap-2">
+                        <a asp-action="Edit" asp-route-id="@c.Id" class="btn btn-sm btn-outline-primary">
+                            <i class="bi bi-pencil-square me-1"></i>Sửa
+                        </a>
+                        <form asp-action="Delete" method="post" class="d-inline m-0">
+                            <input name="id" value="@c.Id" type="hidden"/>
+                            <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa hồ sơ xe này không?');">
+                                <i class="bi bi-trash me-1"></i>Xóa xe chưa nhập
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

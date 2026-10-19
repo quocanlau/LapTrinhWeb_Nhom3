@@ -1,0 +1,255 @@
+@using System.Text.Json
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Antiforgery
+<!DOCTYPE html>
+<html lang="@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName)">
+<head>
+    <meta charset="utf-8" /><meta name="csrf-token" content="@Antiforgery.GetAndStoreTokens(Context).RequestToken"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - AUTORA Showroom</title>
+
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 CSS & Icons CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+    <!-- File Style chính của Khách Hàng -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/autora-modern.css" asp-append-version="true" />
+    @RenderSection("styles", required: false)
+</head>
+<body class="autora-customer" style="background-color: #F6F7F8 !important; color: #182126 !important; font-family: 'Plus Jakarta Sans', sans-serif;">
+
+    <!-- Top Navigation Bar chuẩn Dark Mode Cao Cấp -->
+    <header class="autora-nav sticky-top py-2">
+        <div class="container d-flex align-items-center justify-content-between">
+            <!-- Brand Logo -->
+            <a asp-controller="Home" asp-action="Index" class="brand-logo text-white d-flex align-items-center gap-2 text-decoration-none">
+                <div class="brand-icon-box">
+                    <i class="bi bi-car-front-fill"></i>
+                </div>
+                <span>AUTORA</span>
+            </a>
+
+            <!-- Menu Điều hướng chính: Trang chủ, Danh sách xe, Giới thiệu -->
+            <nav class="d-none d-lg-flex align-items-center gap-4">
+                <a asp-controller="Home" asp-action="Index" class="nav-link-custom @(ViewBag.ActiveMenu == "Home" ? "active" : "")">@L["Nav_Home"]</a>
+                <a asp-controller="Car" asp-action="Index" class="nav-link-custom @(ViewBag.ActiveMenu == "Cars" ? "active" : "")">@L["Nav_Cars"]</a>
+                <a asp-controller="Home" asp-action="About" class="nav-link-custom @(ViewBag.ActiveMenu == "About" ? "active" : "")">@L["Nav_About"]</a>
+            </nav>
+
+            <!-- Tiện ích bên phải: Đổi ngôn ngữ, Tìm kiếm, Giỏ quan tâm & Dropdown Tài khoản -->
+            <div class="d-flex align-items-center gap-2 gap-sm-3">
+                <!-- Dropdown chuyển đổi ngôn ngữ i18n chuẩn UI -->
+                @{
+                    var isEn = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName.Equals("en", StringComparison.OrdinalIgnoreCase);
+                }
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-outline-light dropdown-toggle rounded-pill px-2 px-sm-3 py-1 d-flex align-items-center gap-1 border-opacity-50" type="button" id="navLangDropdown" data-bs-toggle="dropdown" aria-expanded="false" title="Ngôn ngữ / Language" style="font-size: 0.8rem;">
+                        <i class="bi bi-translate text-lime"></i>
+                        <span class="fw-bold">@(isEn ? "EN" : "VN")</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark shadow border-0 mt-2 p-1" aria-labelledby="navLangDropdown" style="min-width: 140px;">
+                        <li>
+                            <form asp-controller="Home" asp-action="SetLanguage" method="post" class="m-0">
+                                <input type="hidden" name="culture" value="vi-VN" />
+                                <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
+                                <button type="submit" class="dropdown-item d-flex align-items-center gap-2 py-2 px-3 rounded-2 @(!isEn ? "active bg-secondary bg-opacity-50" : "")">
+                                    <span>🇻🇳</span> <span>Tiếng Việt</span>
+                                </button>
+                            </form>
+                        </li>
+                        <li>
+                            <form asp-controller="Home" asp-action="SetLanguage" method="post" class="m-0">
+                                <input type="hidden" name="culture" value="en-US" />
+                                <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
+                                <button type="submit" class="dropdown-item d-flex align-items-center gap-2 py-2 px-3 rounded-2 @(isEn ? "active bg-secondary bg-opacity-50" : "")">
+                                    <span>🇺🇸</span> <span>English</span>
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Nút Tìm xe: click vào mở ô gõ tên xe -->
+                <div class="dropdown">
+                    <button class="btn btn-nav-icon text-white border-0 bg-transparent p-0 d-flex align-items-center" type="button" id="navSearchDropdown" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" title="@L["Nav_SearchTitle"]">
+                        <i class="bi bi-search"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end shadow-lg p-2 border border-secondary border-opacity-25 rounded-pill mt-2" aria-labelledby="navSearchDropdown" style="min-width: 290px; background: #FFFFFF;">
+                        <form action="/Car/Index" method="get" class="d-flex align-items-center m-0">
+                            <input type="text" name="Keyword" class="form-control border-0 rounded-pill ps-3 pe-2 shadow-none" placeholder="@L["Nav_SearchPlaceholder"]" style="min-height: 38px;" autofocus />
+                            <button type="submit" class="btn btn-lime rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 36px; height: 36px; padding: 0;">
+                                <i class="bi bi-search" style="font-size: 0.85rem;"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Nút Giỏ cọc / Danh sách quan tâm -->
+                @{
+                    var cartCount = (JsonSerializer.Deserialize<List<int>>(Context.Session.GetString("CartIds") ?? "[]") ?? new List<int>()).Count;
+                }
+                <a asp-controller="Cart" asp-action="Index" class="btn-nav-icon text-white position-relative" title="@L["Nav_SavedCars"]">
+                    <i class="bi bi-bag"></i>
+                    <span id="cart-counter" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-dark" style="font-size: 0.65rem; @(cartCount == 0 ? "display:none;" : "")">
+                        @cartCount
+                    </span>
+                </a>
+
+                <!-- Cụm Tài khoản Người dùng (User Dropdown Menu) -->
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <div class="dropdown">
+                        <button class="btn-user-pill dropdown-toggle d-flex align-items-center gap-2 border-0" type="button" id="userMenuDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="user-avatar-circle">
+                                <i class="bi bi-person-fill"></i>
+                            </div>
+                            <span class="d-none d-md-inline text-truncate text-white" style="max-width: 130px;">
+                                @(User.Identity.Name)
+                            </span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark user-dropdown-menu shadow-lg border-0 mt-2 p-2" aria-labelledby="userMenuDropdown">
+                            <!-- Header thông tin người dùng -->
+                            <li class="px-3 py-2 border-bottom border-secondary border-opacity-25 mb-1">
+                                <div class="text-secondary small" style="font-size: 0.72rem;">@L["Nav_SignedInAs"]</div>
+                                <div class="fw-bold text-white text-truncate" style="max-width: 220px;">@User.Identity.Name</div>
+                                <div class="mt-1">
+                                    @if (User.IsInRole(Roles.Admin))
+                                    {
+                                        <span class="badge bg-danger bg-opacity-75" style="font-size: 0.68rem;">@L["Nav_Admin"]</span>
+                                    }
+                                    else if (User.IsInRole(Roles.Employee))
+                                    {
+                                        <span class="badge bg-primary bg-opacity-75" style="font-size: 0.68rem;">@L["Nav_Employee"]</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-success bg-opacity-75" style="font-size: 0.68rem;">@L["Nav_Customer"]</span>
+                                    }
+                                </div>
+                            </li>
+
+                            <!-- Menu: Quản trị (Dành cho Admin hoặc Nhân viên) -->
+                            @if (User.IsInRole(Roles.Admin) || User.IsInRole(Roles.Employee))
+                            {
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center gap-2 py-2 rounded-2" href="/Admin/Home">
+                                        <i class="bi bi-speedometer2 text-warning"></i>
+                                        <span>@L["Nav_AdminPortal"]</span>
+                                    </a>
+                                </li>
+                            }
+
+                            <!-- Menu: Yêu cầu của tôi (Dành cho Khách hàng) -->
+                            @if (User.IsInRole(Roles.Customer))
+                            {
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center gap-2 py-2 rounded-2" asp-controller="Deposit" asp-action="Mine">
+                                        <i class="bi bi-receipt text-lime"></i>
+                                        <span>@L["Nav_MyOrders"]</span>
+                                    </a>
+                                </li>
+                            }
+
+                            <!-- Menu: Danh sách xe quan tâm -->
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center gap-2 py-2 rounded-2" asp-controller="Cart" asp-action="Index">
+                                    <i class="bi bi-heart text-danger"></i>
+                                    <span>@L["Nav_SavedList"]</span>
+                                    @if (cartCount > 0)
+                                    {
+                                        <span class="badge bg-secondary ms-auto">@cartCount</span>
+                                    }
+                                </a>
+                            </li>
+
+                            <li><hr class="dropdown-divider border-secondary border-opacity-25 my-1" /></li>
+
+                            <!-- Nút Đăng xuất an toàn có Token CSRF -->
+                            <li>
+                                <form asp-controller="Account" asp-action="Logout" method="post" class="m-0">
+                                    <button type="submit" class="dropdown-item d-flex align-items-center gap-2 py-2 rounded-2 text-danger">
+                                        <i class="bi bi-box-arrow-right"></i>
+                                        <span>@L["Nav_SignOut"]</span>
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                }
+                else
+                {
+                    <a asp-controller="Account" asp-action="Login" class="btn btn-sm btn-outline-light rounded-pill px-3 py-2 fw-semibold d-flex align-items-center gap-2">
+                        <i class="bi bi-person"></i>
+                        <span>@L["Nav_SignIn"]</span>
+                    </a>
+                }
+            </div>
+        </div>
+    </header>
+
+    <nav class="container mobile-page-nav d-lg-none" aria-label="Điều hướng trên điện thoại">
+        <a asp-controller="Home" asp-action="Index">@L["Nav_Home"]</a>
+        <a asp-controller="Car" asp-action="Index">@L["Nav_Cars"]</a>
+        <a asp-controller="Home" asp-action="About">@L["Nav_About"]</a>
+    </nav>
+
+    <!-- Thân trang web -->
+    <main role="main" style="min-height: 80vh;">
+        @RenderBody()
+    </main>
+
+    <!-- Footer Showroom Ô Tô -->
+    <footer class="mt-5 py-5 border-top border-secondary border-opacity-25" style="background-color: #EEF2F3;">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="brand-logo text-white mb-3 d-flex align-items-center gap-2">
+                        <div class="brand-icon-box"><i class="bi bi-car-front-fill"></i></div>
+                        <span>AUTORA</span>
+                    </div>
+                    <p class="text-secondary small pe-lg-4">
+                        @L["Footer_Slogan"]
+                    </p>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h6 class="text-white mb-3 fw-bold">@L["Footer_Explore"]</h6>
+                    <ul class="list-unstyled text-secondary small d-flex flex-column gap-2">
+                        <li><a asp-controller="Car" asp-action="Index" asp-route-Fuel="Điện" class="text-secondary text-decoration-none hover-white">@L["Footer_EV"]</a></li>
+                        <li><a asp-controller="Car" asp-action="Index" asp-route-Keyword="Sedan" class="text-secondary text-decoration-none hover-white">@L["Footer_Sedan"]</a></li>
+                        <li><a asp-controller="Car" asp-action="Index" asp-route-Keyword="SUV" class="text-secondary text-decoration-none hover-white">@L["Footer_SUV"]</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h6 class="text-white mb-3 fw-bold">@L["Footer_Info"]</h6>
+                    <ul class="list-unstyled text-secondary small d-flex flex-column gap-2">
+                        <li><a asp-controller="Home" asp-action="About" class="text-secondary text-decoration-none hover-white">@L["Footer_AboutUs"]</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none hover-white">@L["Footer_Installment"]</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none hover-white">@L["Footer_Inspection"]</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h6 class="text-white mb-3 fw-bold">@L["Footer_GetQuote"]</h6>
+                    <div class="input-group">
+                        <input type="email" class="form-control bg-dark border-secondary text-white rounded-start-pill px-3" placeholder="@L["Footer_EmailPlaceholder"]">
+                        <button class="btn btn-lime rounded-end-pill px-4">@L["Footer_Send"]</button>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center text-secondary small mt-5 pt-3 border-top border-secondary border-opacity-25">
+                @L["Footer_Rights"]
+            </div>
+        </div>
+    </footer>
+
+    <!-- Thư viện jQuery & Bootstrap Bundle -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,368 @@
+@model Autora.ViewModels.UserListViewModel
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Quản lý tài khoản & Phân quyền";
+    ViewData["ActiveMenu"] = "Users";
+}
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show rounded-4 border-0 shadow-sm mb-4 d-flex align-items-center" role="alert">
+        <i class="bi bi-check-circle-fill fs-5 me-2"></i>
+        <div>@TempData["Success"]</div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show rounded-4 border-0 shadow-sm mb-4 d-flex align-items-center" role="alert">
+        <i class="bi bi-exclamation-triangle-fill fs-5 me-2"></i>
+        <div>@TempData["Error"]</div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<!-- 3 thẻ thống kê nhân sự -->
+<div class="row g-4 mb-4">
+    <div class="col-md-4">
+        <div class="kpi-card">
+            <div class="kpi-icon-box" style="background:#eaf8d8; color:#5b9816;">
+                <i class="bi bi-people-fill"></i>
+            </div>
+            <div class="kpi-title">TỔNG TÀI KHOẢN</div>
+            <div class="kpi-value" id="kpiTotalUsers">@Model.TotalUsers</div>
+            <div class="kpi-trend text-success"><i class="bi bi-shield-check"></i> Đang phân quyền nội bộ</div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="kpi-card">
+            <div class="kpi-icon-box" style="background:#e5f0ff; color:#0d6efd;">
+                <i class="bi bi-person-check-fill"></i>
+            </div>
+            <div class="kpi-title">ĐANG HOẠT ĐỘNG</div>
+            <div class="kpi-value" id="kpiActiveUsers">@Model.ActiveUsers</div>
+            <div class="kpi-trend text-primary"><i class="bi bi-dot"></i> Đủ điều kiện đăng nhập</div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="kpi-card">
+            <div class="kpi-icon-box" style="background:#f3e8ff; color:#7950f2;">
+                <i class="bi bi-person-badge-fill"></i>
+            </div>
+            <div class="kpi-title">QUẢN TRỊ VIÊN (ADMIN)</div>
+            <div class="kpi-value" id="kpiAdminUsers">@Model.AdminUsers</div>
+            <div class="kpi-trend text-secondary">Toàn quyền hệ thống</div>
+        </div>
+    </div>
+</div>
+
+<!-- Bảng danh sách tài khoản và bộ lọc -->
+<div class="bg-white rounded-4 border p-4 shadow-sm" style="border-color: var(--admin-border);">
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 pb-3 mb-3 border-bottom">
+        <div>
+            <h4 class="fw-bold m-0 text-dark">Danh sách nhân sự & Phân quyền</h4>
+            <span class="text-secondary small">Quản lý tài khoản hệ thống, chỉ Quản trị viên mới có quyền tạo và điều chỉnh phân quyền</span>
+        </div>
+        <button class="btn btn-dark fw-bold rounded-pill px-4 py-2" data-bs-toggle="modal" data-bs-target="#addUserModal">
+            <i class="bi bi-person-plus-fill me-1"></i> Thêm tài khoản
+        </button>
+    </div>
+
+    <!-- Thanh tìm kiếm và bộ lọc vai trò -->
+    <div class="row g-3 mb-4 align-items-center">
+        <div class="col-md-5">
+            <div class="input-group">
+                <span class="input-group-text bg-light border-0 ps-3"><i class="bi bi-search text-secondary"></i></span>
+                <input type="text" id="userSearchInput" class="form-control bg-light border-0 py-2" placeholder="Tìm theo tên, email, SĐT, mã..." autocomplete="off" />
+                <button class="btn btn-dark px-3 fw-semibold" type="button" id="btnSearchUser">Tìm kiếm</button>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <select id="filterRoleSelect" class="form-select rounded-pill bg-light border-0 py-2">
+                <option value="">Tất cả vai trò</option>
+                <option value="Admin">Quản trị viên (Admin)</option>
+                <option value="Employee">Nhân viên (Employee)</option>
+                <option value="Customer">Khách hàng (Customer)</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <select id="filterUserStatusSelect" class="form-select rounded-pill bg-light border-0 py-2">
+                <option value="">Tất cả trạng thái</option>
+                <option value="1">Đang hoạt động</option>
+                <option value="0">Tạm khóa</option>
+            </select>
+        </div>
+        <div class="col-md-1 text-end">
+            <button id="btnResetUserFilter" class="btn btn-sm btn-outline-secondary rounded-circle" title="Đặt lại bộ lọc" style="width:38px; height:38px;">
+                <i class="bi bi-arrow-counterclockwise"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Bảng dữ liệu nhân sự -->
+    <div class="table-responsive">
+        <table class="admin-table align-middle" id="userTable">
+            <thead>
+                <tr>
+                    <th>HỌ VÀ TÊN</th>
+                    <th>LIÊN HỆ</th>
+                    <th>VAI TRÒ</th>
+                    <th>TRẠNG THÁI</th>
+                    <th>BẢO MẬT & TRUY CẬP</th>
+                    <th class="text-end">THAO TÁC</th>
+                </tr>
+            </thead>
+            <tbody id="userTableBody">
+                @if (Model.Users.Count == 0)
+                {
+                    <tr>
+                        <td colspan="6" class="text-center text-muted py-5">
+                            <i class="bi bi-people display-6 d-block mb-2"></i>
+                            Chưa có tài khoản nào trong hệ thống.
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    @foreach (var user in Model.Users)
+                    {
+                        var avatarBg = user.Role == "Admin" ? "var(--admin-accent)" : (user.Role == "Employee" ? "#0d6efd" : "#6c757d");
+                        var avatarColor = user.Role == "Admin" ? "#000" : "#fff";
+
+                        <tr class="user-row" 
+                            data-name="@user.FullName.ToLower()" 
+                            data-code="@user.Code.ToLower()" 
+                            data-email="@user.Email.ToLower()" 
+                            data-phone="@user.Phone" 
+                            data-role="@user.Role" 
+                            data-status="@(user.IsActive ? "1" : "0")">
+                            <td>
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="rounded-circle fw-bold d-flex align-items-center justify-content-center flex-shrink-0" 
+                                         style="width:42px; height:42px; background-color: @avatarBg; color: @avatarColor; font-size:1rem;">
+                                        @user.Initials
+                                    </div>
+                                    <div>
+                                        <div class="fw-bold text-dark user-name">
+                                            @user.FullName
+                                            @if (user.IsCurrentAdmin)
+                                            {
+                                                <span class="badge bg-dark ms-1" style="font-size:0.65rem;">Bạn</span>
+                                            }
+                                        </div>
+                                        <span class="text-secondary small user-id">ID: #@user.Code</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="text-dark small fw-semibold user-email">@user.Email</div>
+                                <span class="text-secondary small user-phone">@(string.IsNullOrEmpty(user.Phone) ? "Chưa có SĐT" : user.Phone)</span>
+                            </td>
+                            <td>
+                                @if (user.Role == "Admin")
+                                {
+                                    <span class="badge bg-dark text-white rounded-pill px-3 py-1 user-role-badge">● Quản trị viên</span>
+                                }
+                                else if (user.Role == "Employee")
+                                {
+                                    <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill px-3 py-1 user-role-badge">● Nhân viên</span>
+                                }
+                                else if (user.Role == "Customer")
+                                {
+                                    <span class="badge bg-secondary bg-opacity-10 text-secondary rounded-pill px-3 py-1 user-role-badge">● Khách hàng</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-light text-dark rounded-pill px-3 py-1 user-role-badge">● @user.Role</span>
+                                }
+                            </td>
+                            <td>
+                                @if (user.IsActive)
+                                {
+                                    <span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3 py-1 user-status-badge">● Hoạt động</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger bg-opacity-10 text-danger rounded-pill px-3 py-1 user-status-badge">● Tạm khóa</span>
+                                }
+                            </td>
+                            <td>
+                                <span class="small @(user.IsActive ? "text-success" : "text-danger")">
+                                    <i class="bi @(user.IsActive ? "bi-check-circle-fill" : "bi-x-circle-fill") me-1"></i>
+                                    @(user.IsActive ? "Cho phép đăng nhập" : "Đã khóa truy cập")
+                                </span>
+                                @if (user.HasTransactions)
+                                {
+                                    <div class="text-secondary mt-1" style="font-size:0.72rem;">
+                                        <i class="bi bi-receipt me-1"></i>Đã có giao dịch
+                                    </div>
+                                }
+                            </td>
+                            <td class="text-end">
+                                @if (user.IsCurrentAdmin)
+                                {
+                                    <button class="btn btn-sm btn-outline-secondary rounded-circle me-1" title="Tài khoản hiện tại của bạn" disabled>
+                                        <i class="bi bi-shield-lock-fill"></i>
+                                    </button>
+                                }
+                                else
+                                {
+                                    <form asp-action="ToggleStatus" method="post" class="d-inline" onsubmit="return confirm('Bạn có chắc muốn @(user.IsActive ? "tạm khóa" : "mở khóa") tài khoản \'@user.FullName\'?');">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="id" value="@user.Id" />
+                                        <button type="submit" class="btn btn-sm @(user.IsActive ? "btn-outline-warning" : "btn-outline-success") rounded-circle me-1" 
+                                                title="@(user.IsActive ? "Tạm khóa tài khoản" : "Mở khóa tài khoản")">
+                                            <i class="bi @(user.IsActive ? "bi-slash-circle" : "bi-unlock-fill")"></i>
+                                        </button>
+                                    </form>
+
+                                    <form asp-action="ResetPassword" method="post" class="d-inline" onsubmit="return confirm('Đặt lại mật khẩu cho tài khoản \'@user.FullName\' về mặc định (Autora@2026)?');">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="id" value="@user.Id" />
+                                        <button type="submit" class="btn btn-sm btn-outline-info rounded-circle me-1" title="Đặt lại mật khẩu (Autora@2026)">
+                                            <i class="bi bi-key-fill"></i>
+                                        </button>
+                                    </form>
+
+                                    <form asp-action="Delete" method="post" class="d-inline" onsubmit="return confirm('CẢNH BÁO: Bạn có chắc chắn muốn XÓA vĩnh viễn tài khoản \'@user.FullName\' (@user.Email)?\n\n- Nếu là nhân viên, các hợp đồng/hóa đơn cũ sẽ được tự động bàn giao lại cho Quản trị viên.\n- Dữ liệu tài khoản sẽ bị xóa hoàn toàn khỏi hệ thống.');">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="id" value="@user.Id" />
+                                        <button type="submit" class="btn btn-sm btn-outline-danger rounded-circle" title="Xóa tài khoản vĩnh viễn">
+                                            <i class="bi bi-trash-fill"></i>
+                                        </button>
+                                    </form>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <div id="noMatchMessage" class="text-center text-muted py-4 d-none">
+            <i class="bi bi-search display-6 d-block mb-2"></i>
+            Không tìm thấy tài khoản nào khớp với điều kiện lọc.
+        </div>
+    </div>
+</div>
+
+<!-- Modal thêm tài khoản mới -->
+<div class="modal fade" id="addUserModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-4">
+            <div class="modal-header border-0 pb-0">
+                <h5 class="modal-title fw-bold text-dark"><i class="bi bi-person-plus-fill me-2" style="color:var(--admin-accent)"></i>Thêm tài khoản nhân viên</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form asp-action="Create" method="post">
+                @Html.AntiForgeryToken()
+                <div class="modal-body row g-3 pt-3">
+                    <div class="col-12">
+                        <label class="form-label small fw-semibold text-secondary">Họ và tên <span class="text-danger">*</span></label>
+                        <input type="text" name="FullName" class="form-control" placeholder="VD: Hoàng Văn Nam" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small fw-semibold text-secondary">Email làm việc <span class="text-danger">*</span></label>
+                        <input type="email" name="Email" class="form-control" placeholder="nam.hoang@autora.vn" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small fw-semibold text-secondary">Số điện thoại <span class="text-danger">*</span></label>
+                        <input type="tel" name="Phone" class="form-control" placeholder="09xxxxxxxx" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small fw-semibold text-secondary">Vai trò (Phân quyền) <span class="text-danger">*</span></label>
+                        <select name="Role" class="form-select" required>
+                            <option value="Employee" selected>Nhân viên (Employee)</option>
+                            <option value="Admin">Quản trị viên (Admin)</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small fw-semibold text-secondary">Mật khẩu khởi tạo <span class="text-danger">*</span></label>
+                        <input type="text" name="Password" class="form-control font-monospace" value="Autora@2026" required minlength="8" />
+                        <span class="text-muted" style="font-size:0.75rem;">Mặc định: Autora@2026 (tối thiểu 8 ký tự)</span>
+                    </div>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-dark rounded-pill px-4 fw-bold">Tạo tài khoản</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('userSearchInput');
+            const roleSelect = document.getElementById('filterRoleSelect');
+            const statusSelect = document.getElementById('filterUserStatusSelect');
+            const btnReset = document.getElementById('btnResetUserFilter');
+            const btnSearch = document.getElementById('btnSearchUser');
+            const rows = document.querySelectorAll('.user-row');
+            const noMatchMsg = document.getElementById('noMatchMessage');
+
+            function applyFilters() {
+                const keyword = (searchInput ? searchInput.value : '').trim().toLowerCase();
+                const selectedRole = (roleSelect ? roleSelect.value : '');
+                const selectedStatus = (statusSelect ? statusSelect.value : '');
+
+                let visibleCount = 0;
+
+                rows.forEach(function (row) {
+                    const name = row.getAttribute('data-name') || '';
+                    const code = row.getAttribute('data-code') || '';
+                    const email = row.getAttribute('data-email') || '';
+                    const phone = row.getAttribute('data-phone') || '';
+                    const role = row.getAttribute('data-role') || '';
+                    const status = row.getAttribute('data-status') || '';
+
+                    const matchesKeyword = !keyword || 
+                        name.includes(keyword) || 
+                        code.includes(keyword) || 
+                        email.includes(keyword) || 
+                        phone.includes(keyword);
+
+                    const matchesRole = !selectedRole || role === selectedRole;
+                    const matchesStatus = !selectedStatus || status === selectedStatus;
+
+                    if (matchesKeyword && matchesRole && matchesStatus) {
+                        row.classList.remove('d-none');
+                        visibleCount++;
+                    } else {
+                        row.classList.add('d-none');
+                    }
+                });
+
+                if (noMatchMsg) {
+                    if (visibleCount === 0 && rows.length > 0) {
+                        noMatchMsg.classList.remove('d-none');
+                    } else {
+                        noMatchMsg.classList.add('d-none');
+                    }
+                }
+            }
+
+            if (searchInput) {
+                searchInput.addEventListener('input', applyFilters);
+            }
+            if (btnSearch) {
+                btnSearch.addEventListener('click', applyFilters);
+            }
+            if (roleSelect) {
+                roleSelect.addEventListener('change', applyFilters);
+            }
+            if (statusSelect) {
+                statusSelect.addEventListener('change', applyFilters);
+            }
+            if (btnReset) {
+                btnReset.addEventListener('click', function () {
+                    if (searchInput) searchInput.value = '';
+                    if (roleSelect) roleSelect.value = '';
+                    if (statusSelect) statusSelect.value = '';
+                    applyFilters();
+                });
+            }
+        });
+    </script>
+}

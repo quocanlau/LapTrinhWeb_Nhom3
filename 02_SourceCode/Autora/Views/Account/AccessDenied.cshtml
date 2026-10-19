@@ -1,0 +1,33 @@
+@{
+    ViewData["Title"] = L["Account_DeniedTitle"];
+}
+
+<div class="container py-5 d-flex justify-content-center align-items-center" style="min-height: 75vh;">
+    <div class="p-4 p-sm-5 rounded-4 border border-secondary border-opacity-25 shadow-lg text-center" 
+         style="width: 100%; max-width: 520px; background-color: #FFFFFF;">
+        
+        <div class="mb-4">
+            <div class="rounded-circle d-inline-flex align-items-center justify-content-center" 
+                 style="width: 72px; height: 72px; background-color: rgba(239, 68, 68, 0.15); color: #ef4444; font-size: 2rem;">
+                <i class="bi bi-shield-slash-fill"></i>
+            </div>
+        </div>
+
+        <h3 class="fw-bolder text-white mb-2">@L["Account_DeniedHeading"]</h3>
+        <p class="text-secondary mb-4">
+            @L["Account_DeniedDesc"]
+        </p>
+
+        <div class="d-flex flex-column flex-sm-row gap-2 justify-content-center">
+            <a asp-controller="Car" asp-action="Index" class="btn btn-lime px-4 py-2 rounded-pill fw-bold text-dark">
+                <i class="bi bi-car-front me-1"></i> @L["Account_BackToStore"]
+            </a>
+            <form action="/Account/Logout" method="post" class="d-inline m-0">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-outline-light px-4 py-2 rounded-pill w-100">
+                    <i class="bi bi-box-arrow-right me-1"></i> @L["Account_SwitchAccount"]
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

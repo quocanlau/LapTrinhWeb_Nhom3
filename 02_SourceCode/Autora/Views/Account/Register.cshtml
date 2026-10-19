@@ -1,0 +1,26 @@
+@model Autora.ViewModels.RegisterForm
+@{ 
+    ViewData["Title"] = L["Account_RegisterTitle"]; 
+}
+<div class="container py-5" style="max-width:500px">
+    <h3 class="fw-bold text-white mb-4">@L["Account_RegisterHeading"]</h3>
+    <form asp-action="Register" method="post">
+        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+        <label class="form-label text-secondary small fw-bold text-uppercase mb-1">@L["Account_FullName"]</label>
+        <input asp-for="FullName" class="form-control mb-3" />
+        
+        <label class="form-label text-secondary small fw-bold text-uppercase mb-1">@L["Account_Phone"]</label>
+        <input asp-for="Phone" class="form-control mb-3" />
+        
+        <label class="form-label text-secondary small fw-bold text-uppercase mb-1">@L["Account_Email"]</label>
+        <input asp-for="Email" class="form-control mb-3" />
+        
+        <label class="form-label text-secondary small fw-bold text-uppercase mb-1">@L["Account_Password"]</label>
+        <input asp-for="Password" type="password" class="form-control mb-3" />
+        
+        <label class="form-label text-secondary small fw-bold text-uppercase mb-1">@L["Account_ConfirmPassword"]</label>
+        <input asp-for="ConfirmPassword" type="password" class="form-control mb-3" />
+        
+        <button class="btn btn-lime w-100 py-3 rounded-pill fw-bold text-dark shadow-sm">@L["Account_RegisterBtn"]</button>
+    </form>
+</div>

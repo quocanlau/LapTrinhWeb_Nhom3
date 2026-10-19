@@ -1,0 +1,138 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Cài đặt hệ thống";
+}
+
+<div class="row g-4">
+    <!--CỘT 1: THÔNG TIN SHOWROOM -->
+    <div class="col-lg-6">
+        <div class="bg-white rounded-4 border p-4 shadow-sm mb-4" style="border-color: var(--admin-border);">
+            <div class="d-flex align-items-center gap-2 mb-3 pb-2 border-bottom">
+                <div class="rounded-circle text-white fw-bold d-flex align-items-center justify-content-center bg-primary" style="width:38px; height:38px;">
+                    <i class="bi bi-building"></i>
+                </div>
+                <div>
+                    <h5 class="fw-bold m-0 text-dark">Thông tin Showroom</h5>
+                    <span class="text-secondary small">Hiển thị trên trang chủ bán hàng và hợp đồng cọc</span>
+                </div>
+            </div>
+
+            <form id="formShowroomSetting">
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold text-secondary">Tên thương hiệu / Showroom <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" value="AUTORA MOTORS VIỆT NAM" required />
+                </div>
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label small fw-semibold text-secondary">Hotline kinh doanh <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" value="1900 8888 (24/7)" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small fw-semibold text-secondary">Email nhận thông báo <span class="text-danger">*</span></label>
+                        <input type="email" class="form-control" value="contact@autora.vn" required />
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold text-secondary">Địa chỉ Showroom trụ sở</label>
+                    <input type="text" class="form-control" value="Số 88 Lê Văn Lương, Trung Hòa, Cầu Giấy, Hà Nội" required />
+                </div>
+                <div class="mb-4">
+                    <label class="form-label small fw-semibold text-secondary">Thời gian mở cửa đón khách</label>
+                    <input type="text" class="form-control" value="08:00 - 20:00 (Tất cả các ngày trong tuần)" />
+                </div>
+
+                <button type="submit" class="btn btn-dark rounded-pill px-4 fw-bold">
+                    <i class="bi bi-check2-circle me-1"></i> Lưu thông tin Showroom
+                </button>
+            </form>
+        </div>
+
+        <!-- THẺ CAM KẾT & BẢO HÀNH -->
+        <div class="bg-white rounded-4 border p-4 shadow-sm" style="border-color: var(--admin-border);">
+            <div class="d-flex align-items-center gap-2 mb-3 pb-2 border-bottom">
+                <div class="rounded-circle text-white fw-bold d-flex align-items-center justify-content-center bg-warning text-dark" style="width:38px; height:38px;">
+                    <i class="bi bi-shield-check"></i>
+                </div>
+                <div>
+                    <h5 class="fw-bold m-0 text-dark">Chính sách & Bảo hành</h5>
+                    <span class="text-secondary small">Cấu hình tiêu chuẩn kỹ thuật áp dụng cho kho xe</span>
+                </div>
+            </div>
+
+            <form id="formPolicySetting">
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold text-secondary">Tiêu chuẩn kiểm định xe</label>
+                    <input type="text" class="form-control" value="120 hạng mục kỹ thuật chuẩn quốc tế" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold text-secondary">Thời hạn bảo hành xe đã qua sử dụng</label>
+                    <input type="text" class="form-control" value="12 tháng hoặc 20.000 km" />
+                </div>
+                <div class="mb-4">
+                    <label class="form-label small fw-semibold text-secondary">Chính sách hoàn cọc</label>
+                    <input type="text" class="form-control" value="Cam kết hoàn trả 100% tiền cọc nếu xe sai lệch cam kết" />
+                </div>
+
+                <button type="submit" class="btn btn-outline-dark rounded-pill px-4 fw-bold">
+                    <i class="bi bi-check2-circle me-1"></i> Cập nhật chính sách
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- CỘT 2: CẤU HÌNH TÀI KHOẢN NGÂN HÀNG NHẬN CỌC -->
+    <div class="col-lg-6">
+        <div class="bg-white rounded-4 border p-4 shadow-sm h-100" style="border-color: var(--admin-border);">
+            <div class="d-flex align-items-center gap-2 mb-3 pb-2 border-bottom">
+                <div class="rounded-circle text-dark fw-bold d-flex align-items-center justify-content-center" style="width:38px; height:38px; background-color: var(--admin-accent);">
+                    <i class="bi bi-qr-code-scan"></i>
+                </div>
+                <div>
+                    <h5 class="fw-bold m-0 text-dark">Tài khoản nhận tiền cọc (VietQR)</h5>
+                    <span class="text-secondary small">Thông tin tài khoản để khách quét mã thanh toán 50 triệu</span>
+                </div>
+            </div>
+
+            <form id="formBankingSetting">
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold text-secondary">Ngân hàng thụ hưởng <span class="text-danger">*</span></label>
+                    <select class="form-select">
+                        <option selected>Vietcombank (Ngoại thương Việt Nam)</option>
+                        <option>Techcombank (Kỹ thương Việt Nam)</option>
+                        <option>MBBank (Quân đội)</option>
+                        <option>BIDV (Đầu tư và Phát triển)</option>
+                        <option>ACB (Á Châu)</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold text-secondary">Số tài khoản ngân hàng <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control fw-bold fs-6 text-dark" value="998877665544" required />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold text-secondary">Tên chủ tài khoản (Viết hoa không dấu) <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control text-uppercase fw-semibold" value="CONG TY CO PHAN AUTORA MOTORS" required />
+                </div>
+                <div class="mb-4">
+                    <label class="form-label small fw-semibold text-secondary">Mức tiền cọc tiêu chuẩn / xe</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control fw-bold text-success fs-5" value="50.000.000" />
+                        <span class="input-group-text fw-bold">VNĐ</span>
+                    </div>
+                    <span class="text-muted" style="font-size:0.75rem;">Số tiền này sẽ được hiển thị mặc định tại trang cọc xe của khách</span>
+                </div>
+
+                <!-- Khung Xem Trước Mã VietQR Mẫu -->
+                <div class="p-3 rounded-4 mb-4 text-center" style="background-color: #f8f9fa; border: 1px dashed var(--admin-border);">
+                    <span class="text-secondary small fw-bold text-uppercase d-block mb-2">Xem trước mã QR tạo tự động</span>
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=AUTORA-DEPOSIT-DEMO" alt="VietQR Preview" class="rounded-3 shadow-sm bg-white p-2" style="width:130px; height:130px;" />
+                    <div class="mt-2 text-dark small fw-bold">NAPAS 247 • VIETCOMBANK</div>
+                    <div class="text-secondary" style="font-size:0.72rem;">Cú pháp: [Họ Tên] cọc xe [Mã Đơn]</div>
+                </div>
+
+                <button type="submit" class="btn btn-dark rounded-pill px-4 fw-bold w-100 py-2">
+                    <i class="bi bi-check2-circle me-1"></i> Lưu cấu hình thanh toán VietQR
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
