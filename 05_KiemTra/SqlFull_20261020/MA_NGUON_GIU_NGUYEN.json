@@ -1,0 +1,1012 @@
+{
+  "source": "Autora_NopBai(1).zip",
+  "files_compared": 201,
+  "changed": 0,
+  "records": [
+    {
+      "file": "02_SourceCode/.config/dotnet-tools.json",
+      "sha256": "723a57da02660d6bec107cca97b2ce3c81bc448d7688ed72e690e4fb2107b8b7",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/appsettings.Development.json",
+      "sha256": "078500c48d59f806acb1d929f7d32a9c066c42a7bc904c2bb12844e25c799de2",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/appsettings.json",
+      "sha256": "200332b434757a0054a3d356c91cde01f2c48712be8aa2bcb0f3e973619f06e3",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Areas/Admin/Controllers/CarController.cs",
+      "sha256": "74187da5949f18890a1f06fde3a08e12b42e19c1fb0ef97a9e285fa7a56d2d8c",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Areas/Admin/Controllers/CarImageController.cs",
+      "sha256": "d89b608d842bb148a18efa26d858cae196a25d2871ae76ec8f47aadbd327381b",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Areas/Admin/Controllers/ContactController.cs",
+      "sha256": "d09b8d08f2d74dff4676082c2fef0c663ec91deebfe3684f7e0f690cd23d5d0c",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Areas/Admin/Controllers/CustomerController.cs",
+      "sha256": "8c6d3828a2530bd12aa3f8243af18ef59474cfa81da8d5361ae84b6e1a96bdef",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Areas/Admin/Controllers/HomeController.cs",
+      "sha256": "42d4d1394b31f3db3c98ef9eb15744750d3171157d82572bd792ff1efffa3f33",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Areas/Admin/Controllers/ManufacturerController.cs",
+      "sha256": "a21502a683fb651215c3b2626905c8d8b5f7bd7a619820196bfba041b3f201ce",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Areas/Admin/Controllers/NotificationController.cs",
+      "sha256": "8a440fbbe49429c25dbdec5bbc4241c313f6f0aaf6e2757eec6b917c36f44ae8",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Areas/Admin/Controllers/OrderController.cs",
+      "sha256": "5e6677093f4167339f6445be695589c2a1837a8bd0cabe4b7611e4c33aea2df0",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Areas/Admin/Controllers/PurchaseController.cs",
+      "sha256": "8955e492cd89d92162c1d662f9a5ea4edf9830e7a5fbcd992835eacc51e3d33c",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Areas/Admin/Controllers/SettingController.cs",
+      "sha256": "6b874292552e369bbff9ef107426c42e1918ecac9bf4da981c82cd5540effdeb",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Areas/Admin/Controllers/SupplierController.cs",
+      "sha256": "7d7ebad42ec8700246049a571b4decc4a679af8a40907616db357c861f31bced",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Areas/Admin/Controllers/UserController.cs",
+      "sha256": "9f64277ed3e75892297e1271d6cd57b495b299db1b7e2a26c28554ed2d44264b",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Areas/Admin/Views/Car/Edit.cshtml",
+      "sha256": "a19fa08975dbda9d0d62e864f5117390974a00e6c1a2a08508a92dcfbab8a15b",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Areas/Admin/Views/Car/Index.cshtml",
+      "sha256": "e2dcc2f9feba222fe7aa14f2f5fe140b58def08c60075432d9cb6aa9925b166b",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Areas/Admin/Views/CarImage/Index.cshtml",
+      "sha256": "11a63060360e72ecc676c4b33e90fd995406da99aa9b86d4f34ebdbc1b08e522",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Areas/Admin/Views/Contact/Index.cshtml",
+      "sha256": "616757b10961af68cd669c333d871b6e03ff42af2fa75341d881f120f2ab267b",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Areas/Admin/Views/Customer/Edit.cshtml",
+      "sha256": "cefe7a05347f67ea417b0ee9ab666ebac10117ceac15b5dc766d27b86efe1604",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Areas/Admin/Views/Customer/Index.cshtml",
+      "sha256": "d432be03a3dfab81e8e2af667c3324d5c2655ac1c3c7443c48f285f50ac96318",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Areas/Admin/Views/Home/Index.cshtml",
+      "sha256": "29cd3df1ef0c8fa35ef03144c2419db4e9043d9d2859d7d4d19d9b1524e8b45a",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Areas/Admin/Views/Manufacturer/EditModel.cshtml",
+      "sha256": "471d9a1d583ef14908696106aca36c92c93e5449aa25eb3323ec5af776b43eda",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Areas/Admin/Views/Manufacturer/Index.cshtml",
+      "sha256": "b3cd5f0b2dd70f48bc8a5e0e64d8291cf151adc38d281b12c46a6a5337ae7c4a",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Areas/Admin/Views/Notification/Index.cshtml",
+      "sha256": "0be4f5216c70b9cdd9a545682a11ca2aac938195c27d720ebf8058d6ecad60b0",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Areas/Admin/Views/Order/Draft.cshtml",
+      "sha256": "9c67aca5afcec7a3235e458b73a0ec23f2455ec8a3f9c445078422cf96f1fbb8",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Areas/Admin/Views/Order/Index.cshtml",
+      "sha256": "5b0c2757e83a218810574b8bd78c0493d08d78c76e8f54bfc23c7b330919bb8d",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Areas/Admin/Views/Purchase/Edit.cshtml",
+      "sha256": "d3a903aa92f3785d3da4355b133115bbccc1fdc4b6c9c8c11a07da9f812a6d14",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Areas/Admin/Views/Purchase/Index.cshtml",
+      "sha256": "89e6e1b6c5ef4c3a019f6b608fc90dfa7332d9ef206f5dc0046fa94d9eb0379a",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Areas/Admin/Views/Setting/Index.cshtml",
+      "sha256": "92278b8812641018c6928a382d58ddc4426d9d9070157da1b026c3d207a6037f",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Areas/Admin/Views/Shared/_AdminLayout.cshtml",
+      "sha256": "363bf22fdc100ffd83b3514ae93348c68d214d08be9f43b0ffdb56657c77d3cd",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Areas/Admin/Views/Supplier/Edit.cshtml",
+      "sha256": "61f84fb98d6072d2bb2911effe964457f8e76504efedfbe46d1bdb5b0e8b1bb8",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Areas/Admin/Views/Supplier/Index.cshtml",
+      "sha256": "aa21736e85b1c9fee75e1a803318e7b8ca63d32edf74e090a53377819e7cfdc4",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Areas/Admin/Views/User/Index.cshtml",
+      "sha256": "7d253833e5657ba8d8ce77581d211a4dbfced290989f8a704c971c7451d3c9ee",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Areas/Admin/Views/User/Reset.cshtml",
+      "sha256": "c926d41d64fdcc283b37cc59b93ff5ec582372a4a72e1e7c72c0e20cd2425cf1",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Areas/Admin/Views/_ViewImports.cshtml",
+      "sha256": "2cc7a5b394d6e37f9b16d62bd95237cbbc14b980760b481e4b85f5ed4d428878",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Autora.csproj",
+      "sha256": "8300592c6647f954b41129f7dad71b4537c3939a3ccec9d06b1970cf078d0c0c",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Controllers/AccountController.cs",
+      "sha256": "15c459bef32e9a30323c2277fc7ae27004544cc0040e8c097e5a48d769107800",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Controllers/Api/CarsController.cs",
+      "sha256": "5d6c1211f07d51d5a5da27057e8ab6dc323de157add102503304aaca58dbbdea",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Controllers/Api/ManufacturersController.cs",
+      "sha256": "903dc0edd29f44fad3d254dc2ce0d74417159f733feaf995f93af7e2bdcc3b0a",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Controllers/Api/PurchaseRequestsController.cs",
+      "sha256": "c66ed064ac0c66dd893d02dd53034c7e63b848d45946918fe5781a458a29ebba",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Controllers/CarController.cs",
+      "sha256": "04150b4252245da669725345729dce4c62e7b7f0c09c938330479c496bb02103",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Controllers/CartController.cs",
+      "sha256": "43790d40a1ab5614af7443cc2daf472e3a200761b9f3707b10460738df0f95e1",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Controllers/CompareController.cs",
+      "sha256": "492e1ea047ddd354a0d5d9ffb10cc32b2f86ac3563c60ee278f48b8aaf874fcc",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Controllers/ContactController.cs",
+      "sha256": "ccf7e31108b80166b7a5458b88a9b0f45ba72565f05e60e8eb6c2f3ddc3125e7",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Controllers/DepositController.cs",
+      "sha256": "f35e876d12c6032f667046ed6adeeb3c152943905f6fcdbdabf8ed216ed10c69",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Controllers/HomeController.cs",
+      "sha256": "0d1b233d67d756b2967f6fa58c83ce802780a48a2ce6c1328db22d8028fed33d",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Data/AppDbContext.cs",
+      "sha256": "ecf0e0aca5050459bd898944b4716f3eb3e72041f3e069136077a8664b75a5a0",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Data/DbSeeder.cs",
+      "sha256": "3a08ffb058ee0712373a0a93fca0e3d034818e18853b94d97731064dcee0b13d",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Data/Migrations/20261008194209_InitialAutora.cs",
+      "sha256": "1f88c902de99073f378e4a6397b6a679fbcf6c1d27260b52ed3136ec3ed7bd72",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Data/Migrations/20261008194209_InitialAutora.Designer.cs",
+      "sha256": "474886dea141a012ddd20d0c395871cc4c744156f8357a6112e72a402de3dbe1",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Data/Migrations/20261016135000_AddAdminNotificationReads.cs",
+      "sha256": "61e5353b6c9bad0dcb04a9a941d0c05c47a056d24cebd8030719aff7556366c0",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Data/Migrations/20261016135000_AddAdminNotificationReads.Designer.cs",
+      "sha256": "5efecb7a3dcec793b51e5cccd2951ad67a4e92d96cd1f1efbc662d493384c277",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Data/Migrations/20261019170014_CompleteShowroomWorkflow.cs",
+      "sha256": "b4390e9eb36847dea38acf7f484765bd43124350f72f7c10bf645e474db4406e",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Data/Migrations/20261019170014_CompleteShowroomWorkflow.Designer.cs",
+      "sha256": "b232c46b6225028577d46767f0d86437f07e0719ef45ea20ba35365d28294093",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Data/Migrations/AppDbContextModelSnapshot.cs",
+      "sha256": "a8294d496e9c17f426d9a6db6bfb6f4dffef7e82923b4d1b3e63404b3bc2a201",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Models/AdminNotificationRead.cs",
+      "sha256": "86e8fa39c99aaa9bc24a5d1a690879f9574eca9bec2f9557a50b412075e8c574",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Models/ContactInquiry.cs",
+      "sha256": "115ad8029ac1e5b35f2ef0592ab11ba5009e50c30073c0f2b2dacde71740f5b5",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Models/Domain.cs",
+      "sha256": "081bb29f32dcf763b096d31205fb4874d197dbc0e65c4836388812bb645448ce",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Models/ErrorViewModel.cs",
+      "sha256": "8c17bd0f5142faf5d0d48b6f270682ce7a30a24dd7f2b1b7d6edb49266e6d80d",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Models/ShowroomSetting.cs",
+      "sha256": "f28151a8e756a2a411c7fad1cf9fd3b344f20153656dae9b5b24c55b5a0c7598",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Program.cs",
+      "sha256": "4356a7dfbfc2c9af2605128ab4f59486e5a2e5c6d7513f691e585cbecbde6b6b",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Properties/launchSettings.json",
+      "sha256": "785449e79a41bfe67558688f8eb347380f05829642d9d5c46b92f382944f7d1e",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Resources/SharedResource.en-US.resx",
+      "sha256": "d60ee233c687baab624bd62541a9c2d81fee38c92e9f80abdf7584d02d758517",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Resources/SharedResource.en.resx",
+      "sha256": "d60ee233c687baab624bd62541a9c2d81fee38c92e9f80abdf7584d02d758517",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Resources/SharedResource.resx",
+      "sha256": "27980edf0daaaf1400dd95cbd8b768494b2c192d4ed257154b8cb345926c377d",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Resources/SharedResource.vi-VN.resx",
+      "sha256": "27980edf0daaaf1400dd95cbd8b768494b2c192d4ed257154b8cb345926c377d",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Resources/SharedResource.vi.resx",
+      "sha256": "27980edf0daaaf1400dd95cbd8b768494b2c192d4ed257154b8cb345926c377d",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Services/AdminNotificationService.cs",
+      "sha256": "60eec1f7ce99a2179e1ebd81760d6a6b7e9f3d4ed97e58d81e1738534f4bf51f",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Services/CarQuery.cs",
+      "sha256": "a8ed4cb39884c647c6f5b07db0cc074cf587277a927fabc50109be99c4866c23",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Services/CarTranslationHelper.cs",
+      "sha256": "766f3896e4de632e7b055cddfa79f0f8b472119ad05b24c55fd4f52131053c61",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Services/CarVisibility.cs",
+      "sha256": "9f1bee0922b9c65fa5fbfc29d2a3592d664ada2bb2b9574696067e62db0eb239",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Services/DatabaseErrorFilter.cs",
+      "sha256": "ec600473fca23d51b204a0bd468b5b86c3d3e8c9b4128b7e9e3aeeae257ed2b0",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Services/DepositPolicy.cs",
+      "sha256": "ef1cd858351d297ffe13f6c372be74dc053ac6a36715b550558ab30a1376d77e",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Services/ImageUpload.cs",
+      "sha256": "e6a3f0ad1a51d2140021bf1b4f263d475b25dcf8bdf5ca7863a53d58373fb005",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Services/Paging.cs",
+      "sha256": "4f911524217d6243fb3a1fea2df5826161c36327512cd2d548d87a0a83a17620",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Services/PurchaseService.cs",
+      "sha256": "b0e89e50cf5e19cd17c1cd333dcf2b50b1234a3b880fda23b3f3e3913e6646a1",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Services/SaleService.cs",
+      "sha256": "08682b8e1ac11b29e2e27aa5ce096c4f8459b324ec6e4e5e20865ebd71762e7a",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Services/ShowroomService.cs",
+      "sha256": "70b928186413ce0765a7d7edff0064089eb71cfe7138d0e92f9a8cec6f1ed7b1",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Services/VersionGuard.cs",
+      "sha256": "bf3a9071efc3494757cd60d5f9220ff1c81b05b02c640585873a12d04e6d803b",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/SharedResource.cs",
+      "sha256": "8ac70742c03ed3d364f31a80bd82edb46810863bef7df1c13db6f3ba0fdad17c",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/ViewModels/CompletionForms.cs",
+      "sha256": "ea69530aa44d2c056a15783f2be739afda697e0a85f2eec790038a80a85fa302",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/ViewModels/Forms.cs",
+      "sha256": "a09724ed14d38f9b5993ca75835f84ab26f7a4f51e6f4fde30d1dc866035b25f",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/ViewModels/Notifications.cs",
+      "sha256": "4f9ade7fa3d4e40f40b13f25e8dca52d95013e6927002da59d6467180d551b40",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Views/Account/AccessDenied.cshtml",
+      "sha256": "887c57ac91d433dec8c8d378011646d90cacb7a35a9029d59034385d0536a281",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Views/Account/ChangePassword.cshtml",
+      "sha256": "d150eefef7504c97ed015c6082a4c9a9148892d8aa73f88f2520d456676b4eb1",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Views/Account/Login.cshtml",
+      "sha256": "2f7192534909c790fe9d74d4604fce1386aa386b186158a007f754866f34a597",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Views/Account/Profile.cshtml",
+      "sha256": "81d87d09a5f6d4c53027bfdae842da13b48fb506a8c9e88d3f6f688ddd8c04de",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Views/Account/Register.cshtml",
+      "sha256": "4d51a9c3d15323e7dabcea2c10c8d7ea2dd80584d212a3bebf668494328308a0",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Views/Car/Details.cshtml",
+      "sha256": "ad2cadd9aa5f4730ed40d8571aee84ab37bbcdd3bf06c4b03aff8a294233f3a0",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Views/Car/Index.cshtml",
+      "sha256": "001d564cf993c6da79ed903765c5053117885c7613c1c49b743e76d10cc629a2",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Views/Car/_CarResults.cshtml",
+      "sha256": "75d73f5cc4d7a6c28139eb654d00ff0a8ce9a1bb1242d4253c363d391e9c39e4",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Views/Cart/Index.cshtml",
+      "sha256": "4233be4f58777ef9752822eb167de6346bbe6a319ee137edfd00e4e1a8c7805a",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Views/Compare/Index.cshtml",
+      "sha256": "25aeb7fa56a3493e9c65074817829afeb333f832cf09404da21bcc3098c4697e",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Views/Contact/Index.cshtml",
+      "sha256": "1d5c36e1a853b661e5f84fd491c56eef49f19ac8584f02d5580666728c6a1909",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Views/Contact/Thanks.cshtml",
+      "sha256": "c41c2658c9c53d63c2d66d7d96273d2b8122cfaa5550fc753dd130e76a3ee07b",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Views/Deposit/Mine.cshtml",
+      "sha256": "3a798f95c34b52ae68b7ad18b35c32c7807db9622355b6bf8f8749084dc9c77f",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Views/Home/About.cshtml",
+      "sha256": "27a9396e376608ae8f3b5460583302bf898a57ea6597317e374c6a01660b30bc",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Views/Home/Index.cshtml",
+      "sha256": "d3d6586be8760af56c4697d675b94dbb6b20b69cca5e8c78a72b8bb463f149f6",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Views/Home/Information.cshtml",
+      "sha256": "cba5de2712b1cbe11925154f375b4472dae87859099df5adf35a1dc7df76a6c1",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Views/Home/Privacy.cshtml",
+      "sha256": "0e00a4445b214863ea51c8985fae1970b43e932712216fa047faf3062bb23445",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Views/Shared/Error.cshtml",
+      "sha256": "5dbf98b6b9394ad78206edce40cab1d7a238aa69cfefa41bab0ebc6aa22488aa",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Views/Shared/OperationError.cshtml",
+      "sha256": "7adb270be10fa8b68668eb64d3c51fd59f21822ed6022ae9ab65f4b87b70dcb0",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Views/Shared/_CarCardPartial.cshtml",
+      "sha256": "227483452c05bee0708f6d5558bb912b91d255fe37c2a37102afd8e8af3d3cbe",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Views/Shared/_Layout.cshtml",
+      "sha256": "4db04fa3cad16396cf6ec5c02d08f4a728af5f8a8f69aade23f3ed1c915be53f",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Views/Shared/_Layout.cshtml.css",
+      "sha256": "e862dec92b90a4b1eaa89adbd968ba49575a04c3d4e84c7f4db10658394dc750",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Views/Shared/_ValidationScriptsPartial.cshtml",
+      "sha256": "9ef82fee87759dfecf2638af263085e669aa14a40c723d556d790d65a525ba11",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Views/_ViewImports.cshtml",
+      "sha256": "f06c169d614a00cdcaa0da0474628098242bd6895a3252328502c2039092a58a",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/Views/_ViewStart.cshtml",
+      "sha256": "47e02b4da20d198892b7b1b00b12944068797c438ef2e82d20ff70b4d56bad39",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/css/admin-notifications.css",
+      "sha256": "9122c1ab8b42024d39e8a7230cd9879fd256bff0fa5c91f100e092cc8ffb0bb8",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/css/admin.css",
+      "sha256": "48539286d845f452814bd38357cc7de3039a52be6f23b6bb1b8e0e3b5b329727",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/css/autora-modern.css",
+      "sha256": "b99b2dd0c5e9d5b96984825cd289d93d7f3f1e386b1b535d7b09f2f5ec71d64b",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/css/site.css",
+      "sha256": "410d0a3c5c06a87e7e429a1757b91442d5fd774d7f1201ce812fde9434a3045a",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/favicon.ico",
+      "sha256": "26dc5ff4bfb9213291735808465e156d4a4691135f3815e3613761243e1f69c3",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/images/car-placeholder.svg",
+      "sha256": "605063c8bb10f26668127831d0aea1db782ff6e73a50877c92d565a10c7d8c24",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/images/cars/2024-toyota-camry-102-64cbc4858e198.jpg",
+      "sha256": "db93de72a141f49f1a5579194d4e03f35a117b74c02c62248f9d09c536229e8f",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/images/cars/2135235-2139205j29545.webp",
+      "sha256": "4ad051c5b86a09304cd5dcb0fd030473ad42d9dfe12aa3193a1791d4c23c06ef",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/images/cars/9y0tzmv-2885400j33687.webp",
+      "sha256": "46578644fc4239781679498b9860fe2f3dae8106976d2e69a03ffdb5a21107b4",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/images/cars/camrytrang.jpg",
+      "sha256": "392c1657c93c414f112b28be17b21e0ca4966685bb016a770d568443630bf851",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/images/cars/ford-territory.jpg",
+      "sha256": "c062035cd42974e5a1aff3a76b3a80fb47548d259c1d8e1cb3b76999029a455b",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/images/cars/honda-city.png",
+      "sha256": "3f1996f0aa7dc1267faaf0587b1adaa1d6482d83a371a58b101d537f7d2e407a",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/images/cars/mitsubishi-attrage-cvt-premium-2236481j32336.webp",
+      "sha256": "02817ffc412b705d31998f550cd512715f491dd7d19f1306364177d1853d8039",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/images/cars/mitsubishiattragemt.jpg",
+      "sha256": "a4a0604abd19e82ea32c5495e18bcf5458259de36b16766b0d659101947f9ef3",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/images/cars/territory-den-dau-xe-trai-truoc.jpg",
+      "sha256": "2f36f5e86dcdc0ef546bb29321de3add4fbfea37411f87e8e63bf7472296153d",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/images/cars/territory.jpg",
+      "sha256": "6dd6fc1fae26c5d84a23c07da194f19a825d47f89c4b3f7daad2ea7d7a8b5821",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/images/cars/toyota-corolla-cross-19943.webp",
+      "sha256": "a4e7dbb5f292552284077d2ba35f36e6778dabdea58dbf5b36294222eabed7f3",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/images/cars/toyota-corolla-cross.jpg",
+      "sha256": "0457923e93418057873bd88f65a4c59d2c7f08b51cbcb1eddcd4a196dd9d7af0",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/images/cars/toyota-vios.jpg",
+      "sha256": "4891537e812319e3dd5b9006c088d0fd338745722d10560d898338f863cc4e30",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/images/cars/toyota-yaris-cross-c-230920-05.jpg",
+      "sha256": "1c2f6b87cb8dbc790c06497ec1d717a7a4655936f5ec75ee7886067bef7e9bfd",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/images/cars/toyota-yaris-cross.jpg",
+      "sha256": "613bcef924822221d66efc194aa5360a4672561202390b0eba0ba42f20897e88",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/images/cars/xpanderpreat.jpg",
+      "sha256": "c4704a9769d28ad6b48c3895193cf90b62b00f1f258cd155617d42d7cce9f784",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/js/admin-notifications.js",
+      "sha256": "94190ce6c586a77d42de5f3a85b7744ab5e6429abf8a394262bc69a32e56216d",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/js/purchase-draft.js",
+      "sha256": "6c456976bbd12dba2f0b4a4140545c13f3732d31aacdb21edfa6f73d50e7745f",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/js/site.js",
+      "sha256": "1eb55a81560d7c7756da23cf4a2cfb0452a0b53fd2a7f6e59e446464db212857",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/js/user-actions.js",
+      "sha256": "4a7970c555367f26e56006f6f9dff6f3a0c04fa7b04643af552a7d1b379a095a",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
+      "sha256": "26d92d822b9001df805deac29cf32b1c20f3d61e40b641f9b686efa6e1bbc59e",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map",
+      "sha256": "40ef1c31b5642e292d517d5c1de5d25127b99d7317520c8bf5c8f09cccb13ea7",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css",
+      "sha256": "cac053fc96311fd81c327c314f8f8c078b0fc4ec7f24c83dc22efb140d774fd0",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
+      "sha256": "ef60bfa83086bbe3b059e540d376dff4a7b44fca08a330ae6f495f26487386f1",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
+      "sha256": "def5099194a928bff31bbc7a18dbc38ecd13c58528f7332de9d01cf21a7d095a",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
+      "sha256": "aaf037f4e32512ce778da7b0a9516613c0d042b8a8e3b6d9b654ecf96bba53c8",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
+      "sha256": "3ba95bda45daac6815c38fd10c3e36c983e1648c1112d85385014a1a60fede3d",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
+      "sha256": "3434998c888c3d12283bbff0efe8c779ff2b7ad3f8ae241af0f323e015511a89",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css",
+      "sha256": "e336d6af440d161a54c06927e16746597b7cd0a9e1445bf4a97919c959e16a36",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map",
+      "sha256": "1591b42b16cda884d48b8418ed0bcf1514bf4dc727b4c7c559f49374737fa70b",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css",
+      "sha256": "cf4380a51f3c504a1c6174d71d4ed47b271a8a26fd5db0d499e97d1b1d206f1e",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
+      "sha256": "d816d1b04ffe7335f5b9f9833c6a67122782f6ee88de6e4128d0d25f5a1bde58",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
+      "sha256": "f0d5f0de4178f4591054f31d8e7183aa85d7454d13c33b0b7c219b2bd53c8279",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
+      "sha256": "fc47561cdeade5760fa650bcf2f8b119fac1bdf1228b5f6402cb1bfb4601554f",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
+      "sha256": "6b92a5832b19e1f417c38af322f5c31c4ac50cf7874522dc70fee45fa1eebd24",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
+      "sha256": "18c0e4e6903974590e8a69010167848d867eee58073d2d236259faa7f589558b",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css",
+      "sha256": "35b159c592e605534bcdbffb07459d15f6fafbc8d71c65fa5d8d7dd2ec206de7",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.map",
+      "sha256": "e1622a3e87ffbeb5d83bf8de2787c33902946162307bae15dddfbdfea363bb6d",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css",
+      "sha256": "e7e13198c922688de47984112e13626c9e595e736e5916f0ad73806684d73058",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
+      "sha256": "a75768a78b2579f6612f8cc6da96bafb61d4ace63551402b1895e67adf0c77d7",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
+      "sha256": "a5e0061fc1aefd92fd5676d419230debd262e4cc706ef39be778035d4d9c3da4",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
+      "sha256": "a6e0e02b0be5140a2b77d47c1bca1ff4fd825582095054a821b8c32c4b0a107d",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
+      "sha256": "5a2e59b854872dfc7a7651208ef5b7058f530bfd4da9d0638fe5c589f492a8de",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
+      "sha256": "d3691ae329a8139c8479c2d49dc2c6dff4a8b9340c9d324e92d5fef7a3edffcf",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/css/bootstrap.css",
+      "sha256": "c657b1aa3f7f937ba86d5c067dc899723fde0dda2868d81c7f83852ed2d4ca03",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map",
+      "sha256": "0d1bd6af481a9e08f9ff94370d19fab6dce97160f39773a91e80300333434794",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
+      "sha256": "3c8f27e6009ccfd710a905e6dcf12d0ee3c6f2ac7da05b0572d3e0d12e736fc8",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map",
+      "sha256": "f12338536350a422c64d02d6e43ff1dea493c3156ad823fe19761cdd5d56c05b",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css",
+      "sha256": "499da629a0f803e6fe1c8bedb7097e4ef2c59d5cbca3cfd7e348fe10a570caf6",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map",
+      "sha256": "545be68bf652c101668d2e8faf2f41f335de67f180d7af135cbcb290384d3191",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css",
+      "sha256": "db6c11e904e27687a24595e9eb391143231251bfc507e02fd758ea999245eae5",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
+      "sha256": "8fbbaa2b95684d3e2b50732bf75d50114e526bde25477ba1f44dbc5c1325ceb3",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js",
+      "sha256": "bd04dfe1ddd6262f6f99640d0389099e3a1e7601213055c50c4317aad1ed8339",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map",
+      "sha256": "80ee2e8717c6b8ad0e3634651eec1f82119f1174f96b39b5a075a74c41464df9",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js",
+      "sha256": "0833b2e9c3a26c258476c46266e6877fc75218625162e0460be9a3a098a61c6c",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
+      "sha256": "5e3e0763164143baaa1ca0706b6100ba0452f911d6ce9713b48e3dbe07b35125",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js",
+      "sha256": "12e0d750960a9df66e3bc7522cdd1fe6255b55ab33dfa0113ae014dcd277241a",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.map",
+      "sha256": "0a5942fec6cbbf22c4f5c4258e61519484dfa9d6519c1bf6cac5f92c9b65fdd8",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js",
+      "sha256": "2a3e22ad058fc1f49be4d15ea2cfe1d08ae8239fe7220d07b408d0fb0e2fe931",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
+      "sha256": "b0fab359c492f5a45ada0a564d5350cde99a8e7f21ac58e05cf8f78fd408b50a",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/js/bootstrap.js",
+      "sha256": "e884ad4507ab05c8584b0e89d8659339618e9c346b59799a1b4afa9c2c0de6ce",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/js/bootstrap.js.map",
+      "sha256": "424979999519eb869805a39144c3fd8df0f5933f09e85c2257633ce890c991d4",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js",
+      "sha256": "7382e5e9e48883a128b6193ca4258017c684f76dc4bed535d69aa3072f8d8cd3",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map",
+      "sha256": "ba2fc5408fb2d0852c63c3db8bcd1bf2cdc67842fe3ecbdd68b4ce3686e99fcf",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/bootstrap/LICENSE",
+      "sha256": "647ea903a052c7a7ee1d9bdd68aa61d43c1427e55262294888442ef22967bea9",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/jquery/dist/jquery.js",
+      "sha256": "1fe2bb5390a75e5d61e72c107cab528fc3c29a837d69aab7d200e1dbb5dcd239",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/jquery/dist/jquery.min.js",
+      "sha256": "fc9a93dd241f6b045cbff0481cf4e1901becd0e12fb45166a8f17f95823f0b1a",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/jquery/dist/jquery.min.map",
+      "sha256": "399548fb0e7b146c12f5ba18099a47d594a970fee96212eee0ab4852f3e56782",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/jquery/LICENSE.txt",
+      "sha256": "86320192f9a0c505db3572b707d610dedd3a4702ee4124330bf769bee07f94c9",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/jquery-validation/dist/additional-methods.js",
+      "sha256": "e23adc2c1b22d14826f222ca76a0ec0326820e392c71865da06b8d1ffceab381",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/jquery-validation/dist/additional-methods.min.js",
+      "sha256": "375d48c89a474e00dc4826f701f5f856b067a4641e7a6d4da0dcf381c5d5c827",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/jquery-validation/dist/jquery.validate.js",
+      "sha256": "9b497cd560cf886ec2706ec20ec4ee673bdc1afc859ab418e432c8c71dda446c",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js",
+      "sha256": "270524b0d27afd1d3b6622d1a176c678daed94564c143297e217a63e21ce9820",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/jquery-validation/LICENSE.md",
+      "sha256": "81e1c4930fd618f75a1d0311ab91ee358f6c9e588dcd4ff2d8e5bcc9c9e1197c",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
+      "sha256": "c0941a2745f29c11367eae827b15d78712aeedfb2d56641ced5d8c1cd4e8f964",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
+      "sha256": "6096bb5bc12241d429924f778861238e72d25164694496d27f37d4461d64c73e",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt",
+      "sha256": "d7a68596ab69b06f51ca278a6545148e4269a9381c26d597c13df5d88e08cf5b",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora.sln",
+      "sha256": "668356c63d5bf2e2ddca76a2c8c98e63a5fd77173cc56778931aefead4ffd4d1",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora.Tests/Autora.Tests.csproj",
+      "sha256": "c017f2c3c9bd1f63362b51d545c83f282cdc2b4065565d496f4eb7b99ce3ab70",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora.Tests/DepositPolicyTests.cs",
+      "sha256": "658e50beb581df6bc7c45f568990cb0cb8d8ef07a6ab6fdf402612f0d388e4e0",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora.Tests/HttpWorkflowTests.cs",
+      "sha256": "71101c094fba59ab4a675a0563c00135babca391a9307af1ba08078cebeb0ce5",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora.Tests/LocalizationTests.cs",
+      "sha256": "9b913f522ffc1647d93edca944f96dc937871b7c291cc3bf1535240f7e565535",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora.Tests/NotificationTests.cs",
+      "sha256": "423ccb0659e76cf7ab563d66e5f9dabafcaeddda5ab632c4e6b9f26c74fd117e",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora.Tests/SqlServerIntegrationTests.cs",
+      "sha256": "07493bb8219bd578de78f0e9c33e1ca45d3e7efe0d06e4d09deed6528a278910",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora.Tests/UserAuthorizationTests.cs",
+      "sha256": "a6a6cdd0a30280c4f693ed7b98db7660837100e368e9ebb76570f555d6daf408",
+      "unchanged": true
+    },
+    {
+      "file": "02_SourceCode/Autora.Tests/WorkflowTests.cs",
+      "sha256": "fd03474a0b425d69b797c5cda4036e1ccdea17187f175da4cc52def9ff3de475",
+      "unchanged": true
+    }
+  ]
+}

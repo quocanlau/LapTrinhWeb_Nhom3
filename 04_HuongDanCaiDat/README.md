@@ -1,5 +1,7 @@
-# Hướng dẫn chạy bản cuối
+# Hướng dẫn cài đặt
 
-Hướng dẫn chính được đặt tại `README.md` ở thư mục gốc `Autora_NopBai`. Mở thư mục đó trong File Explorer, nhập `powershell` trên thanh địa chỉ, rồi làm theo thứ tự các bước. Tất cả lệnh dotnet chạy từ `02_SourceCode`, không chạy từ `04_HuongDanCaiDat`.
+Mở [HUONG_DAN_CHAY_SQL_VA_WEBSITE.md](HUONG_DAN_CHAY_SQL_VA_WEBSITE.md).
 
-DB cũ cần cập nhật migration CompleteShowroomWorkflow. Không xóa database hoặc chạy seed để thay dữ liệu cũ. Xem README gốc để cấu hình SQL Server, dựng DB mới, tạo admin và chạy test.
+Luồng chính: cài môi trường một lần → kết nối đúng SQL Server/LocalDB → Execute toàn bộ 03_Database/Autora_Full.sql → mở Autora.sln và chạy profile http.
+
+Không cần chạy seed, restore backup hay Update-Database cho lần cài đầu này. Đăng nhập bằng tài khoản sẵn có trong DB. Máy có AutoraDb rồi thì script dừng để giữ dữ liệu.
