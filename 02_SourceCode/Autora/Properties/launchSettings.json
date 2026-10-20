@@ -13,31 +13,28 @@
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "launchUrl": "Car",
+      "launchUrl": "",
       "applicationUrl": "http://localhost:5241",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "ConnectionStrings__DefaultConnection": "Server=localhost;Database=AutoraDb;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "https": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "launchUrl": "Car",
+      "launchUrl": "",
       "applicationUrl": "https://localhost:7010;http://localhost:5241",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "ConnectionStrings__DefaultConnection": "Server=localhost;Database=AutoraDb;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "Car",
+      "launchUrl": "",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "ConnectionStrings__DefaultConnection": "Server=localhost;Database=AutoraDb;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     }
   }

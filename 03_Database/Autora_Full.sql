@@ -1,4 +1,4 @@
-﻿-- AUTORA: schema and data exported by the group, portable installation.
+-- AUTORA: schema and data exported by the group, portable installation.
 -- Run the ENTIRE file once on a local SQL Server 2019+ / LocalDB connection.
 -- Existing AutoraDb is never dropped, overwritten or merged.
 -- No SQLCMD mode is needed. Do not select only a portion of this file.
@@ -23,7 +23,15 @@ BEGIN TRY
     IF NULLIF(LTRIM(RTRIM(@database)), N'') IS NULL
         THROW 51004, N'Ten database khong hop le.', 1;
     IF DB_ID(@database) IS NOT NULL
-        THROW 51001, N'AutoraDb da ton tai. Script dung lai de giu nguyen du lieu. Xem huong dan de dung DB cu hoac cai rieng.', 1;
+    BEGIN
+        -- Tu dong xoa DB cu neu ton tai (de chay lai khi gap loi)
+        DECLARE @dropSql nvarchar(max);
+        SET @dropSql = N'ALTER DATABASE ' + QUOTENAME(@database) + N' SET SINGLE_USER WITH ROLLBACK IMMEDIATE;';
+        EXEC sys.sp_executesql @dropSql;
+        SET @dropSql = N'DROP DATABASE ' + QUOTENAME(@database) + N';';
+        EXEC sys.sp_executesql @dropSql;
+        PRINT N'Da xoa database ' + @database + N' cu de cai lai tu dau.';
+    END;
     IF CONVERT(int, SERVERPROPERTY('ProductMajorVersion')) < 15
         THROW 51002, N'Can SQL Server 2019 / LocalDB major 15 hoac moi hon.', 1;
     DECLARE @databaseSql nvarchar(max);

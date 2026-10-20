@@ -7,13 +7,41 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.Data.SqlClient;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Tự động tìm SQL Server đang chạy thực tế trên máy (SQLEXPRESS, LocalDB, localhost, .)
+string ResolveConnectionString(IConfiguration config)
+{
+    var configured = config.GetConnectionString("DefaultConnection");
+    var candidates = new List<string>();
+    if (!string.IsNullOrWhiteSpace(configured)) candidates.Add(configured);
+    candidates.Add("Server=.\\SQLEXPRESS;Database=AutoraDb;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true;Connect Timeout=2");
+    candidates.Add("Server=(localdb)\\MSSQLLocalDB;Database=AutoraDb;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true;Connect Timeout=2");
+    candidates.Add("Server=localhost;Database=AutoraDb;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true;Connect Timeout=2");
+    candidates.Add("Server=.;Database=AutoraDb;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true;Connect Timeout=2");
 
-builder.Services.AddDbContext<AppDbContext>(o => o.UseSqlServer(
-    builder.Configuration.GetConnectionString("DefaultConnection")
-    ?? "Server=(localdb)\\MSSQLLocalDB;Database=AutoraDb;Trusted_Connection=True;TrustServerCertificate=True"));
+    foreach (var cs in candidates)
+    {
+        try
+        {
+            using var conn = new SqlConnection(cs);
+            conn.Open();
+            // Kết nối được instance này -> dùng luôn connection string này
+            return cs;
+        }
+        catch
+        {
+            // Thử candidate tiếp theo
+        }
+    }
+    return configured ?? "Server=(localdb)\\MSSQLLocalDB;Database=AutoraDb;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true";
+}
+
+var activeConnectionString = ResolveConnectionString(builder.Configuration);
+
+builder.Services.AddDbContext<AppDbContext>(o => o.UseSqlServer(activeConnectionString));
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(o =>
 {
@@ -105,8 +133,23 @@ var app = builder.Build();
 if (args.Contains("--seed"))
 {
     await using var scope = app.Services.CreateAsyncScope();
-    await DbSeeder.SeedAsync(scope.ServiceProvider, builder.Configuration);
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    if (db.Database.IsSqlServer())
+    {
+        await db.Database.MigrateAsync();
+    }
+    await DbSeeder.SeedAsync(scope.ServiceProvider, builder.Configuration, forceReset: args.Contains("--reset"));
     return;
+}
+
+await using (var scope = app.Services.CreateAsyncScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    if (db.Database.IsSqlServer())
+    {
+        await db.Database.MigrateAsync();
+        await DbSeeder.SeedAsync(scope.ServiceProvider, builder.Configuration);
+    }
 }
 
 if (!app.Environment.IsDevelopment())

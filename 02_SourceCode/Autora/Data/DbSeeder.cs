@@ -1,50 +1,212 @@
 using Autora.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+
 namespace Autora.Data;
+
 public static class DbSeeder
 {
-    public static async Task SeedAsync(IServiceProvider services, IConfiguration config)
+    public static async Task SeedAsync(IServiceProvider services, IConfiguration config, bool forceReset = false)
     {
         var db = services.GetRequiredService<AppDbContext>();
         var users = services.GetRequiredService<UserManager<ApplicationUser>>();
         var roles = services.GetRequiredService<RoleManager<IdentityRole>>();
-        foreach (var name in new[] { Roles.Admin, Roles.Employee, Roles.Customer })
-            if (!await roles.RoleExistsAsync(name)) { var r = await roles.CreateAsync(new IdentityRole(name)); if (!r.Succeeded) throw new InvalidOperationException(string.Join("; ", r.Errors.Select(x => x.Description))); }
-        var email = config["Bootstrap:AdminEmail"];
-        var password = config["Bootstrap:AdminPassword"];
-        if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password)) throw new InvalidOperationException("Đặt Bootstrap:AdminEmail và Bootstrap:AdminPassword bằng user-secrets hoặc biến môi trường trước khi chạy --seed.");
-        var admin = await users.FindByEmailAsync(email);
-        if (admin is null) { admin = new ApplicationUser { UserName = email, Email = email, FullName = "Quản trị Autora", EmailConfirmed = true }; var r = await users.CreateAsync(admin, password); if (!r.Succeeded) throw new InvalidOperationException(string.Join("; ", r.Errors.Select(x => x.Description))); }
-        if (!await users.IsInRoleAsync(admin, Roles.Admin)) { var r = await users.AddToRoleAsync(admin, Roles.Admin); if (!r.Succeeded) throw new InvalidOperationException(string.Join("; ", r.Errors.Select(x => x.Description))); }
-        if (!config.GetValue<bool>("Seed:IncludeDemoData") || await db.Cars.AnyAsync()) return;
-        await using var tx = await db.Database.BeginTransactionAsync();
-        var manufacturer = await db.Manufacturers.FirstOrDefaultAsync(x => x.Name == "Toyota");
-        if (manufacturer is null) { manufacturer = new Manufacturer { Name = "Toyota", Country = "Nhật Bản" }; db.Manufacturers.Add(manufacturer); await db.SaveChangesAsync(); }
-        var model = await db.CarModels.FirstOrDefaultAsync(x => x.ManufacturerId == manufacturer.Id && x.Name == "Camry");
-        if (model is null) { model = new CarModel { ManufacturerId = manufacturer.Id, Name = "Camry", BodyType = "Sedan" }; db.CarModels.Add(model); await db.SaveChangesAsync(); }
-        var supplier = new Supplier { Name = "Đối tác dữ liệu mẫu", SupplierType = "Tổ chức", Phone = "0900000000" };
-        var receipt = new PurchaseReceipt { Supplier = supplier, EmployeeId = admin.Id, Status = PurchaseStatus.Confirmed };
-        for (var i = 1; i <= Math.Clamp(config.GetValue<int?>("Seed:DemoCarCount") ?? 100, 1, 1000); i++)
+
+        if (db.Database.IsSqlServer())
         {
+            await db.Database.MigrateAsync();
+        }
+
+        // 1. Seed Roles
+        foreach (var name in new[] { Roles.Admin, Roles.Employee, Roles.Customer })
+        {
+            if (!await roles.RoleExistsAsync(name))
+            {
+                var r = await roles.CreateAsync(new IdentityRole(name));
+                if (!r.Succeeded) throw new InvalidOperationException(string.Join("; ", r.Errors.Select(x => x.Description)));
+            }
+        }
+
+        // 2. Seed Admin User
+        var adminEmail = config["Bootstrap:AdminEmail"] ?? "admin@autora.local";
+        var adminPassword = config["Bootstrap:AdminPassword"] ?? "Admin@12345";
+        var admin = await users.FindByEmailAsync(adminEmail);
+        if (admin is null)
+        {
+            admin = new ApplicationUser
+            {
+                UserName = adminEmail,
+                Email = adminEmail,
+                FullName = "Quản trị Autora",
+                EmailConfirmed = true,
+                IsActive = true
+            };
+            var r = await users.CreateAsync(admin, adminPassword);
+            if (!r.Succeeded) throw new InvalidOperationException(string.Join("; ", r.Errors.Select(x => x.Description)));
+        }
+        if (!await users.IsInRoleAsync(admin, Roles.Admin))
+        {
+            await users.AddToRoleAsync(admin, Roles.Admin);
+        }
+
+        // 3. Seed Demo Customer User
+        var customerEmail = "an@gmail.com";
+        var customerUser = await users.FindByEmailAsync(customerEmail);
+        if (customerUser is null)
+        {
+            customerUser = new ApplicationUser
+            {
+                UserName = customerEmail,
+                Email = customerEmail,
+                FullName = "Lưu An",
+                PhoneNumber = "0123456789",
+                EmailConfirmed = true,
+                IsActive = true
+            };
+            var r = await users.CreateAsync(customerUser, "Customer@12345");
+            if (r.Succeeded)
+            {
+                await users.AddToRoleAsync(customerUser, Roles.Customer);
+            }
+        }
+        if (customerUser is not null && !await db.Customers.AnyAsync(x => x.UserId == customerUser.Id))
+        {
+            db.Customers.Add(new Customer
+            {
+                UserId = customerUser.Id,
+                FullName = "Lưu An",
+                Phone = "0123456789",
+                Email = customerEmail
+            });
+            await db.SaveChangesAsync();
+        }
+
+        // 4. Seed Showroom Settings
+        if (!await db.ShowroomSettings.AnyAsync())
+        {
+            db.ShowroomSettings.Add(new ShowroomSetting
+            {
+                Id = 1,
+                Name = "AUTORA MOTORS",
+                Hotline = "1900 8888",
+                Email = "contact@autora.vn",
+                Address = "Hà Nội",
+                OpeningHours = "08:00 - 20:00",
+                Policy = "Cọc 2% giá bán chốt. Hoàn đủ tiền đã thu trước khi hủy."
+            });
+            await db.SaveChangesAsync();
+        }
+
+        // 5. Check if cars already exist (skip seeding if already populated)
+        if (!forceReset && await db.Cars.AnyAsync())
+        {
+            return;
+        }
+
+        // 6. Seed Manufacturers, Models, Supplier, Receipt, Cars & Images
+        // NOTE: All helpers run BEFORE BeginTransactionAsync to avoid nested SaveChanges inside tx.
+
+        // Seed Manufacturers
+        Manufacturer GetOrAddMfr(string name, string country)
+        {
+            var existing = db.Manufacturers.Local.FirstOrDefault(x => x.Name == name)
+                ?? db.Manufacturers.FirstOrDefault(x => x.Name == name);
+            if (existing is not null) return existing;
+            var m = new Manufacturer { Name = name, Country = country, IsActive = true };
+            db.Manufacturers.Add(m);
+            return m;
+        }
+        var mToyota = GetOrAddMfr("Toyota", "Nhật Bản");
+        var mFord = GetOrAddMfr("Ford", "Hoa Kỳ");
+        var mHonda = GetOrAddMfr("Honda", "Nhật Bản");
+        var mMitsubishi = GetOrAddMfr("Mitsubishi", "Nhật Bản");
+        await db.SaveChangesAsync(); // persist manufacturers so they get IDs
+
+        // Seed CarModels
+        CarModel GetOrAddMod(Manufacturer mfr, string name, string bodyType)
+        {
+            var existing = db.CarModels.Local.FirstOrDefault(x => x.ManufacturerId == mfr.Id && x.Name == name)
+                ?? db.CarModels.FirstOrDefault(x => x.ManufacturerId == mfr.Id && x.Name == name);
+            if (existing is not null) return existing;
+            var m = new CarModel { ManufacturerId = mfr.Id, Name = name, BodyType = bodyType, IsActive = true };
+            db.CarModels.Add(m);
+            return m;
+        }
+        var modCamry = GetOrAddMod(mToyota, "Camry", "Sedan");
+        var modCorollaHEV = GetOrAddMod(mToyota, "Corolla Cross 1.8HEV", "SUV");
+        var modCorollaV = GetOrAddMod(mToyota, "Corolla Cross 1.8V", "SUV");
+        var modVios = GetOrAddMod(mToyota, "Vios 1.5E CVT", "Sedan");
+        var modYaris = GetOrAddMod(mToyota, "Yaris Cross", "SUV");
+        var modYarisHEV = GetOrAddMod(mToyota, "Yaris Cross HEV", "SUV");
+        var modTerritoryTrend = GetOrAddMod(mFord, "Territory Trend 1.5L AT", "SUV");
+        var modTerritoryTitanium = GetOrAddMod(mFord, "Territory Titanium 1.5L AT", "SUV");
+        var modTerritoryTitaniumX = GetOrAddMod(mFord, "Territory Titanium X 1.5L AT", "SUV");
+        var modCity = GetOrAddMod(mHonda, "City G", "Sedan");
+        var modAttrageMT = GetOrAddMod(mMitsubishi, "Attrage MT", "Sedan");
+        var modAttrageCVT = GetOrAddMod(mMitsubishi, "Attrage CVT Premium", "Sedan");
+        var modXpanderMT = GetOrAddMod(mMitsubishi, "Xpander MT", "MPV");
+        var modXpanderAT = GetOrAddMod(mMitsubishi, "Xpander AT", "MPV");
+        var modXpanderATPrem = GetOrAddMod(mMitsubishi, "Xpander AT Premium", "MPV");
+        await db.SaveChangesAsync(); // persist models so they get IDs
+
+        // Seed Supplier
+        var supplier = db.Suppliers.Local.FirstOrDefault(x => x.Name == "Đối tác dữ liệu mẫu")
+            ?? db.Suppliers.FirstOrDefault(x => x.Name == "Đối tác dữ liệu mẫu");
+        if (supplier is null)
+        {
+            supplier = new Supplier { Name = "Đối tác dữ liệu mẫu", SupplierType = "Tổ chức", Phone = "0900000000", IsActive = true };
+            db.Suppliers.Add(supplier);
+            await db.SaveChangesAsync();
+        }
+
+        // Now open transaction only for Cars + Receipt
+        await using var tx = await db.Database.BeginTransactionAsync();
+
+        var receipt = new PurchaseReceipt { SupplierId = supplier.Id, EmployeeId = admin.Id, Status = PurchaseStatus.Confirmed };
+
+        var carDefs = new (CarModel model, string vin, short year, string color, CarCondition condition, int mileage, string fuel, string trans, decimal price, string image)[]
+        {
+            (modVios,           "ATRA0000000000001", 2024, "Đen",   CarCondition.New,  0,     "Xăng",   "CVT",           488_000_000m, "/images/cars/toyota-vios.jpg"),
+            (modYaris,          "ATRA0000000000002", 2024, "Đen",   CarCondition.New,  0,     "Xăng",   "CVT",           650_000_000m, "/images/cars/toyota-yaris-cross-c-230920-05.jpg"),
+            (modYarisHEV,       "ATRA0000000000003", 2024, "Đen",   CarCondition.New,  0,     "Hybrid", "CVT",           728_000_000m, "/images/cars/toyota-yaris-cross.jpg"),
+            (modCorollaV,       "ATRA0000000000004", 2024, "Đen",   CarCondition.New,  0,     "Xăng",   "CVT",           820_000_000m, "/images/cars/toyota-corolla-cross.jpg"),
+            (modCorollaHEV,     "ATRA0000000000005", 2024, "Đen",   CarCondition.New,  0,     "Hybrid", "e-CVT",         865_000_000m, "/images/cars/toyota-corolla-cross-19943.webp"),
+            (modCity,           "ATRA0000000000006", 2024, "Đen",   CarCondition.New,  0,     "Xăng",   "CVT",           499_000_000m, "/images/cars/honda-city.png"),
+            (modXpanderMT,      "ATRA0000000000007", 2024, "Trắng", CarCondition.New,  0,     "Xăng",   "Số sàn 5 cấp", 568_000_000m, "/images/cars/2135235-2139205j29545.webp"),
+            (modXpanderAT,      "ATRA0000000000008", 2024, "Trắng", CarCondition.New,  0,     "Xăng",   "Tự động 4 cấp",598_000_000m, "/images/cars/9y0tzmv-2885400j33687.webp"),
+            (modXpanderATPrem,  "ATRA0000000000009", 2024, "Đen",   CarCondition.New,  0,     "Xăng",   "Tự động 4 cấp",659_000_000m, "/images/cars/xpanderpreat.jpg"),
+            (modAttrageMT,      "ATRA0000000000010", 2024, "Trắng", CarCondition.New,  0,     "Xăng",   "Số sàn 5 cấp", 380_000_000m, "/images/cars/mitsubishiattragemt.jpg"),
+            (modAttrageCVT,     "ATRA0000000000011", 2024, "Xám",   CarCondition.New,  0,     "Xăng",   "CVT",           490_000_000m, "/images/cars/mitsubishi-attrage-cvt-premium-2236481j32336.webp"),
+            (modTerritoryTrend, "ATRA0000000000012", 2024, "Đen",   CarCondition.New,  0,     "Xăng",   "Tự động 7 cấp",739_000_000m, "/images/cars/territory.jpg"),
+            (modTerritoryTitanium, "ATRA0000000000013", 2024, "Đen",CarCondition.New,  0,     "Xăng",   "Tự động 7 cấp",819_000_000m, "/images/cars/ford-territory.jpg"),
+            (modTerritoryTitaniumX,"ATRA0000000000014", 2024, "Đen",CarCondition.New,  0,     "Xăng",   "Tự động 7 cấp",875_000_000m, "/images/cars/territory-den-dau-xe-trai-truoc.jpg"),
+            (modCamry,          "ATRA0000000000015", 2024, "Đỏ",   CarCondition.Used, 15000, "Hybrid", "Tự động",       950_000_000m, "/images/cars/2024-toyota-camry-102-64cbc4858e198.jpg"),
+            (modCamry,          "ATRA0000000000016", 2024, "Trắng", CarCondition.New,  0,     "Xăng",   "Tự động",       960_000_000m, "/images/cars/camrytrang.jpg")
+        };
+
+        foreach (var def in carDefs)
+        {
+            if (db.Cars.Local.Any(x => x.VIN == def.vin)) continue;
             var car = new Car
             {
-                CarModelId = model.Id,
-                VIN = "ATRA" + i.ToString("D13"),
-                ManufactureYear = 2024,
-                Color = i % 2 == 0 ? "Trắng" : "Đen",
-                Condition = i % 2 == 0 ? CarCondition.New : CarCondition.Used,
-                Mileage = i % 2 == 0 ? 0 : i * 1000,
-                Fuel = i % 3 == 0 ? "Hybrid" : "Xăng",
-                Transmission = "Tự động",
-                ListedPrice = 800_000_000m + i * 10_000_000m,
+                CarModelId = def.model.Id,
+                VIN = def.vin,
+                ManufactureYear = def.year,
+                Color = def.color,
+                Condition = def.condition,
+                Mileage = def.mileage,
+                Fuel = def.fuel,
+                Transmission = def.trans,
+                ListedPrice = def.price,
                 Status = CarStatus.Available,
                 IsPublished = true
             };
-            var imgPath = i % 2 == 0 ? "/images/cars/camrytrang.jpg" : "/images/cars/2024-toyota-camry-102-64cbc4858e198.jpg";
-            car.Images.Add(new CarImage { ImagePath = imgPath, IsPrimary = true });
-            receipt.Details.Add(new PurchaseDetail { Car = car, PurchasePrice = car.ListedPrice - 100_000_000m });
+            car.Images.Add(new CarImage { ImagePath = def.image, IsPrimary = true, SortOrder = 0 });
+            receipt.Details.Add(new PurchaseDetail { Car = car, PurchasePrice = def.price - 50_000_000m });
         }
-        db.PurchaseReceipts.Add(receipt); await db.SaveChangesAsync(); await tx.CommitAsync();
+
+        db.PurchaseReceipts.Add(receipt);
+        await db.SaveChangesAsync();
+        await tx.CommitAsync();
     }
 }
