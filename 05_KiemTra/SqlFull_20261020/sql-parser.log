@@ -1,8 +1,0 @@
-Autora_Full.sql: parse errors=0
-{}
-Decoded SQL payload: parse errors=0
-{"__EFMigrationsHistory":3,"AdminNotificationReads":1,"AspNetRoles":3,"AspNetUserRoles":4,"AspNetUsers":4,"CarImages":16,"CarModels":15,"Cars":16,"Customers":3,"DepositRequests":3,"Manufacturers":4,"PurchaseDetails":16,"PurchaseReceipts":1,"SaleTransactions":2,"Suppliers":1}
-body_for_validation.sql: parse errors=0
-{"__EFMigrationsHistory":3,"AdminNotificationReads":1,"AspNetRoles":3,"AspNetUserRoles":4,"AspNetUsers":4,"CarImages":16,"CarModels":15,"Cars":16,"Customers":3,"DepositRequests":3,"Manufacturers":4,"PurchaseDetails":16,"PurchaseReceipts":1,"SaleTransactions":2,"Suppliers":1}
-KiemTraDB.sql: parse errors=0
-{}
