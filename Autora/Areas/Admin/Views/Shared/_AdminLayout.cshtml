@@ -1,0 +1,130 @@
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Antiforgery
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="csrf-token" content="@Antiforgery.GetAndStoreTokens(Context).RequestToken" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AUTORA Admin Portal</title>
+
+                                    
+    <link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+                         
+    <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/autora-modern.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/admin-notifications.css" asp-append-version="true" />
+</head>
+@{
+    var currentCtrl = ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
+    var activeMenu = ViewData["ActiveMenu"]?.ToString() ?? "";
+    
+    bool isHome = currentCtrl.Equals("Home", StringComparison.OrdinalIgnoreCase) || activeMenu == "Dashboard";
+    bool isCars = currentCtrl.Equals("Car", StringComparison.OrdinalIgnoreCase) || activeMenu == "Cars";
+    bool isBrand = currentCtrl.Equals("Manufacturer", StringComparison.OrdinalIgnoreCase) || activeMenu == "Brand";
+    bool isPurchase = currentCtrl.Equals("Purchase", StringComparison.OrdinalIgnoreCase) || activeMenu == "Purchase";
+    bool isOrders = currentCtrl.Equals("Order", StringComparison.OrdinalIgnoreCase) || activeMenu == "Orders";
+    bool isUsers = currentCtrl.Equals("User", StringComparison.OrdinalIgnoreCase) || activeMenu == "Users";
+    bool isSettings = currentCtrl.Equals("Setting", StringComparison.OrdinalIgnoreCase) || activeMenu == "Settings";
+
+    var pageTitle = ViewData["Title"]?.ToString() ?? "Tổng quan";
+    var breadcrumb = ViewData["Breadcrumb"]?.ToString() ?? (isHome ? "TỔNG QUAN" : "QUẢN TRỊ HỆ THỐNG");
+    var headerTitle = isHome ? "Tổng quan showroom" : pageTitle;
+}
+<body class="autora-admin">
+                                                           
+    <aside class="admin-sidebar">
+        <div class="admin-brand">
+            <div style="background-color: var(--admin-accent); color:#000; width:34px; height:34px; border-radius:8px; display:flex; align-items:center; justify-content:center;">
+                <i class="bi bi-car-front-fill"></i>
+            </div>
+            <span>AUTORA</span>
+        </div>
+
+        <div class="admin-menu-label">KHÔNG GIAN QUẢN TRỊ</div><a asp-controller="Contact" asp-action="Index" class="admin-menu-item">Tư vấn / báo giá</a>
+        <a asp-controller="Customer" asp-action="Index" class="admin-menu-item">Khách hàng</a>
+        <a asp-controller="Supplier" asp-action="Index" class="admin-menu-item">Đối tác</a>
+        <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="admin-menu-item @(isHome ? "active" : "")">
+            <span><i class="bi bi-grid-fill me-2"></i> Tổng quan</span>
+        </a>
+        <a asp-area="Admin" asp-controller="Car" asp-action="Index" class="admin-menu-item @(isCars ? "active" : "")">
+            <span><i class="bi bi-car-front me-2"></i> Quản lý kho xe</span>
+        </a>
+        <a asp-area="Admin" asp-controller="Manufacturer" asp-action="Index" class="admin-menu-item @(isBrand ? "active" : "")">
+            <span><i class="bi bi-stars me-2"></i> Quản lý hãng xe</span>
+        </a>
+        <a asp-area="Admin" asp-controller="Purchase" asp-action="Index" class="admin-menu-item @(isPurchase ? "active" : "")">
+            <span><i class="bi bi-cart-check me-2"></i> Nhập mua xe</span>
+        </a>
+        <a asp-area="Admin" asp-controller="Order" asp-action="Index" class="admin-menu-item @(isOrders ? "active" : "")">
+            <span><i class="bi bi-check2-circle me-2"></i> Duyệt đơn hàng</span>
+        </a>
+        @if (User.IsInRole(Autora.Models.Roles.Admin))
+        {
+            <a asp-area="Admin" asp-controller="User" asp-action="Index" class="admin-menu-item @(isUsers ? "active" : "")">
+                <span><i class="bi bi-people me-2"></i> Quản lý tài khoản</span>
+            </a>
+        }
+
+        <div class="mt-auto pb-3">
+            <a asp-area="Admin" asp-controller="Setting" asp-action="Index" class="admin-menu-item @(isSettings ? "active" : "") text-secondary">
+                <span><i class="bi bi-gear me-2"></i> Cài đặt</span>
+            </a>
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="admin-menu-item text-secondary">
+                <span><i class="bi bi-arrow-left-circle me-2"></i> Về trang bán hàng</span>
+            </a>
+            <div class="px-3 pt-3 d-flex align-items-center justify-content-between border-top border-dark mt-2">
+                <div class="d-flex align-items-center gap-2 text-truncate me-2">
+                    <div class="rounded-circle text-dark fw-bold d-flex align-items-center justify-content-center flex-shrink-0" style="width:36px; height:36px; background-color: var(--admin-accent);">
+                        @(User.Identity?.Name?.Length >= 2 ? User.Identity.Name.Substring(0, 2).ToUpperInvariant() : "AU")
+                    </div>
+                    <div class="text-truncate" style="line-height:1.2;">
+                        <div class="text-white fw-bold small text-truncate">@User.Identity?.Name</div>
+                        <div class="text-secondary" style="font-size:0.7rem;">@(User.IsInRole(Autora.Models.Roles.Admin) ? "Quản trị viên" : "Nhân viên")</div>
+                    </div>
+                </div>
+                <form action="/Account/Logout" method="post" class="m-0 flex-shrink-0">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-sm btn-outline-danger border-0 p-1 rounded" title="Đăng xuất" style="font-size:1.1rem; line-height:1;">
+                        <i class="bi bi-box-arrow-right"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </aside>
+
+                              
+    <main class="admin-main-wrapper">
+        <header class="d-flex align-items-center justify-content-between mb-4">
+            <div>
+                <span class="text-secondary small fw-semibold">@breadcrumb</span>
+                <h3 class="fw-bold m-0 mt-1">@headerTitle</h3>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <div class="dropdown notification-dropdown">
+                    <button id="notificationBell" type="button" class="btn bg-white border-0 rounded-circle shadow-sm position-relative p-2" style="width:40px;height:40px;" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" aria-label="Thông báo quản trị">
+                        <i class="bi bi-bell" aria-hidden="true"></i>
+                        <span id="notificationBadge" hidden class="notification-badge badge rounded-pill bg-danger"></span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end notification-panel" aria-labelledby="notificationBell">
+                        <div class="notification-heading"><strong>Thông báo</strong><button id="notificationReadAll" type="button" class="btn btn-sm btn-link">Đọc tất cả</button></div>
+                        <p class="notification-hint">Hoạt động trong 30 ngày gần nhất</p>
+                        <div id="notificationStatus" role="status" class="notification-status">Đang tải thông báo…</div>
+                        <div id="notificationList" class="notification-list"></div>
+                        <a asp-area="Admin" asp-controller="Notification" asp-action="Index" class="notification-all">Xem tất cả thông báo <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        @RenderBody()
+    </main>
+
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/admin-notifications.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

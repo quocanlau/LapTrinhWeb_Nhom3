@@ -1,0 +1,130 @@
+@model Autora.ViewModels.CarCatalog
+@{
+    ViewData["Title"] = L["Cars_Title"];
+    ViewBag.ActiveMenu = "Cars";
+}
+
+<div class="container py-4">
+                                       
+    <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-4 gap-3">
+        <div>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-1">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index" class="text-secondary text-decoration-none">@L["Home_Title"]</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">@L["Cars_Breadcrumb"]</li>
+                </ol>
+            </nav>
+            <h2 class="fw-bolder text-white m-0 d-flex align-items-center gap-2">
+                <span>@L["Cars_Heading"]</span>
+            </h2>
+        </div>
+    </div>
+
+                                                   
+    <div class="p-4 rounded-4 mb-4 border border-secondary border-opacity-25 shadow-sm" style="background-color: #FFFFFF;">
+        <div class="d-flex align-items-center justify-content-between pb-3 mb-3 border-bottom border-secondary border-opacity-25">
+            <h5 class="fw-bold text-white m-0 d-flex align-items-center gap-2">
+                <i class="bi bi-sliders text-lime"></i>
+                <span>@L["Filter_SmartSearch"]</span>
+            </h5>
+        </div>
+
+        <form id="carFilterForm" asp-action="Index" method="get" class="row g-3">
+<div class="col-md-4"><label class="form-label">@(CarTranslationHelper.IsEnglish?"Model":"Dòng xe")</label><select name="CarModelId" class="form-select"><option value="">--</option>@foreach(var c in Model.CarModels){<option value="@c.Id" selected="@(Model.Filter.CarModelId == c.Id ? "selected" : null)">@c.Name</option>}</select></div>
+<div class="col-md-4"><label class="form-label">@(CarTranslationHelper.IsEnglish?"Minimum price":"Giá từ")</label><input name="MinPrice" type="number" min="0" step="1" value="@Model.Filter.MinPrice" class="form-control"/></div>
+<div class="col-md-2"><label class="form-label">@(CarTranslationHelper.IsEnglish?"Year from":"Năm từ")</label><input name="YearFrom" type="number" min="1900" max="2100" value="@Model.Filter.YearFrom" class="form-control"/></div>
+<div class="col-md-2"><label class="form-label">@(CarTranslationHelper.IsEnglish?"Year to":"Đến năm")</label><input name="YearTo" type="number" min="1900" max="2100" value="@Model.Filter.YearTo" class="form-control"/></div>
+<div class="col-md-4"><label class="form-label">@(CarTranslationHelper.IsEnglish?"Body type":"Kiểu dáng")</label><select name="BodyType" class="form-select"><option value="">--</option>@foreach(var b in new[]{"Sedan","SUV","MPV","Hatchback","Crossover","Bán tải"}){<option value="@b" selected="@(Model.Filter.BodyType == b ? "selected" : null)">@b</option>}</select></div>
+<div class="col-md-4"><label class="form-label">@(CarTranslationHelper.IsEnglish?"Transmission":"Hộp số")</label><select name="Transmission" class="form-select"><option value="">--</option>@foreach(var t in new[]{"Tự động","Số sàn"}){<option value="@t" selected="@(Model.Filter.Transmission == t ? "selected" : null)">@CarTranslationHelper.TranslateTransmission(t)</option>}</select></div>
+
+                               
+            <div class="col-md-6 col-lg-3">
+                <label class="form-label text-secondary small fw-bold text-uppercase mb-1">@L["Filter_Brand"]</label>
+                <select name="ManufacturerId" class="form-select bg-dark text-white border-secondary border-opacity-50 rounded-3 py-2">
+                    <option value="">@L["Filter_AllBrands"]</option>
+                    @foreach (var m in Model.Manufacturers)
+                    {
+                        <option value="@m.Id" selected="@(Model.Filter.ManufacturerId == m.Id ? "selected" : null)">@m.Name</option>
+                    }
+                </select>
+            </div>
+
+                                        
+            <div class="col-md-6 col-lg-3">
+                <label class="form-label text-secondary small fw-bold text-uppercase mb-1">@L["Filter_Keyword"]</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-dark border-secondary border-opacity-50 text-secondary border-end-0 rounded-start-3">
+                        <i class="bi bi-search"></i>
+                    </span>
+                    <input name="Keyword" 
+                           value="@Model.Filter.Keyword" 
+                           class="form-control bg-dark text-white border-secondary border-opacity-50 border-start-0 rounded-end-3 py-2" 
+                           placeholder="@L["Filter_KeywordPlaceholder"]" 
+                           maxlength="100" />
+                </div>
+            </div>
+
+                                      
+            <div class="col-md-6 col-lg-3">
+                <label class="form-label text-secondary small fw-bold text-uppercase mb-1">@L["Filter_MaxPrice"]</label>
+                <input name="MaxPrice" 
+                       value="@Model.Filter.MaxPrice" 
+                       type="number" 
+                       min="0" 
+                       step="1000000" 
+                       class="form-control bg-dark text-white border-secondary border-opacity-50 rounded-3 py-2" 
+                       placeholder="Ví dụ: 1500000000" />
+            </div>
+
+                                     
+            <div class="col-md-6 col-lg-3">
+                <label class="form-label text-secondary small fw-bold text-uppercase mb-1">@L["Filter_Condition"]</label>
+                <select name="Condition" class="form-select bg-dark text-white border-secondary border-opacity-50 rounded-3 py-2">
+                    <option value="">@L["Filter_AllConditions"]</option>
+                        <option value="0" selected="@(Model.Filter.Condition == CarCondition.New ? "selected" : null)">@L["Filter_ConditionNew"]</option>
+                        <option value="1" selected="@(Model.Filter.Condition == CarCondition.Used ? "selected" : null)">@L["Filter_ConditionUsed"]</option>
+                </select>
+            </div>
+
+                                  
+            <div class="col-md-6 col-lg-3">
+                <label class="form-label text-secondary small fw-bold text-uppercase mb-1">@L["Filter_Fuel"]</label>
+                <select name="Fuel" class="form-select bg-dark text-white border-secondary border-opacity-50 rounded-3 py-2">
+                    <option value="">@L["Filter_AllFuels"]</option>
+                    @foreach (var fuel in new[] { "Xăng", "Dầu", "Hybrid", "Điện" })
+                    {
+                        <option value="@fuel" selected="@(Model.Filter.Fuel == fuel ? "selected" : null)">@CarTranslationHelper.TranslateFuel(fuel)</option>
+                    }
+                </select>
+            </div>
+
+                               
+            <div class="col-md-6 col-lg-3">
+                <label class="form-label text-secondary small fw-bold text-uppercase mb-1">@L["Filter_Sort"]</label>
+                <select name="Sort" class="form-select bg-dark text-white border-secondary border-opacity-50 rounded-3 py-2">
+                    <option value="latest" selected="@(Model.Filter.Sort == "latest" ? "selected" : null)">@L["Filter_SortLatest"]</option>
+                    <option value="price-asc" selected="@(Model.Filter.Sort == "price-asc" ? "selected" : null)">@L["Filter_SortPriceAsc"]</option>
+                    <option value="price-desc" selected="@(Model.Filter.Sort == "price-desc" ? "selected" : null)">@L["Filter_SortPriceDesc"]</option>
+                    <option value="year-desc" selected="@(Model.Filter.Sort == "year-desc" ? "selected" : null)">@L["Filter_SortYearDesc"]</option>
+                </select>
+            </div>
+
+                                                            
+            <div class="col-lg-6 d-flex align-items-end gap-2">
+                <button type="submit" class="btn btn-lime px-4 py-2 rounded-pill fw-bold text-dark d-flex align-items-center gap-2 shadow-sm">
+                    <i class="bi bi-funnel-fill"></i>
+                    <span>@L["Filter_Apply"]</span>
+                </button>
+                <a asp-action="Index" class="btn btn-outline-secondary px-3 py-2 rounded-pill text-white-50 border-secondary border-opacity-50 hover-white">
+                    <i class="bi bi-arrow-counterclockwise me-1"></i> @L["Filter_Reset"]
+                </a>
+            </div>
+        </form>
+    </div>
+
+                                                                     
+    <div id="filterStatus" role="status" class="mb-2"></div>
+    <div id="carResults">
+        @await Html.PartialAsync("_CarResults", Model)
+    </div>
+</div>

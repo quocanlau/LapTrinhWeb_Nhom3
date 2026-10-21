@@ -1,0 +1,1 @@
+document.addEventListener('submit',e=>{if(e.target.matches('.confirm-user-action')&&!window.confirm('Xóa tài khoản chưa có chứng từ hoặc vô hiệu hóa tài khoản có lịch sử: '+e.target.dataset.userName+'?'))e.preventDefault();});

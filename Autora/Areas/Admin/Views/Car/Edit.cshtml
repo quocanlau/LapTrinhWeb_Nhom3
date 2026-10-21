@@ -1,0 +1,13 @@
+@model Autora.ViewModels.CarForm
+@using Autora.Models
+@{Layout="~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";ViewData["Title"]="Hồ sơ xe";}
+<h3>Hồ sơ xe</h3><form asp-action="Save" method="post" class="row g-3"><div asp-validation-summary="All" class="text-danger"></div><input asp-for="Id" type="hidden"/><input asp-for="Version" type="hidden"/>
+<div class="col-md-6"><label>Dòng xe</label><select asp-for="CarModelId" class="form-select">@foreach(CarModel m in ViewBag.CarModels){<option value="@m.Id">@m.Manufacturer.Name @m.Name</option>}</select></div>
+<div class="col-md-6"><label>VIN</label><input asp-for="VIN" class="form-control" maxlength="17"/></div>
+<div class="col-md-4"><label>Năm sản xuất</label><input asp-for="ManufactureYear" class="form-control"/></div><div class="col-md-4"><label>Màu</label><input asp-for="Color" class="form-control"/></div>
+<div class="col-md-4"><label>Tình trạng</label><select asp-for="Condition" asp-items="Html.GetEnumSelectList<CarCondition>()" class="form-select"></select></div>
+<div class="col-md-4"><label>Số km</label><input asp-for="Mileage" class="form-control"/></div><div class="col-md-4"><label>Nhiên liệu</label><input asp-for="Fuel" class="form-control"/></div><div class="col-md-4"><label>Hộp số</label><input asp-for="Transmission" class="form-control"/></div>
+<div class="col-md-6"><label>Giá niêm yết VND</label><input asp-for="ListedPrice" type="number" min="1" step="1" class="form-control"/></div><div class="col-md-6"><label>Ảnh chính URL HTTPS</label><input asp-for="ImageUrl" class="form-control"/></div>
+<div><label><input asp-for="IsPublished"/> Công khai sau khi nhập xe</label></div><div><button class="btn btn-primary">Lưu</button></div></form>
+
+@if(Model.Id>0){<a asp-controller="CarImage" asp-action="Index" asp-route-id="@Model.Id" class="btn btn-outline-primary mt-3">Quản lý bộ ảnh / tải ảnh lên</a>}

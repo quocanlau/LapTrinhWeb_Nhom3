@@ -1,0 +1,649 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About_ConsultDesc" xml:space="preserve">
+    <value>Để lại thông tin, đội ngũ tư vấn cao cấp của AUTORA sẽ liên hệ trong 15 phút.</value>
+  </data>
+  <data name="About_ConsultHeading" xml:space="preserve">
+    <value>Đăng ký tư vấn / Đặt lịch lái thử</value>
+  </data>
+  <data name="About_CoreValues" xml:space="preserve">
+    <value>GIÁ TRỊ CỐT LÕI</value>
+  </data>
+  <data name="About_ExploreBtn" xml:space="preserve">
+    <value>Khám phá kho xe</value>
+  </data>
+  <data name="About_FlagshipDesc" xml:space="preserve">
+    <value>Không gian trải nghiệm xe chuẩn 5 sao</value>
+  </data>
+  <data name="About_FlagshipHanoi" xml:space="preserve">
+    <value>Showroom Flagship Hà Nội</value>
+  </data>
+  <data name="About_FullName" xml:space="preserve">
+    <value>Họ và tên (*)</value>
+  </data>
+  <data name="About_HeroDesc" xml:space="preserve">
+    <value>AUTORA ra đời với sứ mệnh mang đến trải nghiệm sở hữu xe hơi minh bạch, an tâm tuyệt đối và đẳng cấp chuẩn quốc tế cho khách hàng tại Việt Nam.</value>
+  </data>
+  <data name="About_HeroEyebrow" xml:space="preserve">
+    <value>CÂU CHUYỆN THƯƠNG HIỆU</value>
+  </data>
+  <data name="About_HeroH1" xml:space="preserve">
+    <value>Định hình chuẩn mực mới trong thế giới xe hơi hạng sang.</value>
+  </data>
+  <data name="About_HotlineHours" xml:space="preserve">
+    <value>(8:00 - 21:00)</value>
+  </data>
+  <data name="About_InterestedModel" xml:space="preserve">
+    <value>Mẫu xe quan tâm</value>
+  </data>
+  <data name="About_NeedPlaceholder" xml:space="preserve">
+    <value>Quý khách muốn lái thử tại showroom hay tư vấn trả góp?</value>
+  </data>
+  <data name="About_NetworkEyebrow" xml:space="preserve">
+    <value>MẠNG LƯỚI HOẠT ĐỘNG</value>
+  </data>
+  <data name="About_Phone" xml:space="preserve">
+    <value>Số điện thoại (*)</value>
+  </data>
+  <data name="About_ServicesEyebrow" xml:space="preserve">
+    <value>DỊCH VỤ ĐẶC QUYỀN</value>
+  </data>
+  <data name="About_ServicesTitle" xml:space="preserve">
+    <value>Giải pháp toàn diện cho chủ sở hữu ô tô</value>
+  </data>
+  <data name="About_ShowroomHanoi" xml:space="preserve">
+    <value>Showroom Trụ Sở Hà Nội</value>
+  </data>
+  <data name="About_ShowroomHanoiAddr" xml:space="preserve">
+    <value>Số 3 Cầu Giấy, Láng Thượng, Đống Đa, Hà Nội</value>
+  </data>
+  <data name="About_ShowroomHcm" xml:space="preserve">
+    <value>Showroom TP. Hồ Chí Minh</value>
+  </data>
+  <data name="About_ShowroomHcmAddr" xml:space="preserve">
+    <value>Đại lộ Nguyễn Văn Linh, Tân Phong, Quận 7, TP.HCM</value>
+  </data>
+  <data name="About_ShowroomsBtn" xml:space="preserve">
+    <value>Hệ thống Showroom</value>
+  </data>
+  <data name="About_SpecificNeed" xml:space="preserve">
+    <value>Nhu cầu cụ thể</value>
+  </data>
+  <data name="About_StatBrands" xml:space="preserve">
+    <value>Thương hiệu toàn cầu</value>
+  </data>
+  <data name="About_StatCars" xml:space="preserve">
+    <value>Mẫu xe sẵn giao ngay</value>
+  </data>
+  <data name="About_StatChecks" xml:space="preserve">
+    <value>Hạng mục kiểm định độc quyền</value>
+  </data>
+  <data name="About_StatClients" xml:space="preserve">
+    <value>Khách hàng tin chọn</value>
+  </data>
+  <data name="About_SubmitBtn" xml:space="preserve">
+    <value>Gửi yêu cầu tư vấn</value>
+  </data>
+  <data name="About_Svc1Desc" xml:space="preserve">
+    <value>Định giá xe cũ sát giá thị trường trong 15 phút, lên đời xe mới nhanh chóng.</value>
+  </data>
+  <data name="About_Svc1Title" xml:space="preserve">
+    <value>Thu Cũ Đổi Mới</value>
+  </data>
+  <data name="About_Svc2Desc" xml:space="preserve">
+    <value>Liên kết cùng các ngân hàng lớn với mức lãi suất ưu đãi, duyệt hồ sơ trong ngày.</value>
+  </data>
+  <data name="About_Svc2Title" xml:space="preserve">
+    <value>Hỗ Trợ Vay 80%</value>
+  </data>
+  <data name="About_Svc3Desc" xml:space="preserve">
+    <value>Hỗ trợ đưa các mẫu xe sang trọng đến tận nơi để Quý khách trải nghiệm thực tế.</value>
+  </data>
+  <data name="About_Svc3Title" xml:space="preserve">
+    <value>Lái Thử Tận Nhà</value>
+  </data>
+  <data name="About_Svc4Desc" xml:space="preserve">
+    <value>Đội ngũ chuyên viên hỗ trợ rút hồ sơ gốc, bấm biển số và đăng kiểm thuận tiện.</value>
+  </data>
+  <data name="About_Svc4Title" xml:space="preserve">
+    <value>Pháp Lý Trọn Gói</value>
+  </data>
+  <data name="About_Title" xml:space="preserve">
+    <value>Giới thiệu về AUTORA Motors</value>
+  </data>
+  <data name="About_Value1Desc" xml:space="preserve">
+    <value>Mỗi chiếc xe trước khi xuất hiện tại showroom đều trải qua quy trình kiểm tra động cơ, khung gầm, hệ thống điện bằng thiết bị chẩn đoán chuyên dụng.</value>
+  </data>
+  <data name="About_Value1Title" xml:space="preserve">
+    <value>Kiểm Định 120 Hạng Mục</value>
+  </data>
+  <data name="About_Value2Desc" xml:space="preserve">
+    <value>Cam kết giá niêm yết đúng thực tế, không chi phí ẩn. Hỗ trợ pháp lý sang tên đổi chủ hoàn tất trong vòng 24 - 48 giờ làm việc.</value>
+  </data>
+  <data name="About_Value2Title" xml:space="preserve">
+    <value>Giá Trị Minh Bạch</value>
+  </data>
+  <data name="About_Value3Desc" xml:space="preserve">
+    <value>Chính sách bảo hành động cơ &amp; hộp số lên đến 12 tháng hoặc 20.000 km, cùng gói cứu hộ khẩn cấp 24/7 trên phạm vi toàn quốc.</value>
+  </data>
+  <data name="About_Value3Title" xml:space="preserve">
+    <value>Bảo Hành Hậu Mãi Vượt Trội</value>
+  </data>
+  <data name="About_VisitTitle" xml:space="preserve">
+    <value>Ghé thăm Showroom AUTORA</value>
+  </data>
+  <data name="About_WhyChoose" xml:space="preserve">
+    <value>Tại sao khách hàng tin tưởng AUTORA?</value>
+  </data>
+  <data name="Account_BackToStore" xml:space="preserve">
+    <value>Về trang bán hàng</value>
+  </data>
+  <data name="Account_ConfirmPassword" xml:space="preserve">
+    <value>Xác nhận mật khẩu</value>
+  </data>
+  <data name="Account_CreateAccount" xml:space="preserve">
+    <value>Tạo tài khoản khách hàng</value>
+  </data>
+  <data name="Account_DeniedDesc" xml:space="preserve">
+    <value>Tài khoản hiện tại của bạn không có quyền truy cập vào chức năng quản trị này. Bạn hãy chuyển về xem danh sách xe tại Showroom hoặc đăng nhập bằng tài khoản Quản trị viên / Nhân viên.</value>
+  </data>
+  <data name="Account_DeniedHeading" xml:space="preserve">
+    <value>Khu vực giới hạn truy cập</value>
+  </data>
+  <data name="Account_DeniedTitle" xml:space="preserve">
+    <value>Không có quyền truy cập</value>
+  </data>
+  <data name="Account_Email" xml:space="preserve">
+    <value>Email tài khoản</value>
+  </data>
+  <data name="Account_FullName" xml:space="preserve">
+    <value>Họ tên</value>
+  </data>
+  <data name="Account_LoginBtn" xml:space="preserve">
+    <value>Đăng nhập hệ thống</value>
+  </data>
+  <data name="Account_LoginTitle" xml:space="preserve">
+    <value>Đăng nhập tài khoản</value>
+  </data>
+  <data name="Account_NoAccount" xml:space="preserve">
+    <value>Bạn chưa có tài khoản?</value>
+  </data>
+  <data name="Account_Password" xml:space="preserve">
+    <value>Mật khẩu</value>
+  </data>
+  <data name="Account_Phone" xml:space="preserve">
+    <value>Điện thoại</value>
+  </data>
+  <data name="Account_PortalSubtitle" xml:space="preserve">
+    <value>Cổng thông tin khách hàng &amp; quản lý đơn cọc</value>
+  </data>
+  <data name="Account_RegisterBtn" xml:space="preserve">
+    <value>Đăng ký</value>
+  </data>
+  <data name="Account_RegisterHeading" xml:space="preserve">
+    <value>Đăng ký khách hàng</value>
+  </data>
+  <data name="Account_RegisterTitle" xml:space="preserve">
+    <value>Đăng ký</value>
+  </data>
+  <data name="Account_RememberMe" xml:space="preserve">
+    <value>Ghi nhớ đăng nhập trên thiết bị này</value>
+  </data>
+  <data name="Account_SwitchAccount" xml:space="preserve">
+    <value>Đổi tài khoản khác</value>
+  </data>
+  <data name="Card_AddToCart" xml:space="preserve">
+    <value>Thêm vào danh sách quan tâm</value>
+  </data>
+  <data name="Card_Available" xml:space="preserve">
+    <value>Sẵn sàng</value>
+  </data>
+  <data name="Card_Deposit" xml:space="preserve">
+    <value>Cọc (2%):</value>
+  </data>
+  <data name="Card_Deposited" xml:space="preserve">
+    <value>Đã có cọc</value>
+  </data>
+  <data name="Card_Details" xml:space="preserve">
+    <value>Chi tiết</value>
+  </data>
+  <data name="Card_Inspected" xml:space="preserve">
+    <value>Đã kiểm định</value>
+  </data>
+  <data name="Card_ListedPrice" xml:space="preserve">
+    <value>Giá niêm yết</value>
+  </data>
+  <data name="Card_Reserved" xml:space="preserve">
+    <value>Xe đã được giữ</value>
+  </data>
+  <data name="Card_Year" xml:space="preserve">
+    <value>Năm {0}</value>
+  </data>
+  <data name="Cars_Breadcrumb" xml:space="preserve">
+    <value>Danh sách xe</value>
+  </data>
+  <data name="Cars_Heading" xml:space="preserve">
+    <value>Khám phá bộ sưu tập xe</value>
+  </data>
+  <data name="Cars_Title" xml:space="preserve">
+    <value>Danh sách xe ô tô có sẵn</value>
+  </data>
+  <data name="Cart_BrowseMore" xml:space="preserve">
+    <value>Khám phá thêm xe khác</value>
+  </data>
+  <data name="Cart_CountBadge" xml:space="preserve">
+    <value>Đang lưu: {0} chiếc</value>
+  </data>
+  <data name="Cart_DepositBtn" xml:space="preserve">
+    <value>Đặt cọc</value>
+  </data>
+  <data name="Cart_EmptyDesc" xml:space="preserve">
+    <value>Bạn chưa lưu chiếc xe nào. Hãy khám phá bộ sưu tập xe để chọn những mẫu xe ưng ý nhất!</value>
+  </data>
+  <data name="Cart_EmptyTitle" xml:space="preserve">
+    <value>Danh sách quan tâm đang trống</value>
+  </data>
+  <data name="Cart_ExploreBtn" xml:space="preserve">
+    <value>Khám phá kho xe ngay</value>
+  </data>
+  <data name="Cart_Heading" xml:space="preserve">
+    <value>Danh sách xe đang theo dõi</value>
+  </data>
+  <data name="Cart_PolicyDesc" xml:space="preserve">
+    <value>Tiền cọc giữ xe tiêu chuẩn bằng đúng 2% giá trị xe, được trừ thẳng vào tổng giá trị khi hoàn tất hợp đồng mua bán.</value>
+  </data>
+  <data name="Cart_PolicyTitle" xml:space="preserve">
+    <value>Chính sách đặt cọc:</value>
+  </data>
+  <data name="Cart_RemoveBtn" xml:space="preserve">
+    <value>Bỏ lưu</value>
+  </data>
+  <data name="Cart_SummaryTitle" xml:space="preserve">
+    <value>Tóm tắt danh sách</value>
+  </data>
+  <data name="Cart_Title" xml:space="preserve">
+    <value>Danh sách xe quan tâm</value>
+  </data>
+  <data name="Cart_TotalCars" xml:space="preserve">
+    <value>Số lượng xe:</value>
+  </data>
+  <data name="Cart_TotalDeposit" xml:space="preserve">
+    <value>Tổng tiền cọc dự kiến (2%):</value>
+  </data>
+  <data name="Cart_TotalValue" xml:space="preserve">
+    <value>Tổng giá trị ước tính:</value>
+  </data>
+  <data name="Details_AdminOrders" xml:space="preserve">
+    <value>Trang Quản trị đơn</value>
+  </data>
+  <data name="Details_Color" xml:space="preserve">
+    <value>Màu sắc</value>
+  </data>
+  <data name="Details_Condition" xml:space="preserve">
+    <value>Tình trạng</value>
+  </data>
+  <data name="Details_DepositDisclaimer" xml:space="preserve">
+    <value>Gửi yêu cầu chưa trừ tiền hoặc giữ xe ngay. Nhân viên sẽ liên hệ xác nhận giá chốt trước khi thu cọc.</value>
+  </data>
+  <data name="Details_DepositHold" xml:space="preserve">
+    <value>Tiền cọc giữ xe (2%):</value>
+  </data>
+  <data name="Details_Fuel" xml:space="preserve">
+    <value>Nhiên liệu</value>
+  </data>
+  <data name="Details_Inspected120" xml:space="preserve">
+    <value>Đã kiểm định 120 hạng mục</value>
+  </data>
+  <data name="Details_LoginBtn" xml:space="preserve">
+    <value>Đăng nhập để đặt cọc</value>
+  </data>
+  <data name="Details_NeedLogin" xml:space="preserve">
+    <value>Bạn cần đăng nhập tài khoản Khách hàng để gửi yêu cầu đặt cọc chiếc xe này.</value>
+  </data>
+  <data name="Details_NoteLabel" xml:space="preserve">
+    <value>Ghi chú cho Showroom (tùy chọn)</value>
+  </data>
+  <data name="Details_NotePlaceholder" xml:space="preserve">
+    <value>Ví dụ: Tôi muốn hẹn lái thử xe vào cuối tuần này...</value>
+  </data>
+  <data name="Details_Odo" xml:space="preserve">
+    <value>ODO</value>
+  </data>
+  <data name="Details_PriceVat" xml:space="preserve">
+    <value>Giá bán niêm yết (Đã bao gồm VAT)</value>
+  </data>
+  <data name="Details_Promise1" xml:space="preserve">
+    <value>Cam kết không đâm đụng, không ngập nước</value>
+  </data>
+  <data name="Details_Promise2" xml:space="preserve">
+    <value>Hồ sơ pháp lý minh bạch, hỗ trợ sang tên trọn gói</value>
+  </data>
+  <data name="Details_Promise3" xml:space="preserve">
+    <value>Tư vấn viên hỗ trợ 24/7 trực tiếp tại Showroom</value>
+  </data>
+  <data name="Details_ReadyToDeliver" xml:space="preserve">
+    <value>Xe sẵn sàng giao ngay</value>
+  </data>
+  <data name="Details_RecentCars" xml:space="preserve">
+    <value>Xe bạn vừa xem gần đây</value>
+  </data>
+  <data name="Details_ReservedOrDeposited" xml:space="preserve">
+    <value>Đang giữ / Đã cọc</value>
+  </data>
+  <data name="Details_SpecsHeading" xml:space="preserve">
+    <value>Thông số kỹ thuật chi tiết</value>
+  </data>
+  <data name="Details_StaffAlert" xml:space="preserve">
+    <value>Bạn đang đăng nhập bằng tài khoản Quản trị / Nhân viên. Hãy truy cập</value>
+  </data>
+  <data name="Details_SubmitDeposit" xml:space="preserve">
+    <value>Gửi yêu cầu đặt cọc xe</value>
+  </data>
+  <data name="Details_ToProcess" xml:space="preserve">
+    <value>để xử lý yêu cầu.</value>
+  </data>
+  <data name="Details_Transmission" xml:space="preserve">
+    <value>Hộp số</value>
+  </data>
+  <data name="Details_UnavailableBtn" xml:space="preserve">
+    <value>Xe đã giữ hoặc đã cọc — Không nhận cọc mới</value>
+  </data>
+  <data name="Details_Year" xml:space="preserve">
+    <value>Năm SX</value>
+  </data>
+  <data name="Filter_AllBrands" xml:space="preserve">
+    <value>Tất cả các hãng</value>
+  </data>
+  <data name="Filter_AllConditions" xml:space="preserve">
+    <value>Tất cả tình trạng</value>
+  </data>
+  <data name="Filter_AllFuels" xml:space="preserve">
+    <value>Tất cả loại nhiên liệu</value>
+  </data>
+  <data name="Filter_Apply" xml:space="preserve">
+    <value>Áp dụng lọc</value>
+  </data>
+  <data name="Filter_Brand" xml:space="preserve">
+    <value>Hãng xe</value>
+  </data>
+  <data name="Filter_Condition" xml:space="preserve">
+    <value>Tình trạng</value>
+  </data>
+  <data name="Filter_ConditionNew" xml:space="preserve">
+    <value>Xe mới 100%</value>
+  </data>
+  <data name="Filter_ConditionUsed" xml:space="preserve">
+    <value>Xe đã sử dụng (Lướt)</value>
+  </data>
+  <data name="Filter_Fuel" xml:space="preserve">
+    <value>Nhiên liệu</value>
+  </data>
+  <data name="Filter_Keyword" xml:space="preserve">
+    <value>Tên xe / Từ khóa</value>
+  </data>
+  <data name="Filter_KeywordPlaceholder" xml:space="preserve">
+    <value>Camry, Vios, GLC...</value>
+  </data>
+  <data name="Filter_MaxPrice" xml:space="preserve">
+    <value>Giá tối đa (VND)</value>
+  </data>
+  <data name="Filter_Reset" xml:space="preserve">
+    <value>Đặt lại</value>
+  </data>
+  <data name="Filter_SmartSearch" xml:space="preserve">
+    <value>Bộ lọc tìm kiếm thông minh</value>
+  </data>
+  <data name="Filter_Sort" xml:space="preserve">
+    <value>Sắp xếp theo</value>
+  </data>
+  <data name="Filter_SortLatest" xml:space="preserve">
+    <value>Mới cập nhật</value>
+  </data>
+  <data name="Filter_SortPriceAsc" xml:space="preserve">
+    <value>Giá: Thấp đến Cao</value>
+  </data>
+  <data name="Filter_SortPriceDesc" xml:space="preserve">
+    <value>Giá: Cao đến Thấp</value>
+  </data>
+  <data name="Filter_SortYearDesc" xml:space="preserve">
+    <value>Năm sản xuất mới nhất</value>
+  </data>
+  <data name="Footer_AboutUs" xml:space="preserve">
+    <value>Về chúng tôi</value>
+  </data>
+  <data name="Footer_EmailPlaceholder" xml:space="preserve">
+    <value>Nhập email của bạn...</value>
+  </data>
+  <data name="Footer_EV" xml:space="preserve">
+    <value>Xe điện (EV)</value>
+  </data>
+  <data name="Footer_Explore" xml:space="preserve">
+    <value>Khám phá</value>
+  </data>
+  <data name="Footer_GetQuote" xml:space="preserve">
+    <value>Nhận báo giá</value>
+  </data>
+  <data name="Footer_Info" xml:space="preserve">
+    <value>Thông tin</value>
+  </data>
+  <data name="Footer_Inspection" xml:space="preserve">
+    <value>Quy chuẩn kiểm định</value>
+  </data>
+  <data name="Footer_Installment" xml:space="preserve">
+    <value>Thủ tục trả góp</value>
+  </data>
+  <data name="Footer_Rights" xml:space="preserve">
+    <value>© 2026 AUTORA Motors Inc. All Rights Reserved.</value>
+  </data>
+  <data name="Footer_Sedan" xml:space="preserve">
+    <value>Sedan hạng sang</value>
+  </data>
+  <data name="Footer_Send" xml:space="preserve">
+    <value>Gửi</value>
+  </data>
+  <data name="Footer_Slogan" xml:space="preserve">
+    <value>Trung tâm phân phối xe ô tô sang trọng &amp; xe lướt chuẩn kiểm định 120 hạng mục. Minh bạch tài chính, an tâm sở hữu trên mọi hành trình.</value>
+  </data>
+  <data name="Footer_SUV" xml:space="preserve">
+    <value>SUV Đa dụng</value>
+  </data>
+  <data name="Home_CollectionEyebrow" xml:space="preserve">
+    <value>BỘ SƯU TẬP AUTORA</value>
+  </data>
+  <data name="Home_ExploreBtn" xml:space="preserve">
+    <value>Khám phá xe</value>
+  </data>
+  <data name="Home_Eyebrow" xml:space="preserve">
+    <value>AUTORA · KHÁM PHÁ HÀNH TRÌNH MỚI</value>
+  </data>
+  <data name="Home_FeaturedBtn" xml:space="preserve">
+    <value>Xe nổi bật</value>
+  </data>
+  <data name="Home_FeaturedHeading" xml:space="preserve">
+    <value>Những lựa chọn nổi bật</value>
+  </data>
+  <data name="Home_FindCarBtn" xml:space="preserve">
+    <value>Tìm xe</value>
+  </data>
+  <data name="Home_HeroDesc" xml:space="preserve">
+    <value>Khám phá chiếc xe phù hợp với bạn. Thông tin rõ ràng, lựa chọn dễ dàng trên từng hành trình.</value>
+  </data>
+  <data name="Home_HeroHeading" xml:space="preserve">
+    <value>Chọn xe.&lt;br /&gt;Mở hành trình.</value>
+  </data>
+  <data name="Home_MaxBudgetLabel" xml:space="preserve">
+    <value>Ngân sách tối đa (VND)</value>
+  </data>
+  <data name="Home_MaxBudgetPlaceholder" xml:space="preserve">
+    <value>Nhập giá tối đa</value>
+  </data>
+  <data name="Home_Next" xml:space="preserve">
+    <value>Sau</value>
+  </data>
+  <data name="Home_Prev" xml:space="preserve">
+    <value>Trước</value>
+  </data>
+  <data name="Home_SearchCarLabel" xml:space="preserve">
+    <value>Tên xe hoặc hãng</value>
+  </data>
+  <data name="Home_SearchCarPlaceholder" xml:space="preserve">
+    <value>Toyota, Honda, Ford...</value>
+  </data>
+  <data name="Home_Title" xml:space="preserve">
+    <value>Trang chủ</value>
+  </data>
+  <data name="Home_ViewAllCars" xml:space="preserve">
+    <value>Xem toàn bộ kho ({0})</value>
+  </data>
+  <data name="Mine_AgreedPrice" xml:space="preserve">
+    <value>Giá chốt:</value>
+  </data>
+  <data name="Mine_Deposit" xml:space="preserve">
+    <value>Cọc 2%:</value>
+  </data>
+  <data name="Mine_Paid" xml:space="preserve">
+    <value>Thực thu:</value>
+  </data>
+  <data name="Mine_Remaining" xml:space="preserve">
+    <value>Còn phải thu:</value>
+  </data>
+  <data name="Mine_RequestsHeading" xml:space="preserve">
+    <value>Yêu cầu đặt cọc</value>
+  </data>
+  <data name="Mine_SalesHeading" xml:space="preserve">
+    <value>Giao dịch mua xe</value>
+  </data>
+  <data name="Mine_Title" xml:space="preserve">
+    <value>Yêu cầu và giao dịch của tôi</value>
+  </data>
+  <data name="Nav_About" xml:space="preserve">
+    <value>Giới thiệu</value>
+  </data>
+  <data name="Nav_Admin" xml:space="preserve">
+    <value>Quản trị viên</value>
+  </data>
+  <data name="Nav_AdminPortal" xml:space="preserve">
+    <value>Trang Quản trị</value>
+  </data>
+  <data name="Nav_Cars" xml:space="preserve">
+    <value>Danh sách xe</value>
+  </data>
+  <data name="Nav_Customer" xml:space="preserve">
+    <value>Khách hàng</value>
+  </data>
+  <data name="Nav_Employee" xml:space="preserve">
+    <value>Nhân viên</value>
+  </data>
+  <data name="Nav_Home" xml:space="preserve">
+    <value>Trang chủ</value>
+  </data>
+  <data name="Nav_MyOrders" xml:space="preserve">
+    <value>Yêu cầu mua xe của tôi</value>
+  </data>
+  <data name="Nav_SavedCars" xml:space="preserve">
+    <value>Danh sách xe quan tâm</value>
+  </data>
+  <data name="Nav_SavedList" xml:space="preserve">
+    <value>Xe quan tâm</value>
+  </data>
+  <data name="Nav_SearchPlaceholder" xml:space="preserve">
+    <value>Nhập tên xe cần tìm...</value>
+  </data>
+  <data name="Nav_SearchTitle" xml:space="preserve">
+    <value>Tìm xe</value>
+  </data>
+  <data name="Nav_SignedInAs" xml:space="preserve">
+    <value>Đang đăng nhập với</value>
+  </data>
+  <data name="Nav_SignIn" xml:space="preserve">
+    <value>Đăng nhập</value>
+  </data>
+  <data name="Nav_SignOut" xml:space="preserve">
+    <value>Đăng xuất</value>
+  </data>
+  <data name="OpError_Back" xml:space="preserve">
+    <value>Quay lại</value>
+  </data>
+  <data name="OpError_CarList" xml:space="preserve">
+    <value>Danh sách xe</value>
+  </data>
+  <data name="OpError_Title" xml:space="preserve">
+    <value>Thao tác chưa hoàn thành</value>
+  </data>
+  <data name="Paging_Next" xml:space="preserve">
+    <value>Sau</value>
+  </data>
+  <data name="Paging_Prev" xml:space="preserve">
+    <value>Trước</value>
+  </data>
+  <data name="Results_FoundCars" xml:space="preserve">
+    <value>Tìm thấy {0} chiếc xe phù hợp</value>
+  </data>
+  <data name="Results_NoCarsDesc" xml:space="preserve">
+    <value>Hãy thử nới lỏng mức giá hoặc chọn hãng xe khác.</value>
+  </data>
+  <data name="Results_NoCarsTitle" xml:space="preserve">
+    <value>Không tìm thấy chiếc xe nào phù hợp</value>
+  </data>
+  <data name="Results_Page" xml:space="preserve">
+    <value>Trang {0} / {1}</value>
+  </data>
+</root>

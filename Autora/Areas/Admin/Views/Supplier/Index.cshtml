@@ -1,0 +1,49 @@
+@model Autora.ViewModels.PageResult<Supplier>
+@{ Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml"; }
+
+<div class="admin-page-heading">
+    <h2>Đối tác</h2>
+    <a asp-action="Edit" class="btn btn-primary">Thêm mới</a>
+</div>
+
+<form method="get" class="admin-search-form mb-3">
+    <input name="keyword" value="@Model.Keyword" class="form-control" placeholder="Tìm kiếm" />
+    <button class="btn btn-outline-secondary" type="submit">Tìm</button>
+</form>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead><tr><th>Tên</th><th>Điện thoại</th><th>Thao tác</th></tr></thead>
+        <tbody>
+        @foreach (var x in Model.Items)
+        {
+            <tr>
+                <td>@x.Name</td>
+                <td>@x.Phone</td>
+                <td>
+                    <div class="admin-action-group">
+                        <a asp-action="Edit" asp-route-id="@x.Id" class="btn btn-sm btn-outline-primary">Sửa</a>
+                        <form asp-action="Delete" method="post" class="m-0">
+                            @Html.AntiForgeryToken()
+                            <input name="id" value="@x.Id" type="hidden" />
+                            <button class="btn btn-sm btn-outline-danger" type="submit">Xóa</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+<p>Trang @Model.Page / @Model.Pages · @Model.Total hồ sơ</p>
+<div class="admin-pagination">
+    @if (Model.Page > 1)
+    {
+        <a class="btn btn-sm btn-outline-secondary" asp-route-page="@(Model.Page - 1)" asp-route-keyword="@Model.Keyword">Trang trước</a>
+    }
+    @if (Model.Page < Model.Pages)
+    {
+        <a class="btn btn-sm btn-outline-secondary" asp-route-page="@(Model.Page + 1)" asp-route-keyword="@Model.Keyword">Trang sau</a>
+    }
+</div>

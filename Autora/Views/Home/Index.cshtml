@@ -1,0 +1,99 @@
+@model Autora.ViewModels.CarCatalog
+@{
+    ViewData["Title"] = L["Home_Title"];
+    ViewBag.ActiveMenu = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="modern-hero">
+    <div class="hero-ambient" aria-hidden="true"></div>
+    <div class="container position-relative">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-5 hero-copy">
+                <span class="hero-eyebrow">@L["Home_Eyebrow"]</span>
+                <h1>@Html.Raw(L["Home_HeroHeading"])</h1>
+                <p>@L["Home_HeroDesc"]</p>
+                <div class="d-flex gap-3 flex-wrap">
+                    <a asp-controller="Car" asp-action="Index" class="btn-lime">@L["Home_ExploreBtn"] <i class="bi bi-arrow-right"></i></a>
+                    <a href="#about-section" class="btn-outline-custom">@L["Home_FeaturedBtn"]</a>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="hero-photo p-0 overflow-hidden rounded-4 shadow-lg position-relative">
+                    @if (Model.Cars.Any())
+                    {
+                                                                                                                              
+                        <div id="heroCarCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+                                                                         
+                            <div class="carousel-indicators mb-2">
+                                @for (int i = 0; i < Model.Cars.Count; i++)
+                                {
+                                    <button type="button" data-bs-target="#heroCarCarousel" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")" aria-current="@(i == 0 ? "true" : "false")" aria-label="Slide @(i + 1)"></button>
+                                }
+                            </div>
+
+                                                                  
+                            <div class="carousel-inner">
+                                @for (int i = 0; i < Model.Cars.Count; i++)
+                                {
+                                    var c = Model.Cars[i];
+                                    var imgPath = c.Images.FirstOrDefault(x => x.IsPrimary)?.ImagePath ?? "/images/cars/ford-territory.jpg";
+                                    
+                                    <div class="carousel-item @(i == 0 ? "active" : "")" data-bs-interval="5000">
+                                                                                         
+                                        <a asp-controller="Car" asp-action="Details" asp-route-id="@c.Id" class="d-block text-decoration-none" title="@c.CarModel.Name">
+                                            <img src="@imgPath" class="d-block w-100" style="object-fit: cover; aspect-ratio: 16/10; border-radius: 1.25rem;" alt="@c.CarModel.Name" />
+                                        </a>
+                                    </div>
+                                }
+                            </div>
+
+                                                                     
+                            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarCarousel" data-bs-slide="prev" style="width: 12%;">
+                                <span class="carousel-control-prev-icon" aria-hidden="true" style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.6));"></span>
+                                <span class="visually-hidden">@L["Home_Prev"]</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#heroCarCarousel" data-bs-slide="next" style="width: 12%;">
+                                <span class="carousel-control-next-icon" aria-hidden="true" style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.6));"></span>
+                                <span class="visually-hidden">@L["Home_Next"]</span>
+                            </button>
+                        </div>
+                    }
+                    else
+                    {
+                        <img src="/images/cars/ford-territory.jpg" alt="Ford Territory" class="d-block w-100" />
+                    }
+                </div>
+            </div>
+        </div>
+        <form action="/Car/Index" method="get" class="floating-search-bar modern-search">
+            <div class="search-field-group">
+                <label for="homeKeyword">@L["Home_SearchCarLabel"]</label>
+                <input id="homeKeyword" name="Keyword" placeholder="@L["Home_SearchCarPlaceholder"]" />
+            </div>
+            <div class="search-field-group">
+                <label for="homeMaxPrice">@L["Home_MaxBudgetLabel"]</label>
+                <input id="homeMaxPrice" name="MaxPrice" type="number" min="0" step="1000000" placeholder="@L["Home_MaxBudgetPlaceholder"]" />
+            </div>
+            <button class="btn btn-lime" type="submit"><i class="bi bi-search"></i> @L["Home_FindCarBtn"]</button>
+        </form>
+    </div>
+</section>
+<section class="py-5" id="about-section">
+    <div class="container py-lg-3">
+        <div class="section-heading">
+            <div>
+                <span class="hero-eyebrow">@L["Home_CollectionEyebrow"]</span>
+                <h2>@L["Home_FeaturedHeading"]</h2>
+            </div>
+            <a asp-controller="Car" asp-action="Index">@string.Format(L["Home_ViewAllCars"].Value, Model.TotalCount) <i class="bi bi-arrow-right"></i></a>
+        </div>
+        <div class="row g-4" id="featuredCarList">
+            @foreach(var car in Model.Cars)
+            {
+                <div class="col-md-6 col-lg-4">
+                    @await Html.PartialAsync("_CarCardPartial", car)
+                </div>
+            }
+        </div>
+    </div>
+</section>

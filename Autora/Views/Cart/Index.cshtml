@@ -1,0 +1,186 @@
+@model List<Car>
+@using Autora.Services
+@{
+    ViewData["Title"] = L["Cart_Title"];
+}
+
+<div class="container py-4">
+                                       
+    <div class="mb-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-1">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index" class="text-secondary text-decoration-none">@L["Home_Title"]</a></li>
+                <li class="breadcrumb-item active text-white" aria-current="page">@L["Cart_Title"]</li>
+            </ol>
+        </nav>
+        <div class="d-flex align-items-center justify-content-between">
+            <h2 class="fw-bolder text-white m-0 d-flex align-items-center gap-2">
+                <i class="bi bi-heart-fill text-danger fs-3"></i>
+                <span>@L["Cart_Heading"]</span>
+            </h2>
+            <span class="badge bg-dark border border-secondary border-opacity-50 text-white-50 px-3 py-2 rounded-pill">
+                @string.Format(L["Cart_CountBadge"].Value, Model.Count)
+            </span>
+        </div>
+    </div>
+
+    @if (Model.Count > 0)
+    {
+                                          
+        <div class="row g-4 align-items-start">
+                                                           
+                                                 
+                                                               
+            <div class="col-lg-8">
+                <div class="d-flex flex-column gap-3">
+                    @foreach (var car in Model)
+                    {
+                        var thumbImage = car.Images.OrderByDescending(x => x.IsPrimary).ThenBy(x => x.SortOrder).FirstOrDefault()?.ImagePath
+                                         ?? "/images/car-placeholder.svg";
+                        var depositAmount = DepositPolicy.Calculate(car.ListedPrice);
+
+                        <div class="p-3 rounded-4 border border-secondary border-opacity-25 shadow-sm d-flex flex-column flex-sm-row gap-3 align-items-sm-center" 
+                             style="background-color: #FFFFFF;">
+                            
+                                                     
+                            <div class="position-relative overflow-hidden rounded-3 flex-shrink-0" 
+                                 style="width: 100%; max-width: 160px; height: 110px; background-color: #EEF2F3;">
+                                <img src="@thumbImage" 
+                                     alt="@car.CarModel.Name" 
+                                     class="w-100 h-100 object-fit-cover" 
+                                     style="object-fit: cover;" 
+                                     loading="lazy"
+                                     onerror="this.onerror=null;this.src='/images/car-placeholder.svg';" />
+                            </div>
+
+                                                          
+                            <div class="flex-grow-1">
+                                <div class="d-flex align-items-center justify-content-between mb-1">
+                                    <span class="text-secondary small fw-bold text-uppercase">@car.CarModel.Manufacturer.Name</span>
+                                    <span class="badge bg-dark border border-secondary text-white-50 small">
+                                        @CarTranslationHelper.TranslateStatus(car.Status)
+                                    </span>
+                                </div>
+
+                                <h5 class="text-white fw-bold mb-2">
+                                    @car.CarModel.Manufacturer.Name @car.CarModel.Name
+                                </h5>
+
+                                                         
+                                <div class="text-secondary small mb-2 d-flex flex-wrap gap-2">
+                                    <span><i class="bi bi-calendar-event me-1"></i>@string.Format(L["Card_Year"].Value, car.ManufactureYear)</span>
+                                    <span>•</span>
+                                    <span><i class="bi bi-speedometer2 me-1"></i>@car.Mileage.ToString("N0") km</span>
+                                    <span>•</span>
+                                    <span><i class="bi bi-fuel-pump me-1"></i>@CarTranslationHelper.TranslateFuel(car.Fuel)</span>
+                                </div>
+
+                                                              
+                                <div class="d-flex align-items-baseline gap-3">
+                                    <span class="text-white fw-bolder fs-5">@car.ListedPrice.ToString("N0") đ</span>
+                                    <span class="text-secondary small">
+                                        @L["Card_Deposit"] <strong class="text-lime">@depositAmount.ToString("N0") đ</strong>
+                                    </span>
+                                </div>
+                            </div>
+
+                                                               
+                            <div class="d-flex flex-sm-column gap-2 justify-content-end align-items-stretch flex-shrink-0">
+                                                                   
+                                <a asp-controller="Car" asp-action="Details" asp-route-id="@car.Id" 
+                                   class="btn btn-sm btn-lime px-3 py-2 rounded-pill fw-bold text-dark d-flex align-items-center justify-content-center gap-1 shadow-sm">
+                                    <span>@L["Cart_DepositBtn"]</span>
+                                    <i class="bi bi-arrow-right"></i>
+                                </a>
+
+                                                               
+                                <form asp-action="Remove" method="post" class="m-0">
+                                    <input name="carId" value="@car.Id" type="hidden" />
+                                    <button type="submit" 
+                                            class="btn btn-sm btn-outline-danger w-100 px-3 py-2 rounded-pill d-flex align-items-center justify-content-center gap-1">
+                                        <i class="bi bi-trash"></i>
+                                        <span>@L["Cart_RemoveBtn"]</span>
+                                    </button>
+                                </form>
+                            </div>
+
+                        </div>
+                    }
+                </div>
+            </div>
+
+                                                          
+            <div class="col-lg-4">
+                <div class="p-4 rounded-4 border border-secondary border-opacity-25 sticky-top shadow-lg" 
+                     style="background-color: #FFFFFF; top: 90px;">
+                    
+                    <h5 class="fw-bold text-white mb-3 d-flex align-items-center gap-2">
+                        <i class="bi bi-receipt-cutoff text-lime"></i>
+                        <span>@L["Cart_SummaryTitle"]</span>
+                    </h5>
+
+                                          
+                    <div class="d-flex justify-content-between text-secondary small py-2 border-bottom border-secondary border-opacity-25">
+                        <span>@L["Cart_TotalCars"]</span>
+                        <strong class="text-white">@Model.Count</strong>
+                    </div>
+
+                    <div class="d-flex justify-content-between text-secondary small py-2 border-bottom border-secondary border-opacity-25">
+                        <span>@L["Cart_TotalValue"]</span>
+                        <strong class="text-white">@Model.Sum(x => x.ListedPrice).ToString("N0") đ</strong>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center py-3 border-bottom border-secondary border-opacity-25 mb-3">
+                        <span class="text-white fw-bold">@L["Cart_TotalDeposit"]</span>
+                        <span class="text-lime fw-bolder fs-5">
+                            @Model.Sum(x => DepositPolicy.Calculate(x.ListedPrice)).ToString("N0") đ
+                        </span>
+                    </div>
+
+                                          
+                    <div class="p-3 rounded-3 bg-dark border border-secondary border-opacity-25 small text-secondary mb-3" style="font-size: 0.8rem;">
+                        <i class="bi bi-info-circle text-lime me-1"></i>
+                        <strong>@L["Cart_PolicyTitle"]</strong> @L["Cart_PolicyDesc"]
+                    </div>
+
+                                            
+                    <a asp-controller="Car" asp-action="Index" class="btn btn-outline-light w-100 py-2 rounded-pill fw-semibold mb-3">
+                        <i class="bi bi-plus-circle me-1"></i> @L["Cart_BrowseMore"]
+                    </a>
+
+                                           
+                    <div class="p-3 rounded-3 border border-secondary border-opacity-25 text-center" style="background-color: rgba(255, 255, 255, 0.02);">
+                        <div class="text-secondary small mb-1">AUTORA Showroom Support</div>
+                        <div class="fw-bold text-white fs-5"><i class="bi bi-telephone-fill text-lime me-2"></i>1900 8888</div>
+                        <div class="text-white-50 small mt-1" style="font-size: 0.75rem;">24/7 Hotline</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+                                                       
+                                                      
+                                                           
+        <div class="p-5 rounded-4 border border-secondary border-opacity-25 text-center my-4 shadow-sm" 
+             style="background-color: #FFFFFF; max-width: 650px; margin: 0 auto;">
+            
+            <div class="mb-4">
+                <i class="bi bi-bag-x display-1 text-secondary opacity-50"></i>
+            </div>
+
+            <h3 class="fw-bolder text-white mb-2">@L["Cart_EmptyTitle"]</h3>
+            <p class="text-secondary mb-4 pe-lg-4 ps-lg-4">
+                @L["Cart_EmptyDesc"]
+            </p>
+
+            <a asp-controller="Car" asp-action="Index" 
+               class="btn btn-lime px-4 py-3 rounded-pill fw-bold text-dark fs-6 shadow-sm d-inline-flex align-items-center gap-2">
+                <i class="bi bi-car-front-fill"></i>
+                <span>@L["Cart_ExploreBtn"]</span>
+            </a>
+        </div>
+    }
+</div>

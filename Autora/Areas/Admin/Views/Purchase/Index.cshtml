@@ -1,0 +1,6 @@
+@model Autora.ViewModels.PageResult<PurchaseReceipt>
+@{Layout="~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";}
+<h2>Phiếu nhập mua</h2><a asp-action="Edit" class="btn btn-primary mb-3">Tạo phiếu nháp nhiều xe</a> <a asp-controller="Supplier" asp-action="Index">Quản lý đối tác</a>
+@foreach(var p in Model.Items){<div class="card p-3 mb-3"><h5>#@p.Id · @p.Supplier.Name · @(p.Status==PurchaseStatus.Draft?"Nháp":"Đã xác nhận")</h5>@foreach(var d in p.Details){<p>@d.Car.CarModel.Name · @d.Car.VIN · @d.PurchasePrice.ToString("N0") đ</p>}
+@if(p.Status==PurchaseStatus.Draft){<a asp-action="Edit" asp-route-id="@p.Id">Sửa phiếu</a><form asp-action="Confirm" method="post"><input name="id" value="@p.Id" type="hidden"/><input name="version" value="@Convert.ToBase64String(p.RowVersion)" type="hidden"/><button class="btn btn-success">Xác nhận nhận tất cả xe</button></form><form asp-action="Delete" method="post"><input name="id" value="@p.Id" type="hidden"/><input name="version" value="@Convert.ToBase64String(p.RowVersion)" type="hidden"/><button class="btn btn-outline-danger">Xóa nháp</button></form>}</div>}
+<p>Trang @Model.Page / @Model.Pages</p>@if(Model.Page>1){<a asp-route-page="@(Model.Page-1)">Trước</a>} @if(Model.Page<Model.Pages){<a asp-route-page="@(Model.Page+1)">Sau</a>}

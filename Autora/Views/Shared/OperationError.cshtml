@@ -1,0 +1,13 @@
+@model string
+@{ 
+    Layout = "~/Views/Shared/_Layout.cshtml"; 
+    ViewData["Title"] = L["OpError_Title"];
+}
+<div class="container py-5">
+    <h3 class="fw-bold text-white mb-3">@L["OpError_Title"]</h3>
+    <p class="text-secondary mb-4">@Model</p>
+    <div class="d-flex gap-2">
+        <a href="javascript:history.back()" class="btn btn-light rounded-pill px-4">@L["OpError_Back"]</a>
+        <a href="/Car" class="btn btn-outline-light rounded-pill px-4">@L["OpError_CarList"]</a>
+    </div>
+</div>

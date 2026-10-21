@@ -1,0 +1,7 @@
+@model Autora.ViewModels.ProfileForm
+@{bool en=CarTranslationHelper.IsEnglish;ViewData["Title"]=en?"My profile":"Hồ sơ cá nhân";}
+<div class="container py-4" style="max-width:640px"><h2>@ViewData["Title"]</h2><p>@TempData["Message"]</p><form asp-action="Profile" method="post"><div asp-validation-summary="All" class="text-danger"></div>
+<label>@(en?"Full name":"Họ tên")</label><input asp-for="FullName" class="form-control mb-3"/>
+<label>@(en?"Phone":"Điện thoại")</label><input asp-for="Phone" class="form-control mb-3"/>
+<label>@(en?"Address":"Địa chỉ")</label><input asp-for="Address" class="form-control mb-3"/>
+<button class="btn btn-primary">@(en?"Save":"Lưu hồ sơ")</button> <a asp-action="ChangePassword">@(en?"Change password":"Đổi mật khẩu")</a></form></div>

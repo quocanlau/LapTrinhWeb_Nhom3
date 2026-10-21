@@ -1,0 +1,252 @@
+@model Car
+@using Autora.Services
+@using Microsoft.EntityFrameworkCore
+
+@{
+    ViewData["Title"] = $"{Model.CarModel.Manufacturer.Name} {Model.CarModel.Name}";
+    var mainImage = Model.Images.OrderByDescending(x => x.IsPrimary).ThenBy(x => x.SortOrder).FirstOrDefault()?.ImagePath 
+                    ?? "/images/car-placeholder.svg";
+    var depositAmount = DepositPolicy.Calculate(Model.ListedPrice);
+}
+
+<div class="container py-4">
+                                  
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index" class="text-secondary text-decoration-none">@L["Home_Title"]</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Car" asp-action="Index" class="text-secondary text-decoration-none">@L["Cars_Breadcrumb"]</a></li>
+            <li class="breadcrumb-item active text-white" aria-current="page">@Model.CarModel.Manufacturer.Name @Model.CarModel.Name</li>
+        </ol>
+    </nav>
+
+    <div class="row g-4 align-items-start">
+                                                       
+                                                      
+                                                           
+        <div class="col-lg-7">
+                                            
+            <div class="position-relative overflow-hidden rounded-4 mb-4 border border-secondary border-opacity-25" style="background-color: #FFFFFF;">
+                <img src="@mainImage" 
+                     class="w-100 object-fit-cover" 
+                     style="height: 420px; object-fit: cover;" 
+                     alt="@Model.CarModel.Name"
+                     onerror="this.onerror=null;this.src='/images/car-placeholder.svg';" />
+
+                                                 
+                <div class="position-absolute top-0 start-0 m-3 d-flex flex-column gap-2">
+                    <span class="badge bg-dark bg-opacity-75 border border-secondary text-white px-3 py-2 rounded-pill shadow-sm">
+                        <i class="bi bi-shield-check text-lime me-1"></i> @L["Details_Inspected120"]
+                    </span>
+                    @if (Model.Status == CarStatus.Available)
+                    {
+                        <span class="badge bg-success bg-opacity-75 px-3 py-2 rounded-pill shadow-sm">
+                            <i class="bi bi-check-circle-fill me-1"></i> @L["Details_ReadyToDeliver"]
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-warning bg-opacity-75 text-dark px-3 py-2 rounded-pill shadow-sm">
+                            <i class="bi bi-clock-fill me-1"></i> @L["Details_ReservedOrDeposited"]
+                        </span>
+                    }
+                </div>
+            </div>
+
+                                                                            
+            @if (Model.Images.Count > 1)
+            {
+                <div class="d-flex gap-2 overflow-auto pb-3 mb-4">
+                    @foreach (var img in Model.Images.OrderBy(x => x.SortOrder))
+                    {
+                        <img src="@img.ImagePath" 
+                             class="rounded-3 border border-secondary border-opacity-50 object-fit-cover" 
+                             style="width: 100px; height: 70px; cursor: pointer;" 
+                             alt="Ảnh xe @Model.CarModel.Name" />
+                    }
+                </div>
+            }
+
+                                                                                        
+            <div class="mb-4">
+                <h5 class="text-white fw-bold mb-3 d-flex align-items-center gap-2">
+                    <i class="bi bi-sliders2 text-lime"></i> @L["Details_SpecsHeading"]
+                </h5>
+
+                <div class="row g-3">
+                                                  
+                    <div class="col-6 col-sm-4">
+                        <div class="p-3 rounded-4 border border-secondary border-opacity-25 h-100" style="background-color: #FFFFFF;">
+                            <div class="text-secondary small mb-1"><i class="bi bi-calendar-event text-lime me-1"></i> @L["Details_Year"]</div>
+                            <div class="fs-5 fw-bold text-white">@Model.ManufactureYear</div>
+                        </div>
+                    </div>
+
+                                                    
+                    <div class="col-6 col-sm-4">
+                        <div class="p-3 rounded-4 border border-secondary border-opacity-25 h-100" style="background-color: #FFFFFF;">
+                            <div class="text-secondary small mb-1"><i class="bi bi-speedometer2 text-lime me-1"></i> @L["Details_Odo"]</div>
+                            <div class="fs-5 fw-bold text-white">@Model.Mileage.ToString("N0") <span class="fs-6 fw-normal text-secondary">km</span></div>
+                        </div>
+                    </div>
+
+                                            
+                    <div class="col-6 col-sm-4">
+                        <div class="p-3 rounded-4 border border-secondary border-opacity-25 h-100" style="background-color: #FFFFFF;">
+                            <div class="text-secondary small mb-1"><i class="bi bi-gear-wide-connected text-lime me-1"></i> @L["Details_Transmission"]</div>
+                            <div class="fs-5 fw-bold text-white">@CarTranslationHelper.TranslateTransmission(Model.Transmission)</div>
+                        </div>
+                    </div>
+
+                                                
+                    <div class="col-6 col-sm-4">
+                        <div class="p-3 rounded-4 border border-secondary border-opacity-25 h-100" style="background-color: #FFFFFF;">
+                            <div class="text-secondary small mb-1"><i class="bi bi-fuel-pump text-lime me-1"></i> @L["Details_Fuel"]</div>
+                            <div class="fs-5 fw-bold text-white">@CarTranslationHelper.TranslateFuel(Model.Fuel)</div>
+                        </div>
+                    </div>
+
+                                                        
+                    <div class="col-6 col-sm-4">
+                        <div class="p-3 rounded-4 border border-secondary border-opacity-25 h-100" style="background-color: #FFFFFF;">
+                            <div class="text-secondary small mb-1"><i class="bi bi-palette text-lime me-1"></i> @L["Details_Color"]</div>
+                            <div class="fs-5 fw-bold text-white">@CarTranslationHelper.TranslateColor(Model.Color)</div>
+                        </div>
+                    </div>
+
+                                                   
+                    <div class="col-6 col-sm-4">
+                        <div class="p-3 rounded-4 border border-secondary border-opacity-25 h-100" style="background-color: #FFFFFF;">
+                            <div class="text-secondary small mb-1"><i class="bi bi-check2-circle text-lime me-1"></i> @L["Details_Condition"]</div>
+                            <div class="fs-5 fw-bold text-white">@CarTranslationHelper.TranslateCondition(Model.Condition)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                                                       
+                                                        
+                                                           
+        <div class="col-lg-5">
+            <div class="p-4 rounded-4 border border-secondary border-opacity-25 shadow-sm sticky-top" 
+                 style="background-color: #FFFFFF; top: 90px;">
+                
+                                           
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="badge bg-secondary bg-opacity-25 text-white-50 border border-secondary border-opacity-25 text-uppercase fw-bold">
+                        @Model.CarModel.Manufacturer.Name
+                    </span>
+                    <span class="text-secondary small">VIN: <code class="text-white">@Model.VIN</code></span>
+                </div>
+
+                                      
+                <h3 class="fw-bolder text-white mb-3">
+                    @Model.CarModel.Manufacturer.Name @Model.CarModel.Name
+                </h3>
+
+                                                            
+                <div class="p-3 rounded-3 mb-4" style="background: #F0F5F6; border: 1px dashed #B4CBD0;">
+                    <div class="text-secondary small mb-1">@L["Details_PriceVat"]</div>
+                    <div class="display-6 fw-bolder text-white mb-2">
+                        @Model.ListedPrice.ToString("N0") <span class="fs-4 text-lime">đ</span>
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-between pt-2 border-top border-secondary border-opacity-25">
+                        <span class="text-white-50 small">@L["Details_DepositHold"]</span>
+                        <span class="fw-bold text-lime fs-5">@depositAmount.ToString("N0") đ</span>
+                    </div>
+                </div>
+
+                                                 
+                @if (Model.Status == CarStatus.Available)
+                {
+                    @if (User.IsInRole(Roles.Customer))
+                    {
+                        <form asp-controller="Deposit" asp-action="Create" method="post">
+                            <input type="hidden" name="CarId" value="@Model.Id" />
+
+                            <div class="mb-3">
+                                <label class="form-label text-white small fw-bold">@L["Details_NoteLabel"]</label>
+                                <textarea name="Note" 
+                                          maxlength="1000" 
+                                          rows="3" 
+                                          class="form-control bg-dark border-secondary text-white rounded-3 placeholder-secondary" 
+                                          placeholder="@L["Details_NotePlaceholder"]"></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-lime w-100 py-3 rounded-pill fw-bold fs-6 shadow-sm d-flex align-items-center justify-content-center gap-2">
+                                <span>@L["Details_SubmitDeposit"]</span>
+                                <i class="bi bi-arrow-right"></i>
+                            </button>
+                        </form>
+
+                        <p class="text-secondary small text-center mt-3 mb-0" style="font-size: 0.78rem;">
+                            <i class="bi bi-shield-check text-lime me-1"></i>
+                            @L["Details_DepositDisclaimer"]
+                        </p>
+                    }
+                    else if (User.Identity?.IsAuthenticated != true)
+                    {
+                        <div class="text-center py-2">
+                            <p class="text-secondary small mb-3">@L["Details_NeedLogin"]</p>
+                            <a asp-controller="Account" 
+                               asp-action="Login" 
+                               asp-route-returnUrl="@Context.Request.Path" 
+                               class="btn btn-outline-light w-100 py-3 rounded-pill fw-bold d-flex align-items-center justify-content-center gap-2">
+                                <i class="bi bi-box-arrow-in-right"></i>
+                                <span>@L["Details_LoginBtn"]</span>
+                            </a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-dark border-secondary small text-secondary m-0">
+                            <i class="bi bi-info-circle me-1 text-lime"></i>
+                            @L["Details_StaffAlert"] <a href="/Admin/Order" class="text-lime fw-bold">@L["Details_AdminOrders"]</a> @L["Details_ToProcess"]
+                        </div>
+                    }
+                }
+                else
+                {
+                    <button disabled class="btn btn-secondary w-100 py-3 rounded-pill fw-bold text-white-50">
+                        <i class="bi bi-lock-fill me-2"></i> @L["Details_UnavailableBtn"]
+                    </button>
+                }
+
+                                                            
+                <div class="mt-4 pt-3 border-top border-secondary border-opacity-25 d-flex flex-column gap-2 text-secondary small" style="font-size: 0.8rem;">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-check2-circle text-lime fs-6"></i>
+                        <span>@L["Details_Promise1"]</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-file-earmark-text text-lime fs-6"></i>
+                        <span>@L["Details_Promise2"]</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-headset text-lime fs-6"></i>
+                        <span>@L["Details_Promise3"]</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@{ var recentCars = (List<Car>)ViewBag.RecentCars; }
+
+@if (recentCars.Any())
+{
+    <div class="mt-5 pt-4 border-top border-secondary border-opacity-25">
+        <h4 class="fw-bold text-white mb-3"><i class="bi bi-clock-history me-2 text-lime"></i>@L["Details_RecentCars"]</h4>
+        <div class="row g-3">
+            @foreach (var rc in recentCars)
+            {
+                <div class="col-md-4">
+                    @await Html.PartialAsync("_CarCardPartial", rc)
+                </div>
+            }
+        </div>
+    </div>
+}
