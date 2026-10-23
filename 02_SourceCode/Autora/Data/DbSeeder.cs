@@ -28,8 +28,17 @@ public static class DbSeeder
         }
 
         // 2. Seed Admin User
-        var adminEmail = config["Bootstrap:AdminEmail"] ?? "admin@autora.local";
-        var adminPassword = config["Bootstrap:AdminPassword"] ?? "Admin@12345";
+        // Configuration can be overridden by User Secrets/environment variables.
+        // Never pass a PowerShell command or another malformed value to Identity.
+        var configuredAdminEmail = config["Bootstrap:AdminEmail"]?.Trim();
+        var adminEmail = IsValidEmail(configuredAdminEmail)
+            ? configuredAdminEmail!
+            : "admin@autora.local";
+        var adminPassword = config["Bootstrap:AdminPassword"];
+        if (string.IsNullOrWhiteSpace(adminPassword) || adminPassword.Contains("Read-Host", StringComparison.OrdinalIgnoreCase))
+        {
+            adminPassword = "Admin@12345";
+        }
         var admin = await users.FindByEmailAsync(adminEmail);
         if (admin is null)
         {
@@ -47,6 +56,23 @@ public static class DbSeeder
         if (!await users.IsInRoleAsync(admin, Roles.Admin))
         {
             await users.AddToRoleAsync(admin, Roles.Admin);
+        }
+
+        static bool IsValidEmail(string? value)
+        {
+            if (string.IsNullOrWhiteSpace(value) || value.Length > 256)
+            {
+                return false;
+            }
+
+            try
+            {
+                return new System.Net.Mail.MailAddress(value).Address == value;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
         }
 
         // 3. Seed Demo Customer User
@@ -100,6 +126,7 @@ public static class DbSeeder
         // 5. Check if cars already exist (skip seeding if already populated)
         if (!forceReset && await db.Cars.AnyAsync())
         {
+            await RepairSeededCarImagePathsAsync(db);
             return;
         }
 
@@ -208,5 +235,58 @@ public static class DbSeeder
         db.PurchaseReceipts.Add(receipt);
         await db.SaveChangesAsync();
         await tx.CommitAsync();
+    }
+
+    private static async Task RepairSeededCarImagePathsAsync(AppDbContext db)
+    {
+        var imageByModel = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+        {
+            ["Attrage CVT Premium"] = "/images/cars/mitsubishi-attrage-cvt-premium-2236481j32336.webp",
+            ["Xpander MT"] = "/images/cars/2135235-2139205j29545.webp",
+            ["Xpander AT"] = "/images/cars/9y0tzmv-2885400j33687.webp",
+            ["Xpander AT Premium"] = "/images/cars/xpanderpreat.jpg",
+            ["Camry"] = "/images/cars/2024-toyota-camry-102-64cbc4858e198.jpg",
+            ["Corolla Cross 1.8HEV"] = "/images/cars/toyota-corolla-cross-19943.webp",
+            ["Corolla Cross 1.8V"] = "/images/cars/toyota-corolla-cross.jpg",
+            ["Vios 1.5E CVT"] = "/images/cars/toyota-vios.jpg",
+            ["Yaris Cross"] = "/images/cars/toyota-yaris-cross-c-230920-05.jpg",
+            ["Yaris Cross HEV"] = "/images/cars/toyota-yaris-cross.jpg",
+            ["City G"] = "/images/cars/honda-city.png",
+            ["Attrage MT"] = "/images/cars/mitsubishiattragemt.jpg",
+            ["Territory Trend 1.5L AT"] = "/images/cars/territory.jpg",
+            ["Territory Titanium 1.5L AT"] = "/images/cars/ford-territory.jpg",
+            ["Territory Titanium X 1.5L AT"] = "/images/cars/territory-den-dau-xe-trai-truoc.jpg"
+        };
+
+        var cars = await db.Cars
+            .Include(x => x.CarModel)
+            .Include(x => x.Images)
+            .ToListAsync();
+
+        var changed = false;
+        foreach (var car in cars)
+        {
+            if (!imageByModel.TryGetValue(car.CarModel.Name, out var expectedPath))
+            {
+                continue;
+            }
+
+            var primary = car.Images.OrderByDescending(x => x.IsPrimary).ThenBy(x => x.SortOrder).FirstOrDefault();
+            if (primary is null)
+            {
+                car.Images.Add(new CarImage { ImagePath = expectedPath, IsPrimary = true, SortOrder = 0 });
+                changed = true;
+            }
+            else if (!string.Equals(primary.ImagePath, expectedPath, StringComparison.OrdinalIgnoreCase))
+            {
+                primary.ImagePath = expectedPath;
+                changed = true;
+            }
+        }
+
+        if (changed)
+        {
+            await db.SaveChangesAsync();
+        }
     }
 }
